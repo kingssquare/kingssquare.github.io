@@ -1,3 +1,476 @@
-<html>
-  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>King's Square Chess Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Saira:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- RESET & VARS --- */
+        :root {
+            --primary: #ffe23e; /* Adrenaline Red */
+            --dark: #0a0a0a;
+            --darker: #050505;
+            --light: #F0F0F0;
+            --lightdark: #222222;
+            --accent: #2d2d2d;
+            --font-head: 'Russo One', sans-serif;
+            --font-body: 'Saira', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+        }
+
+        /* --- UTILITY ANIMATIONS --- */
+        @keyframes slideInLeft {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideInUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 10px var(--primary); }
+            50% { box-shadow: 0 0 30px var(--primary); }
+            100% { box-shadow: 0 0 10px var(--primary); }
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary);
+        }
+        .logo { font-family: var(--font-head); font-size: 1.5rem; color: var(--light); text-transform: uppercase; letter-spacing: 2px; }
+        .logo span { color: var(--primary); }
+        .nav-links button {
+            background: transparent;
+            border: 1px solid var(--light);
+            color: var(--light);
+            padding: 10px 25px;
+            margin-left: 20px;
+            font-family: var(--font-head);
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+        }
+        .nav-links button:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        /* --- HERO SECTION (PARALLAX) --- */
+        header {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+        
+        /* Dynamic Background Grid */
+        .bg-grid {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                linear-gradient(rgba(255, 62, 62, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 62, 62, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+            animation: gridMove 20s linear infinite;
+            opacity: 0.3;
+        }
+        @keyframes gridMove { from { background-position: 0 0; } to { background-position: 0 1000px; } }
+
+        .hero-content {
+            z-index: 10;
+            text-align: center;
+        }
+        h1 {
+            font-family: var(--font-head);
+            font-size: 6rem;
+            line-height: 0.9;
+            text-transform: uppercase;
+            font-style: italic;
+            text-shadow: 10px 10px 0px rgba(255, 255, 255, 0.1);
+            animation: slideInUp 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+        h1 span { color: var(--primary); display: block; }
+        
+        .cta-btn {
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            background: var(--primary);
+            color: var(--lightdark);
+            border: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+            transition: 0.3s;
+            animation: slideInUp 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+        .cta-btn:hover {
+            box-shadow: 0 0 30px var(--primary);
+            transform: translateY(-5px);
+        }
+
+        /* Floating Chess Pieces (Decorative) */
+        .floater {
+            position: absolute;
+            font-size: 10rem;
+            opacity: 0.1;
+            color: var(--light);
+            z-index: 1;
+            transition: transform 0.1s linear;
+        }
+        .p-king { top: 10%; right: 10%; }
+        .p-knight { bottom: 10%; left: 10%; }
+        .p-rook { top: 40%; left: 50%; filter: blur(4px); opacity: 0.05; }
+
+        /* --- STATS TICKER --- */
+        .ticker {
+            background: var(--primary);
+            color: var(--dark);
+            padding: 15px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            font-family: var(--font-head);
+            font-style: italic;
+            font-size: 1.5rem;
+            border-top: 2px solid var(--light);
+            border-bottom: 2px solid var(--light);
+        }
+        .ticker-content {
+            display: inline-block;
+            animation: tickerScroll 20s linear infinite;
+        }
+        @keyframes tickerScroll { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+
+        /* --- SECTIONS COMMON --- */
+        section { padding: 100px 10%; position: relative; }
+        .section-title {
+            font-family: var(--font-head);
+            font-size: 3rem;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            border-left: 10px solid var(--primary);
+            padding-left: 20px;
+            opacity: 0; /* Hidden for scroll anim */
+            transform: translateX(-50px);
+            transition: 1s all ease;
+        }
+        .section-title.visible { opacity: 1; transform: translateX(0); }
+
+        /* --- GRANDMASTERS (CARDS) --- */
+        .gm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .gm-card {
+            background: var(--accent);
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #444;
+            transition: 0.4s;
+            opacity: 0; transform: translateY(50px); /* Scroll anim setup */
+        }
+        .gm-card.visible { opacity: 1; transform: translateY(0); }
+        
+        .gm-card:hover { border-color: var(--primary); }
+        .gm-card img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: grayscale(100%);
+            transition: 0.5s;
+        }
+        .gm-card:hover img { filter: grayscale(0%); transform: scale(1.1); }
+        .gm-info {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, var(--dark) 0%, transparent 100%);
+            transform: translateY(20px);
+            transition: 0.4s;
+        }
+        .gm-card:hover .gm-info { transform: translateY(0); }
+        .gm-name { font-family: var(--font-head); font-size: 1.5rem; text-transform: uppercase; }
+        .gm-rank { color: var(--primary); font-weight: bold; }
+
+        /* --- TOURNAMENTS (LIST) --- */
+        .tourney-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px;
+            border-bottom: 1px solid #333;
+            transition: 0.3s;
+            background: linear-gradient(90deg, transparent 0%, transparent 100%);
+            opacity: 0; /* Scroll anim setup */
+        }
+        .tourney-row.visible { opacity: 1; }
+        .tourney-row:hover {
+            background: linear-gradient(90deg, rgba(255,62,62,0.1) 0%, transparent 100%);
+            border-left: 5px solid var(--primary);
+            padding-left: 40px;
+        }
+        .t-date { color: #888; font-weight: bold; }
+        .t-name { font-size: 1.5rem; font-family: var(--font-head); }
+        .t-prize { color: var(--primary); font-size: 1.2rem; font-weight: bold; }
+
+        /* --- PRICING (HOVER SCALING) --- */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        .price-card {
+            background: var(--darker);
+            border: 1px solid #333;
+            padding: 40px;
+            text-align: center;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        .price-card:hover {
+            transform: scale(1.1);
+            border-color: var(--primary);
+            box-shadow: 0 0 40px rgba(255, 62, 62, 0.2);
+            z-index: 10;
+        }
+        .price-tier { color: var(--primary); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; display: block;}
+        .price-amt { font-size: 3rem; font-family: var(--font-head); display: block; margin-bottom: 20px; }
+        .price-list { list-style: none; text-align: left; margin-bottom: 30px; color: #aaa; }
+        .price-list li { margin-bottom: 10px; border-bottom: 1px solid #222; padding-bottom: 5px; }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo"><br>KING'S SQUARE<br><span>Chess Academy</span></div>
+        <div class="nav-links">
+            <button>Home</button>
+            <button>Coaches Roster</button>
+            <button>Tournaments</button>
+            <button>Class Schedule</button>
+        </div>
+    </nav>
+
+    <header id="hero">
+        <div class="bg-grid"></div>
+        
+        <div class="floater p-king" data-speed="2">♚</div>
+        <div class="floater p-knight" data-speed="-2">♞</div>
+        <div class="floater p-rook" data-speed="1">♜</div>
+
+        <div class="hero-content">
+            <h1>Dominate<br><span>The Board</span></h1>
+            <p style="font-size: 1.2rem; color: #888; margin-top: 10px;">High-Velocity Chess Training for the Modern Era</p>
+            <button class="cta-btn">Start Training</button>
+        </div>
+    </header>
+
+    <div class="ticker">
+        <div class="ticker-content">
+            Upcoming: BLITZ KINGS OPEN 2024 /// GM NAKAMURA SEMINAR: JULY 12 /// 500+ NEW PUZZLES ADDED /// JOIN THE ELITE ///
+        </div>
+    </div>
+
+    <section>
+        <h2 class="section-title scroll-trigger">Our Coaches</h2>
+        <div class="gm-grid">
+            <div class="gm-card scroll-trigger" style="transition-delay: 0.1s;">
+                <img src="Assets/Photo.jpg" alt="Coach">
+                <div class="gm-info">
+                    <div class="gm-name">Thejan Rathnayake</div>
+                    <div class="gm-rank">FIDE Instructor</div>
+                </div>
+            </div>
+            <div class="gm-card scroll-trigger" style="transition-delay: 0.2s;">
+                <img src="Assets/Udan.jpg" alt="Coach">
+                <div class="gm-info">
+                    <div class="gm-name">Udan Rathnayake</div>
+                    <div class="gm-rank">National Instructor</div>
+                </div>
+            </div>
+            <div class="gm-card scroll-trigger" style="transition-delay: 0.3s;">
+                <img src="Assets/Sandeepa.jpg" alt="Coach">
+                <div class="gm-info">
+                    <div class="gm-name">Sandeepana Prabuddha</div>
+                    <div class="gm-rank">Well-Experienced Chess Coach</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background: var(--darker);">
+        <h2 class="section-title scroll-trigger">Live Tournaments</h2>
+        <div class="tourney-list">
+            <div class="tourney-row scroll-trigger">
+                <span class="t-date">AUG 15</span>
+                <span class="t-name">Speed Chess Championship</span>
+                <span class="t-prize">$10,000 Prize</span>
+            </div>
+            <div class="tourney-row scroll-trigger">
+                <span class="t-date">SEP 02</span>
+                <span class="t-name">The Iron Defense Open</span>
+                <span class="t-prize">$5,000 Prize</span>
+            </div>
+            <div class="tourney-row scroll-trigger">
+                <span class="t-date">OCT 10</span>
+                <span class="t-name">Junior Global Qualifiers</span>
+                <span class="t-prize">Entry to Finals</span>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title scroll-trigger">Our Branches</h2>
+        <div class="pricing-grid">
+            <div class="price-card scroll-trigger">
+                <span class="price-tier">Nugegoda</span>
+                <span class="price-amt">Head Office</span>
+                <ul class="price-list">
+                    <li>Beginner</li>
+                    <li>Intermediate</li>
+                    <li>Advanced</li>
+                </ul>
+                <button class="cta-btn" style="background:transparent; border:1px solid var(--primary);">Sign Up</button>
+            </div>
+            <div class="price-card scroll-trigger" style="border-color: var(--primary);">
+                <span class="price-tier">Tactician</span>
+                <span class="price-amt">$29</span>
+                <ul class="price-list">
+                    <li>Video Library</li>
+                    <li>Engine Analysis</li>
+                    <li>Weekly Tournaments</li>
+                </ul>
+                <button class="cta-btn">Select</button>
+            </div>
+            <div class="price-card scroll-trigger">
+                <span class="price-tier">Grandmaster</span>
+                <span class="price-amt">$99</span>
+                <ul class="price-list">
+                    <li>1-on-1 Coaching</li>
+                    <li>Private Seminars</li>
+                    <li>All Access Pass</li>
+                </ul>
+                <button class="cta-btn" style="background:transparent; border:1px solid var(--primary);">Sign Up</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // --- 1. PARALLAX EFFECT FOR HERO ---
+        document.addEventListener("mousemove", (e) => {
+            const floaters = document.querySelectorAll(".floater");
+            const x = (window.innerWidth - e.pageX * 2) / 100;
+            const y = (window.innerHeight - e.pageY * 2) / 100;
+
+            floaters.forEach(el => {
+                const speed = el.getAttribute("data-speed");
+                el.style.transform = `translateX(${x * speed}px) translateY(${y * speed}px)`;
+            });
+        });
+
+        // --- 2. SCROLL REVEAL ANIMATION (INTERSECTION OBSERVER) ---
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    // Optional: Stop observing once visible to prevent re-animating
+                    // observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        const scrollElements = document.querySelectorAll(".scroll-trigger");
+        scrollElements.forEach(el => observer.observe(el));
+
+    </script>
+</body>
+<footer>
+        <div class="footer-content"
+            style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; padding-bottom: 40px;">
+            <div class="f-col">
+                <h3
+                    style="font-family: 'Russo One', sans-serif; font-size: 1.5rem; margin-bottom: 20px; text-transform: uppercase;">
+                    KING'S SQUARE<span style="color: #ffe23e;"><br>Chess Academy</span></h3>
+                <p style="color: #888; line-height: 1.6;">Forging the next generation of chess elite.</p>
+            </div>
+            <div class="f-col">
+                <h4 style="color: #ffe23e; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px;">Quick
+                    Links</h4>
+                <a href="index.html"
+                    style="display: block; color: #fff; text-decoration: none; margin-bottom: 10px;">Home</a>
+                <a href="schedule.html"
+                    style="display: block; color: #fff; text-decoration: none; margin-bottom: 10px;">Class Schedule</a>
+            </div>
+        </div>
+        <div class="copyright" style="text-align: center; color: #555; border-top: 1px solid #222; padding-top: 20px;">
+            &copy; 2024 KING'S SQUARE Chess Academy.</div>
+    </footer>
+
+    <style>
+        footer {
+            background: var(--darker);
+            border-top: 5px solid var(--primary);
+            padding: 50px 10% 20px;
+            margin-top: 50px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .f-col h3 { font-family: var(--font-head); font-size: 1.5rem; margin-bottom: 20px; text-transform: uppercase; }
+        .f-col h3 span { color: var(--primary); }
+        .f-col h4 { color: var(--primary); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .f-col p { color: #888; line-height: 1.6; }
+        .f-col a { display: block; color: #fff; text-decoration: none; margin-bottom: 10px; transition: 0.3s; }
+        .f-col a:hover { color: var(--primary); padding-left: 10px; }
+        
+        .newsletter { display: flex; }
+        .newsletter input {
+            background: #1a1a1a; border: 1px solid #333; color: #fff; padding: 10px; flex: 1; outline: none;
+        }
+        .newsletter button {
+            background: var(--primary); border: none; color: #fff; padding: 0 20px; font-weight: bold; cursor: pointer;
+        }
+        .socials { margin-top: 20px; }
+        .socials span {
+            display: inline-block; width: 40px; height: 40px; line-height: 40px; text-align: center;
+            background: #222; margin-right: 10px; border-radius: 50%; cursor: pointer; transition: 0.3s; font-weight: bold;
+        }
+        .socials span:hover { background: var(--primary); color: #fff; }
+        .copyright { text-align: center; color: #555; font-size: 0.9rem; border-top: 1px solid #222; padding-top: 20px; }
+    </style>
 </html>

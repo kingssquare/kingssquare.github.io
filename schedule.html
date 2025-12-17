@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>King's Square Chess Academy | Branch Schedules</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CORE THEME VARIABLES --- */
+        :root {
+            --gold: #FFD700;
+            --gold-dim: #b39700;
+            --black: #0a0a0a;
+            --dark-grey: #1a1a1a;
+            --glass: rgba(30, 30, 30, 0.85);
+            --text-white: #ffffff;
+            --text-grey: #cccccc;
+            /* Font stacks */
+            --heading-font: 'Gotham', 'Montserrat', 'Oswald', 'Roboto', sans-serif;
+            --body-font: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            /* New: Color for Branch Dividers */
+            --branch-color: #ff8c00; /* Deep Orange/Amber for separation */
+        }
+
+        /* --- GLOBAL STYLES --- */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--body-font);
+            background-color: var(--black);
+            color: var(--text-white);
+            overflow-x: hidden;
+            --bg-start: #262626;
+            --bg-end: #6f6f6f;
+            background-image: linear-gradient(180deg, var(--bg-start) 0%, var(--bg-end) 100%);
+        }
+
+        .main-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        /* --- HEADER SECTION --- */
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .crown-icon {
+            font-size: 4rem;
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            margin-bottom: 10px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+            font-family: var(--heading-font);
+        }
+
+        h1 {
+            font-family: var(--heading-font);
+            font-size: 3.5rem;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            background: linear-gradient(to right, #fff, var(--gold), #fff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-grey);
+            letter-spacing: 2px;
+            margin-top: 10px;
+            border-top: 1px solid var(--gold);
+            display: inline-block;
+            padding-top: 10px;
+        }
+
+        /* --- NEW: BRANCH HEADING STYLE --- */
+        .branch-heading {
+            font-family: var(--heading-font);
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin: 40px 0 20px 0;
+            padding: 10px 15px;
+            background-color: var(--branch-color);
+            color: var(--black);
+            border-radius: 6px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            letter-spacing: 1px;
+        }
+        /* Location icon link (map pin) shown before branch name */
+        .branch-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            background: transparent;
+            border: none;
+            text-decoration: none;
+            color: inherit;
+            vertical-align: middle;
+            padding: 3px;
+            border-radius: 4px;
+        }
+        .branch-link svg { width: 1.1rem; height: 1.1rem; display: block; fill: var(--black); transition: fill 0.15s ease-in-out; }
+        .branch-link:focus { outline: 2px solid rgba(255,255,255,0.2); outline-offset: 2px; }
+        .branch-link:hover svg { fill: var(--gold); }
+
+
+        /* --- SCHEDULE CARDS --- */
+        .schedule-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Reduced gap between cards in the same branch */
+        }
+
+        .class-ticket {
+            background: var(--glass);
+            border: 1px solid #333;
+            border-left: 8px solid var(--gold);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            overflow: hidden;
+        }
+
+        .class-ticket:hover {
+            transform: translateY(-4px) scale(1.005); /* Adjusted hover for tighter grouping */
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.15);
+            border-color: var(--gold);
+        }
+
+        .bg-watermark {
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            font-size: 10rem;
+            font-family: var(--heading-font);
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.03);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .ticket-content {
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
+        }
+
+        /* Left Side: Time & Day */
+        .ticket-time-box {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+            color: var(--black);
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 150px;
+        }
+
+        .ticket-day {
+            font-family: var(--heading-font);
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .ticket-hours {
+            font-weight: 700;
+            margin-top: 5px;
+            font-size: 1.1rem;
+        }
+
+        /* Middle: Details */
+        .ticket-details {
+            padding: 25px;
+            flex: 1;
+        }
+
+        .location-tag {
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+            font-family: var(--heading-font);
+            font-weight: 500;
+        }
+        
+        /* Adjusted Instructor Name for branch view */
+        .instructor-name {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin: 0 0 5px 0; /* Reduced margin */
+        }
+        
+        .instructor-name span {
+            font-weight: 700;
+            color: #fff;
+            font-family: var(--heading-font);
+        }
+
+        .level-pills {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .pill {
+            background: rgba(255,255,255,0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            border: 1px solid #444;
+        }
+
+        /* Right/Bottom: CONTACT & FEE Zone */
+        .contact-fee-zone {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 25px;
+            border-top: 1px dashed #444;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 280px;
+        }
+
+        .fee-header {
+            color: var(--gold);
+            font-family: var(--heading-font);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .contact-info-block {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #ddd;
+            line-height: 1.5;
+            background: rgba(255,255,255,0.05);
+            padding: 10px;
+            border-radius: 4px;
+        }
+        
+        .fee-label {
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        /* --- NEW CLASSES SECTION --- */
+        .new-classes {
+            margin-top: 60px;
+            padding: 30px;
+            background-color: var(--dark-grey);
+            border-radius: 12px;
+            border: 1px solid var(--gold);
+            text-align: center;
+        }
+
+        .new-classes h2 {
+            font-family: var(--heading-font);
+            color: var(--gold);
+            font-size: 2rem;
+            margin-top: 0;
+        }
+
+        .town-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .town-list li {
+            background-color: var(--black);
+            color: var(--text-white);
+            padding: 10px 15px;
+            border-radius: 6px;
+            border: 1px solid #444;
+            font-family: var(--heading-font);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            padding: 20px;
+            border-top: 1px solid #333;
+            color: #ffffff;
+        }
+        
+        /* --- ANIMATION & RESPONSIVE --- */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @media (min-width: 768px) {
+            .ticket-content {
+                flex-direction: row;
+            }
+            .class-ticket {
+                flex-direction: row;
+            }
+            .contact-fee-zone {
+                border-top: none;
+                border-left: 1px dashed #444;
+            }
+            h1 { font-size: 4.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-wrapper">
+        
+        <header>
+            <div class="crown-icon">
+                <img src="Assets/logo.png" alt="Crown Icon" style="width: 150px; height: 150px; vertical-align: middle;">
+                    <!-- Outer geometric frame -->
+                    <defs>
+                        <linearGradient id="kingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00eaff;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#0096a7;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <!-- Chess board grid background (stylized) -->
+                    <g opacity="0.15">
+                        <rect x="20" y="20" width="15" height="15" fill="#00eaff"/>
+                        <rect x="50" y="20" width="15" height="15" fill="#00eaff"/>
+                        <rect x="80" y="20" width="15" height="15" fill="#00eaff"/>
+                        <rect x="20" y="50" width="15" height="15" fill="#00eaff"/>
+                        <rect x="80" y="50" width="15" height="15" fill="#00eaff"/>
+                        <rect x="20" y="80" width="15" height="15" fill="#00eaff"/>
+                        <rect x="50" y="80" width="15" height="15" fill="#00eaff"/>
+                        <rect x="80" y="80" width="15" height="15" fill="#00eaff"/>
+                    </g>
+                    <!-- Central geometric King symbol (stylized crown/square) -->
+                    <g>
+                        <!-- Outer hexagon frame -->
+                        <circle cx="60" cy="60" r="45" fill="none" stroke="url(#kingGradient)" stroke-width="2"/>
+                        <!-- Inner tilted square (representing chess square) -->
+                        <g transform="translate(60, 60) rotate(45)">
+                            <rect x="-20" y="-20" width="40" height="40" fill="none" stroke="#00eaff" stroke-width="1.5"/>
+                            <rect x="-12" y="-12" width="24" height="24" fill="none" stroke="#00eaff" stroke-width="1"/>
+                        </g>
+                        <!-- Top crown points (tech inspired) -->
+                        <polygon points="60,15 55,35 60,32 65,35" fill="#00eaff"/>
+                        <polygon points="35,32 32,45 37,42" fill="#00eaff" opacity="0.8"/>
+                        <polygon points="85,32 88,45 83,42" fill="#00eaff" opacity="0.8"/>
+                    </g>
+                    <!-- Center dot (power indicator) -->
+                    <circle cx="60" cy="60" r="3" fill="#00eaff"/>
+                </svg>
+            </div>
+            <h1>KING'S SQUARE CHESS ACADEMY</h1>
+            <div class="subtitle">PHYSICAL CLASS SCHEDULE</div>
+        </header>
+        
+        
+        <h2 class="branch-heading"> <a class="branch-link" href="https://maps.app.goo.gl/3unBYHzQNJB7W6X77" target="_blank" rel="noopener noreferrer" title="Open Nugegoda (Head Office) in Google Maps" aria-label="Open Nugegoda Head Office in Google Maps">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img"><path d="M12 2C8.134 2 5 5.134 5 9c0 6 7 13 7 13s7-7 7-13c0-3.866-3.134-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+            </a>👑 NUGEGODA (HEAD OFFICE)</h2>
+        <div class="schedule-container">
+
+
+            <h4>
+            </h4>
+            <div class="class-ticket">
+                <div class="bg-watermark">TUE</div>
+                <div class="ticket-content">
+                    <div class="ticket-time-box">
+                        <div class="ticket-day">TUE</div>
+                        <div class="ticket-hours">5:00 PM<br>7:00 PM</div>
+                    </div>
+                    <div class="ticket-details">
+                        <span class="location-tag">KING'S SQUARE CHESS ACADEMY</span>
+                        <h3 class="instructor-name"> <span>NI UDAN RATHNAYAKE </span></h3>
+                        <div class="level-pills">
+                            <span class="pill">Beginner</span>
+                            <span class="pill">Intermediate</span>
+                            <span class="pill">Advanced</span>
+                        </div>
+                    </div>
+                    <div class="contact-fee-zone">
+                        <div class="fee-header">Class Fee</div>
+                        <div class="contact-info-block">
+                            <span class="fee-label">Rs.2500/=</span><br>
+                            <br>
+                            Contact:<br>
+                            071 666 8363
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="class-ticket">
+                <div class="bg-watermark">THU</div>
+                <div class="ticket-content">
+                    <div class="ticket-time-box">
+                        <div class="ticket-day">THU</div>
+                        <div class="ticket-hours">5:00 PM<br>7:00 PM</div>
+                    </div>
+                    <div class="ticket-details">
+                        <span class="location-tag">KING'S SQUARE CHESS ACADEMY</span>
+                        <h3 class="instructor-name"> <span>FI THEJAN RATHNAYAKE </span></h3>
+                        <div class="level-pills">
+                            <span class="pill">Beginner</span>
+                            <span class="pill">Intermediate</span>
+                            <span class="pill">Advanced</span>
+                        </div>
+                    </div>
+                    <div class="contact-fee-zone">
+                        <div class="fee-header">Class Fee</div>
+                        <div class="contact-info-block">
+                            <span class="fee-label">ENTER FEE HERE</span><br>
+                            <br>
+                            Contact:<br>
+                            071 666 8363
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="class-ticket">
+                <div class="bg-watermark">SAT</div>
+                <div class="ticket-content">
+                    <div class="ticket-time-box">
+                        <div class="ticket-day">SAT</div>
+                        <div class="ticket-hours">3:30 PM<br>5:30 PM</div>
+                    </div>
+                    <div class="ticket-details">
+                        <span class="location-tag">KING'S SQUARE CHESS ACADEMY</span>
+                        <h3 class="instructor-name"> <span>FI THEJAN RATHNAYAKE </span></h3>
+                        <div class="level-pills">
+                            <span class="pill">Beginner</span>
+                            <span class="pill">Intermediate</span>
+                            <span class="pill">Advanced</span>
+                        </div>
+                    </div>
+                    <div class="contact-fee-zone">
+                        <div class="fee-header">Class Fee</div>
+                        <div class="contact-info-block">
+                            <span class="fee-label">ENTER FEE HERE</span><br>
+                            <br>
+                            Contact:<br>
+                            071 679 0303
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> <h2 class="branch-heading"> <a class="branch-link" href="https://maps.app.goo.gl/qfEARydnLKkg94q47" target="_blank" rel="noopener noreferrer" title="Open Pannipitiya (Free Birds) in Google Maps" aria-label="Open Pannipitiya Free Birds nursery in Google Maps">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img"><path d="M12 2C8.134 2 5 5.134 5 9c0 6 7 13 7 13s7-7 7-13c0-3.866-3.134-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+            </a>♟️ PANNIPITIYA (FREE BIRDS)</h2>
+        <div class="schedule-container">
+
+            <div class="class-ticket">
+                <div class="bg-watermark">SAT</div>
+                <div class="ticket-content">
+                    <div class="ticket-time-box">
+                        <div class="ticket-day">SAT</div>
+                        <div class="ticket-hours">9:00 AM<br>11:00 AM</div>
+                    </div>
+                    <div class="ticket-details">
+                        <span class="location-tag">FREE BIRDS NURSERY</span>
+                        <h3 class="instructor-name"> <span>FI THEJAN RATHNAYAKE </span></h3>
+                        <div class="level-pills">
+                            <span class="pill">Beginner</span>
+                            <span class="pill">Intermediate</span>
+                            <span class="pill">Advanced</span>
+                        </div>
+                    </div>
+                    <div class="contact-fee-zone">
+                        <div class="fee-header">Class Fee</div>
+                        <div class="contact-info-block">
+                            <span class="fee-label">ENTER FEE HERE</span><br>
+                            <br>
+                            Contact:<br>
+                            071 313 8301
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="class-ticket">
+                <div class="bg-watermark">SAT</div>
+                <div class="ticket-content">
+                    <div class="ticket-time-box">
+                        <div class="ticket-day">SAT</div>
+                        <div class="ticket-hours">3:00 PM<br>5:00 PM</div>
+                    </div>
+                    <div class="ticket-details">
+                        <span class="location-tag">FREE BIRDS NURSERY</span>
+                        <h3 class="instructor-name"> <span>NI UDAN RATHNAYAKE </span></h3>
+                        <div class="level-pills">
+                            <span class="pill">Beginner</span>
+                            <span class="pill">Intermediate</span>
+                            <span class="pill">Advanced</span>
+                        </div>
+                    </div>
+                    <div class="contact-fee-zone">
+                        <div class="fee-header">Class Fee</div>
+                        <div class="contact-info-block">
+                            <span class="fee-label">ENTER FEE HERE</span><br>
+                            <br>
+                            Contact:<br>
+                            071 313 8301
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="class-ticket">
+                <div class="bg-watermark">SAT</div>
+                <div class="ticket-content">
+                    <div class="ticket-time-box">
+                        <div class="ticket-day">SAT</div>
+                        <div class="ticket-hours">6:00 PM<br>8:00 PM</div>
+                    </div>
+                    <div class="ticket-details">
+                        <span class="location-tag">FREE BIRDS NURSERY</span>
+                        <h3 class="instructor-name"> <span>FI THEJAN RATHNAYAKE </span></h3>
+                        <div class="level-pills">
+                            <span class="pill">Beginner</span>
+                            <span class="pill">Intermediate</span>
+                            <span class="pill">Advanced</span>
+                        </div>
+                    </div>
+                    <div class="contact-fee-zone">
+                        <div class="fee-header">Class Fee</div>
+                        <div class="contact-info-block">
+                            <span class="fee-label">ENTER FEE HERE</span><br>
+                            <br>
+                            Contact:<br>
+                            071 313 8301
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="class-ticket">
+                <div class="bg-watermark">SUN</div>
+                <div class="ticket-content">
+                    <div class="ticket-time-box">
+                        <div class="ticket-day">SUN</div>
+                        <div class="ticket-hours">5:00 PM<br>7:00 PM</div>
+                    </div>
+                    <div class="ticket-details">
+                        <span class="location-tag">FREE BIRDS NURSERY</span>
+                        <h3 class="instructor-name"> <span>FI THEJAN RATHNAYAKE </span></h3>
+                        <div class="level-pills">
+                            <span class="pill">Beginner</span>
+                            <span class="pill">Intermediate</span>
+                            <span class="pill">Advanced</span>
+                        </div>
+                    </div>
+                    <div class="contact-fee-zone">
+                        <div class="fee-header">Class Fee</div>
+                        <div class="contact-info-block">
+                            <span class="fee-label">ENTER FEE HERE</span><br>
+                            <br>
+                            Contact:<br>
+                            071 313 8301
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> <h2 class="branch-heading"> <a class="branch-link" href="https://maps.app.goo.gl/LRscnHdAmPbWJWaFA" target="_blank" rel="noopener noreferrer" title="Open Kotikawatta Sipleeme Institute in Google Maps" aria-label="Open Kotikawatta Sipleeme Institute in Google Maps">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img"><path d="M12 2C8.134 2 5 5.134 5 9c0 6 7 13 7 13s7-7 7-13c0-3.866-3.134-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+            </a>🏰 KOTIKAWATTA (SIPLEEME INST.)</h2>
+        <div class="schedule-container">
+
+            <div class="class-ticket">
+                <div class="bg-watermark">WED</div>
+                <div class="ticket-content">
+                    <div class="ticket-time-box">
+                        <div class="ticket-day">WED</div>
+                        <div class="ticket-hours">5:30 PM<br>7:30 PM</div>
+                    </div>
+                    <div class="ticket-details">
+                        <span class="location-tag">SIPLEEME INSTITUTE</span>
+                        <h3 class="instructor-name"> <span>FI THEJAN RATHNAYAKE </span></h3>
+                        <div class="level-pills">
+                            <span class="pill">Beginner</span>
+                            <span class="pill">Intermediate</span>
+                            <span class="pill">Advanced</span>
+                        </div>
+                    </div>
+                    <div class="contact-fee-zone">
+                        <div class="fee-header">Class Fee</div>
+                        <div class="contact-info-block">
+                            <span class="fee-label">ENTER FEE HERE</span><br>
+                            <br>
+                            Contact:<br>
+                            071 666 8363
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> <h2 class="branch-heading"> <a class="branch-link" href="https://maps.app.goo.gl/1osEJz9AL9FaRoBb7" target="_blank" rel="noopener noreferrer" title="Open Malabe LIT Institute in Google Maps" aria-label="Open Malabe LIT Institute in Google Maps">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img"><path d="M12 2C8.134 2 5 5.134 5 9c0 6 7 13 7 13s7-7 7-13c0-3.866-3.134-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+            </a>📚 MALABE (LIT INSTITUTE)</h2>
+        <div class="schedule-container">
+
+            <div class="class-ticket">
+                <div class="bg-watermark">FRI</div>
+                <div class="ticket-content">
+                    <div class="ticket-time-box">
+                        <div class="ticket-day">FRI</div>
+                        <div class="ticket-hours">5:00 PM<br>7:00 PM</div>
+                    </div>
+                    <div class="ticket-details">
+                        <span class="location-tag">LIT INSTITUTE</span>
+                        <h3 class="instructor-name"> <span>FI THEJAN RATHNAYAKE </span></h3>
+                        <div class="level-pills">
+                            <span class="pill">Beginner</span>
+                            <span class="pill">Intermediate</span>
+                            <span class="pill">Advanced</span>
+                        </div>
+                    </div>
+                    <div class="contact-fee-zone">
+                        <div class="fee-header">Class Fee</div>
+                        <div class="contact-info-block">
+                            <span class="fee-label">ENTER FEE HERE</span><br>
+                            <br>
+                            Contact:<br>
+                            071 666 8363
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> <h2 class="branch-heading"> <a class="branch-link" href="https://www.google.com/maps/search/Nanapetha+Institute+Kesbewa" target="_blank" rel="noopener noreferrer" title="Open Nanapetha Institute in Google Maps" aria-label="Open Nanapetha Institute in Google Maps">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img"><path d="M12 2C8.134 2 5 5.134 5 9c0 6 7 13 7 13s7-7 7-13c0-3.866-3.134-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+            </a>💡 KESBEWA (NANAPETHA INST.)</h2>
+        <div class="schedule-container">
+
+            <div class="class-ticket">
+                <div class="bg-watermark">SUN</div>
+                <div class="ticket-content">
+                    <div class="ticket-time-box">
+                        <div class="ticket-day">SUN</div>
+                        <div class="ticket-hours">2:30 PM<br>4:30 PM</div>
+                    </div>
+                    <div class="ticket-details">
+                        <span class="location-tag">NANAPETHA INSTITUTE</span>
+                        <h3 class="instructor-name"> <span>FI THEJAN RATHNAYAKE </span></h3>
+                        <div class="level-pills">
+                            <span class="pill">Beginner</span>
+                            <span class="pill">Intermediate</span>
+                            <span class="pill">Advanced</span>
+                        </div>
+                    </div>
+                    <div class="contact-fee-zone">
+                        <div class="fee-header">Class Fee</div>
+                        <div class="contact-info-block">
+                            <span class="fee-label">ENTER FEE HERE</span><br>
+                            <br>
+                            Contact:<br>
+                            071 666 8363
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> <h2 class="branch-heading"> <a class="branch-link" href="https://maps.app.goo.gl/q3tMcQMwvPgPfQz16" target="_blank" rel="noopener noreferrer" title="Open Colombo Wycherely in Google Maps" aria-label="Open Colombo Wycherely International School in Google Maps">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="img"><path d="M12 2C8.134 2 5 5.134 5 9c0 6 7 13 7 13s7-7 7-13c0-3.866-3.134-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+            </a>🏢 COLOMBO (WYCHERELY International School)</h2>
+        <div class="schedule-container">
+
+            <div class="class-ticket">
+                <div class="bg-watermark">SAT</div>
+                <div class="ticket-content">
+                    <div class="ticket-time-box">
+                        <div class="ticket-day">SAT</div>
+                        <div class="ticket-hours">11:00 AM<br>1:00 PM</div>
+                    </div>
+                    <div class="ticket-details">
+                        <span class="location-tag">WYCHERELY INTER SCHOOL</span>
+                        <h3 class="instructor-name"> <span>FI THEJAN RATHNAYAKE </span></h3>
+                        <div class="level-pills">
+                            <span class="pill">Beginner</span>
+                            <span class="pill">Intermediate</span>
+                            <span class="pill">Advanced</span>
+                        </div>
+                    </div>
+                    <div class="contact-fee-zone">
+                        <div class="fee-header">Class Fee</div>
+                        <div class="contact-info-block">
+                            <span class="fee-label">ENTER FEE HERE</span><br>
+                            <br>
+                            Contact:<br>
+                            071 666 8363
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div> <div class="new-classes">
+            <h2>🟢 NEW CLASSES STARTING IN NOVEMBER</h2>
+            <p style="color: var(--text-grey);">We are expanding! Please update us with your preferred and most convenient town:</p>
+            <ul class="town-list">
+                <li>Pannipitiya - Free Birds</li>
+                <li>Kottawa - Sahasra</li>
+                <li>Homagama - Youth Centre</li>
+                <li>Bope</li>
+            </ul>
+        </div>
+
+        <footer>
+        <div class="footer-content"
+            style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; padding-bottom: 40px;">
+            <div class="f-col">
+                <h3
+                    style="font-family: 'Russo One', sans-serif; font-size: 1.5rem; margin-bottom: 20px; text-transform: uppercase;">
+                    KING'S SQUARE<span style="color: #ffe23e;"><br>Chess Academy</span></h3>
+                <p style="color: #888; line-height: 1.6;">Forging the next generation of chess elite.</p>
+            </div>
+            <div class="f-col">
+                <h4 style="color: #ffe23e; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px;">Quick
+                    Links</h4>
+                <a href="index.html"
+                    style="display: block; color: #fff; text-decoration: none; margin-bottom: 10px;">Home</a>
+                <a href="schedule.html"
+                    style="display: block; color: #fff; text-decoration: none; margin-bottom: 10px;">Class Schedule</a>
+            </div>
+        </div>
+        <div class="copyright" style="text-align: center; color: #555; border-top: 1px solid #222; padding-top: 20px;">
+            &copy; 2024 KING'S SQUARE Chess Academy.</div>
+    </footer>
+
+    </div>
+
+</body>
+</html>
