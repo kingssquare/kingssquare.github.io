@@ -8,12 +8,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Saira:wght@400;700&display=swap"
         rel="stylesheet">
     <style>
-        /* Reuse Variables & Basic Reset from Index */
+        /* --- RESET & VARS --- */
         :root {
             --primary: #ffe23e;
             --dark: #0a0a0a;
             --darker: #050505;
             --light: #F0F0F0;
+            --lightdark: #222222;
             --accent: #2d2d2d;
             --font-head: 'Russo One', sans-serif;
             --font-body: 'Saira', sans-serif;
@@ -29,47 +30,55 @@
             background-color: var(--dark);
             color: var(--light);
             font-family: var(--font-body);
+            overflow-x: hidden; 
         }
 
-        /* Nav & Footer Styles should be copied here or linked via CSS file in production */
+        /* --- NAVIGATION --- */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 20px 50px;
+            padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(10, 10, 10, 0.9);
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
             z-index: 1000;
             border-bottom: 2px solid var(--primary);
         }
-
-        .logo {
-            font-family: var(--font-head);
-            font-size: 1.5rem;
-            text-transform: uppercase;
-            color: var(--light);
+        
+        .logo { 
+            font-family: var(--font-head); 
+            font-size: 1.5rem; 
+            color: var(--light); 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            line-height: 1.1;
+            text-align: center;
         }
+        .logo span { color: var(--primary); font-size: 1rem; display: block;}
 
-        .logo span {
-            color: var(--primary);
-        }
-
-        .nav-links a {
+        .nav-links { display: flex; align-items: center; }
+        .nav-links button {
+            background: transparent;
+            border: 1px solid var(--light);
             color: var(--light);
-            text-decoration: none;
-            margin-left: 20px;
+            padding: 8px 20px;
+            margin-left: 15px;
             font-family: var(--font-head);
             text-transform: uppercase;
+            cursor: pointer;
             transition: 0.3s;
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+        }
+        .nav-links button:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--dark);
         }
 
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        /* HEADER */
+        /* --- HEADER --- */
         .page-header {
             padding: 150px 10% 50px;
             background: linear-gradient(rgba(10, 10, 10, 0.8), var(--dark)), url('https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&w=1500&q=80');
@@ -82,17 +91,9 @@
             font-family: var(--font-head);
             font-size: 4rem;
             text-transform: uppercase;
-            margin-bottom: 10px;
         }
 
-        .page-subtitle {
-            color: var(--primary);
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        /* ROSTER GRID */
+        /* --- ROSTER GRID --- */
         .roster-grid {
             padding: 50px 10%;
             display: grid;
@@ -100,23 +101,23 @@
             gap: 40px;
         }
 
-        /* COACH CARD (Flip Effect or Stats Expand) */
+        /* --- COACH CARD --- */
         .coach-card {
             background: var(--accent);
             border: 1px solid #444;
             overflow: hidden;
-            position: relative;
             transition: 0.3s;
+            display: flex;
+            flex-direction: column;
         }
 
         .coach-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(255, 62, 62, 0.2);
             border-color: var(--primary);
         }
 
         .coach-img {
-            height: 300px;
+            height: 400px;
             width: 100%;
             object-fit: cover;
             filter: grayscale(100%);
@@ -129,11 +130,14 @@
 
         .coach-details {
             padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .coach-name {
             font-family: var(--font-head);
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             text-transform: uppercase;
             margin-bottom: 5px;
         }
@@ -141,36 +145,60 @@
         .coach-title {
             color: var(--primary);
             font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .coach-bio {
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.6;
             margin-bottom: 20px;
-            display: block;
         }
 
-        /* STAT BARS */
-        .stat-row {
-            margin-bottom: 10px;
-        }
-
-        .stat-label {
+        /* Social Icons in Card */
+        .coach-socials {
             display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-            color: #aaa;
+            align-items: center;
+            gap: 15px;
+            margin-top: auto;
+            border-top: 1px solid #444;
+            padding-top: 15px;
         }
 
-        .progress-bg {
-            width: 100%;
-            height: 8px;
-            background: #111;
-            border-radius: 4px;
-            overflow: hidden;
+        .coach-socials a {
+            transition: 0.3s ease;
+            display: flex;
+            align-items: center;
         }
 
-        .progress-fill {
-            height: 100%;
-            background: var(--primary);
-            width: 0%;
-            transition: width 1.5s ease-out;
+        .coach-socials img {
+            height: 24px; /* Slightly smaller for the card row */
+            width: auto;
+            filter: brightness(0.8);
+        }
+
+        .coach-socials a:hover img {
+            transform: scale(1.15);
+            filter: brightness(1);
+        }
+
+        /* Special sizing for FIDE logo to keep proportion */
+        .fide-logo {
+            height: 35px !important; 
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--darker);
+            border-top: 5px solid var(--primary);
+            padding: 50px 10% 20px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .page-title { font-size: 2.5rem; }
+            nav { flex-direction: column; height: auto; padding: 10px; }
+            .nav-links { margin-top: 10px; }
         }
     </style>
 </head>
@@ -180,135 +208,189 @@
     <nav>
         <div class="logo">KING'S SQUARE<br><span>Chess Academy</span></div>
         <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="schedule.html">Schedule</a>
+            <a href="index.html"><button>Home</button></a>
+            <a href="coaches.html"><button>Coaches</button></a>
+            <a href="Tournaments.html"><button>Tournaments</button></a>
+            <a href="schedule.html"><button>Schedule</button></a>
         </div>
     </nav>
 
     <header class="page-header">
-        <h1 class="page-title">The Roster</h1>
+        <h1 class="page-title">Our Coaches</h1>
         <p class="page-subtitle">Learn from the World's Most Aggressive Minds</p>
     </header>
 
     <div class="roster-grid">
+        
         <div class="coach-card">
-            <img src="Assets/Photo.jpg"
-                class="coach-img" alt="Thejan">
+            <img src="Assets/Photo.jpg" class="coach-img" alt="Thejan">
             <div class="coach-details">
                 <div class="coach-name">Thejan Rathnayake</div>
-                <span class="coach-title">Grandmaster | Opening Specialist</span>
+                <span class="coach-title">FIDE Instructor</span>
+                <p class="coach-bio">Specializing in aggressive tactical play and opening repertoires.</p>
 
-                <div class="stat-row">
-                    <div class="stat-label"><span>Tactics</span><span>98/100</span></div>
-                    <div class="progress-bg">
-                        <div class="progress-fill" style="width: 98%;"></div>
-                    </div>
-                </div>
-                <div class="stat-row">
-                    <div class="stat-label"><span>Endgame</span><span>92/100</span></div>
-                    <div class="progress-bg">
-                        <div class="progress-fill" style="width: 92%;"></div>
-                    </div>
-                </div>
-                <div class="stat-row">
-                    <div class="stat-label"><span>Aggression</span><span>99/100</span></div>
-                    <div class="progress-bg">
-                        <div class="progress-fill" style="width: 99%;"></div>
-                    </div>
+                <div class="coach-socials">
+                    <a href="https://ratings.fide.com/" target="_blank" title="FIDE Profile">
+                        <img src="Assets/FIDE_logo_top.png" class="fide-logo" alt="FIDE">
+                    </a>
+                    <a href="#" target="_blank"><img src="Assets/fb.png" alt="FB"></a>
+                    <a href="#" target="_blank"><img src="Assets/insta.png" alt="IG"></a>
+                    <a href="#" target="_blank"><img src="Assets/whatsapp.png" alt="WA"></a>
                 </div>
             </div>
         </div>
 
         <div class="coach-card">
-            <img src="Assets/Udan.jpg"
-                class="coach-img" alt="IM Chen">
+            <img src="Assets/Udan.jpg" class="coach-img" alt="Sarah">
             <div class="coach-details">
                 <div class="coach-name">Sarah Chen</div>
                 <span class="coach-title">IM | Defensive Strategist</span>
+                <p class="coach-bio">Known for rock-solid defense and converting small advantages into wins.</p>
 
-                <div class="stat-row">
-                    <div class="stat-label"><span>Tactics</span><span>94/100</span></div>
-                    <div class="progress-bg">
-                        <div class="progress-fill" style="width: 94%;"></div>
-                    </div>
-                </div>
-                <div class="stat-row">
-                    <div class="stat-label"><span>Endgame</span><span>97/100</span></div>
-                    <div class="progress-bg">
-                        <div class="progress-fill" style="width: 97%;"></div>
-                    </div>
-                </div>
-                <div class="stat-row">
-                    <div class="stat-label"><span>Defense</span><span>99/100</span></div>
-                    <div class="progress-bg">
-                        <div class="progress-fill" style="width: 99%;"></div>
-                    </div>
+                <div class="coach-socials">
+                    <a href="https://ratings.fide.com/" target="_blank" title="FIDE Profile">
+                        <img src="Assets/FIDE_logo_top.png" class="fide-logo" alt="FIDE">
+                    </a>
+                    <a href="#" target="_blank"><img src="Assets/fb.png" alt="FB"></a>
+                    <a href="#" target="_blank"><img src="Assets/insta.png" alt="IG"></a>
+                    <a href="#" target="_blank"><img src="Assets/whatsapp.png" alt="WA"></a>
                 </div>
             </div>
         </div>
 
         <div class="coach-card">
-            <img src="Assets/Sandeepa.jpg"
-                class="coach-img" alt="GM Thorne">
+            <img src="Assets/Sandeepa.jpg" class="coach-img" alt="Marcus">
             <div class="coach-details">
                 <div class="coach-name">Marcus Thorne</div>
                 <span class="coach-title">Grandmaster | Calculation King</span>
+                <p class="coach-bio">Focuses on complex middlegame strategies and theoretical endgames.</p>
 
-                <div class="stat-row">
-                    <div class="stat-label"><span>Tactics</span><span>99/100</span></div>
-                    <div class="progress-bg">
-                        <div class="progress-fill" style="width: 99%;"></div>
-                    </div>
-                </div>
-                <div class="stat-row">
-                    <div class="stat-label"><span>Endgame</span><span>95/100</span></div>
-                    <div class="progress-bg">
-                        <div class="progress-fill" style="width: 95%;"></div>
-                    </div>
-                </div>
-                <div class="stat-row">
-                    <div class="stat-label"><span>Psychology</span><span>100/100</span></div>
-                    <div class="progress-bg">
-                        <div class="progress-fill" style="width: 100%;"></div>
-                    </div>
+                <div class="coach-socials">
+                    <a href="https://ratings.fide.com/" target="_blank" title="FIDE Profile">
+                        <img src="Assets/FIDE_logo_top.png" class="fide-logo" alt="FIDE">
+                    </a>
+                    <a href="#" target="_blank"><img src="Assets/fb.png" alt="FB"></a>
+                    <a href="#" target="_blank"><img src="Assets/insta.png" alt="IG"></a>
+                    <a href="#" target="_blank"><img src="Assets/whatsapp.png" alt="WA"></a>
                 </div>
             </div>
         </div>
+
+        <div class="coach-card">
+            <img src="Assets/tharuka.jpg" class="coach-img" alt="Tharuka">
+            <div class="coach-details">
+                <div class="coach-name">Tharuka Gimhani</div>
+                <span class="coach-title">FIDE Instructor</span>
+                <p class="coach-bio">Dynamic approach focusing on tournament prep and board vision.</p>
+
+                <div class="coach-socials">
+                    <a href="https://ratings.fide.com/" target="_blank" title="FIDE Profile">
+                        <img src="Assets/FIDE_logo_top.png" class="fide-logo" alt="FIDE">
+                    </a>
+                    <a href="#" target="_blank"><img src="Assets/fb.png" alt="FB"></a>
+                    <a href="#" target="_blank"><img src="Assets/insta.png" alt="IG"></a>
+                    <a href="#" target="_blank"><img src="Assets/whatsapp.png" alt="WA"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="coach-card">
+            <img src="Assets/tharuka.jpg" class="coach-img" alt="Tharuka">
+            <div class="coach-details">
+                <div class="coach-name">Tharuka Gimhani</div>
+                <span class="coach-title">FIDE Instructor</span>
+                <p class="coach-bio">Dynamic approach focusing on tournament prep and board vision.</p>
+
+                <div class="coach-socials">
+                    <a href="https://ratings.fide.com/" target="_blank" title="FIDE Profile">
+                        <img src="Assets/FIDE_logo_top.png" class="fide-logo" alt="FIDE">
+                    </a>
+                    <a href="#" target="_blank"><img src="Assets/fb.png" alt="FB"></a>
+                    <a href="#" target="_blank"><img src="Assets/insta.png" alt="IG"></a>
+                    <a href="#" target="_blank"><img src="Assets/whatsapp.png" alt="WA"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="coach-card">
+            <img src="Assets/tharuka.jpg" class="coach-img" alt="Tharuka">
+            <div class="coach-details">
+                <div class="coach-name">Tharuka Gimhani</div>
+                <span class="coach-title">FIDE Instructor</span>
+                <p class="coach-bio">Dynamic approach focusing on tournament prep and board vision.</p>
+
+                <div class="coach-socials">
+                    <a href="https://ratings.fide.com/" target="_blank" title="FIDE Profile">
+                        <img src="Assets/FIDE_logo_top.png" class="fide-logo" alt="FIDE">
+                    </a>
+                    <a href="#" target="_blank"><img src="Assets/fb.png" alt="FB"></a>
+                    <a href="#" target="_blank"><img src="Assets/insta.png" alt="IG"></a>
+                    <a href="#" target="_blank"><img src="Assets/whatsapp.png" alt="WA"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="coach-card">
+            <img src="Assets/tharuka.jpg" class="coach-img" alt="Tharuka">
+            <div class="coach-details">
+                <div class="coach-name">Tharuka Gimhani</div>
+                <span class="coach-title">FIDE Instructor</span>
+                <p class="coach-bio">Dynamic approach focusing on tournament prep and board vision.</p>
+
+                <div class="coach-socials">
+                    <a href="https://ratings.fide.com/" target="_blank" title="FIDE Profile">
+                        <img src="Assets/FIDE_logo_top.png" class="fide-logo" alt="FIDE">
+                    </a>
+                    <a href="#" target="_blank"><img src="Assets/fb.png" alt="FB"></a>
+                    <a href="#" target="_blank"><img src="Assets/insta.png" alt="IG"></a>
+                    <a href="#" target="_blank"><img src="Assets/whatsapp.png" alt="WA"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="coach-card">
+            <img src="Assets/tharuka.jpg" class="coach-img" alt="Tharuka">
+            <div class="coach-details">
+                <div class="coach-name">Tharuka Gimhani</div>
+                <span class="coach-title">FIDE Instructor</span>
+                <p class="coach-bio">Dynamic approach focusing on tournament prep and board vision.</p>
+
+                <div class="coach-socials">
+                    <a href="https://ratings.fide.com/" target="_blank" title="FIDE Profile">
+                        <img src="Assets/FIDE_logo_top.png" class="fide-logo" alt="FIDE">
+                    </a>
+                    <a href="#" target="_blank"><img src="Assets/fb.png" alt="FB"></a>
+                    <a href="#" target="_blank"><img src="Assets/insta.png" alt="IG"></a>
+                    <a href="#" target="_blank"><img src="Assets/whatsapp.png" alt="WA"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="coach-card">
+            <img src="Assets/tharuka.jpg" class="coach-img" alt="Tharuka">
+            <div class="coach-details">
+                <div class="coach-name">Tharuka Gimhani</div>
+                <span class="coach-title">FIDE Instructor</span>
+                <p class="coach-bio">Dynamic approach focusing on tournament prep and board vision.</p>
+
+                <div class="coach-socials">
+                    <a href="https://ratings.fide.com/" target="_blank" title="FIDE Profile">
+                        <img src="Assets/FIDE_logo_top.png" class="fide-logo" alt="FIDE">
+                    </a>
+                    <a href="#" target="_blank"><img src="Assets/fb.png" alt="FB"></a>
+                    <a href="#" target="_blank"><img src="Assets/insta.png" alt="IG"></a>
+                    <a href="#" target="_blank"><img src="Assets/whatsapp.png" alt="WA"></a>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <footer>
-        <div class="footer-content"
-            style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; padding-bottom: 40px;">
-            <div class="f-col">
-                <h3
-                    style="font-family: 'Russo One', sans-serif; font-size: 1.5rem; margin-bottom: 20px; text-transform: uppercase;">
-                    KING'S SQUARE<span style="color: #ffe23e;">Chess Academy</span></h3>
-                <p style="color: #888; line-height: 1.6;">Forging the next generation of chess elite.</p>
-            </div>
-            <div class="f-col">
-                <h4 style="color: #ffe23e; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px;">Quick
-                    Links</h4>
-                <a href="index.html"
-                    style="display: block; color: #fff; text-decoration: none; margin-bottom: 10px;">Home</a>
-                <a href="schedule.html"
-                    style="display: block; color: #fff; text-decoration: none; margin-bottom: 10px;">Class Schedule</a>
-            </div>
+        <div class="copyright" style="text-align: center; color: #555;">
+            &copy; 2024 KING'S SQUARE Chess Academy.
         </div>
-        <div class="copyright" style="text-align: center; color: #555; border-top: 1px solid #222; padding-top: 20px;">
-            &copy; 2024 KING'S SQUARE Chess Academy.</div>
     </footer>
 
-    <script>
-        // Animate Bars on Load
-        window.onload = () => {
-            const bars = document.querySelectorAll('.progress-fill');
-            bars.forEach(bar => {
-                const width = bar.style.width;
-                bar.style.width = '0%';
-                setTimeout(() => { bar.style.width = width; }, 300);
-            });
-        }
-    </script>
 </body>
-
 </html>
