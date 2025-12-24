@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tournament Center | King's Square Chess Academy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Saira:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Saira:wght@400;600;700&display=swap"
+        rel="stylesheet">
     <style>
         /* --- RESET & VARS --- */
         :root {
-            --primary: #ffe23e; /* Adrenaline Red/Yellow */
+            --primary: #ffe23e;
+            /* Adrenaline Red/Yellow */
             --dark: #0a0a0a;
             --darker: #050505;
             --light: #F0F0F0;
@@ -18,8 +21,12 @@
             --font-body: 'Saira', sans-serif;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             background-color: var(--dark);
             color: var(--light);
@@ -30,8 +37,15 @@
 
         /* --- UTILITY ANIMATIONS --- */
         @keyframes slideInUp {
-            from { transform: translateY(100px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         /* --- NAVIGATION --- */
@@ -39,7 +53,8 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 15px 5%; /* Changed to percentage for flexibility */
+            padding: 15px 5%;
+            /* Changed to percentage for flexibility */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -49,22 +64,32 @@
             border-bottom: 2px solid var(--primary);
             transition: 0.3s ease;
         }
-        
-        .logo { 
-            font-family: var(--font-head); 
-            font-size: 1.5rem; 
-            color: var(--light); 
-            text-transform: uppercase; 
+
+        .logo {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            color: var(--light);
+            text-transform: uppercase;
             letter-spacing: 2px;
             line-height: 1.1;
             text-align: center;
         }
-        .logo span { color: var(--primary); font-size: 1rem; display: block;}
 
-        .nav-links { display: flex; align-items: center; }
-        
-        .nav-links a { text-decoration: none; }
-        
+        .logo span {
+            color: var(--primary);
+            font-size: 1rem;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+        }
+
         .nav-links button {
             background: transparent;
             border: 1px solid var(--light);
@@ -78,6 +103,7 @@
             clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
             white-space: nowrap;
         }
+
         .nav-links button:hover {
             background: var(--primary);
             border-color: var(--primary);
@@ -88,7 +114,8 @@
         /* --- HERO SECTION --- */
         header {
             height: 100vh;
-            min-height: 600px; /* Safety for small phones */
+            min-height: 600px;
+            /* Safety for small phones */
             position: relative;
             display: flex;
             align-items: center;
@@ -97,11 +124,14 @@
             perspective: 1000px;
             padding: 0 20px;
         }
-        
+
         .bg-grid {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
                 linear-gradient(rgba(255, 62, 62, 0.1) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255, 62, 62, 0.1) 1px, transparent 1px);
             background-size: 50px 50px;
@@ -109,22 +139,39 @@
             animation: gridMove 20s linear infinite;
             opacity: 0.3;
         }
-        @keyframes gridMove { from { background-position: 0 0; } to { background-position: 0 1000px; } }
 
-        .hero-content { z-index: 10; text-align: center; width: 100%; }
-        
+        @keyframes gridMove {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: 0 1000px;
+            }
+        }
+
+        .hero-content {
+            z-index: 10;
+            text-align: center;
+            width: 100%;
+        }
+
         h1 {
             font-family: var(--font-head);
             /* CLAMP: Minimum 3rem, Preferred 10vw, Maximum 6rem */
-            font-size: clamp(3rem, 10vw, 6rem); 
+            font-size: clamp(3rem, 10vw, 6rem);
             line-height: 0.9;
             text-transform: uppercase;
             font-style: italic;
             text-shadow: 10px 10px 0px rgba(255, 255, 255, 0.1);
             animation: slideInUp 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
         }
-        h1 span { color: var(--primary); display: block; }
-        
+
+        h1 span {
+            color: var(--primary);
+            display: block;
+        }
+
         .cta-btn {
             margin-top: 30px;
             padding: 15px 40px;
@@ -140,6 +187,7 @@
             transition: 0.3s;
             animation: slideInUp 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
         }
+
         .cta-btn:hover {
             box-shadow: 0 0 30px var(--primary);
             transform: translateY(-5px);
@@ -148,16 +196,32 @@
         /* Floating Pieces */
         .floater {
             position: absolute;
-            font-size: clamp(5rem, 15vw, 10rem); /* Responsive size */
+            font-size: clamp(5rem, 15vw, 10rem);
+            /* Responsive size */
             opacity: 0.1;
             color: var(--light);
             z-index: 1;
             transition: transform 0.1s linear;
-            pointer-events: none; /* Allows clicking through them */
+            pointer-events: none;
+            /* Allows clicking through them */
         }
-        .p-king { top: 15%; right: 5%; }
-        .p-knight { bottom: 15%; left: 5%; }
-        .p-rook { top: 40%; left: 50%; filter: blur(4px); opacity: 0.05; }
+
+        .p-king {
+            top: 15%;
+            right: 5%;
+        }
+
+        .p-knight {
+            bottom: 15%;
+            left: 5%;
+        }
+
+        .p-rook {
+            top: 40%;
+            left: 50%;
+            filter: blur(4px);
+            opacity: 0.05;
+        }
 
         /* --- TICKER --- */
         .ticker {
@@ -172,12 +236,28 @@
             border-top: 2px solid var(--light);
             border-bottom: 2px solid var(--light);
         }
-        .ticker-content { display: inline-block; animation: tickerScroll 25s linear infinite; }
-        @keyframes tickerScroll { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+
+        .ticker-content {
+            display: inline-block;
+            animation: tickerScroll 25s linear infinite;
+        }
+
+        @keyframes tickerScroll {
+            from {
+                transform: translateX(100%);
+            }
+
+            to {
+                transform: translateX(-100%);
+            }
+        }
 
         /* --- SECTIONS COMMON --- */
-        section { padding: 80px 10%; position: relative; }
-        
+        section {
+            padding: 80px 10%;
+            position: relative;
+        }
+
         .section-title {
             font-family: var(--font-head);
             font-size: clamp(2rem, 5vw, 3rem);
@@ -185,18 +265,25 @@
             text-transform: uppercase;
             border-left: 10px solid var(--primary);
             padding-left: 20px;
-            opacity: 0; transform: translateX(-50px); transition: 1s all ease;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: 1s all ease;
         }
-        .section-title.visible { opacity: 1; transform: translateX(0); }
+
+        .section-title.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
 
         /* --- GRID SYSTEMS --- */
-        .gm-grid, .pricing-grid {
+        .gm-grid,
+        .pricing-grid {
             display: grid;
             /* Auto-fit with slightly smaller min-width for mobile support */
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
-        
+
         /* GM Card */
         .gm-card {
             background: var(--accent);
@@ -205,24 +292,57 @@
             overflow: hidden;
             border: 1px solid #444;
             transition: 0.4s;
-            opacity: 0; transform: translateY(50px);
+            opacity: 0;
+            transform: translateY(50px);
         }
-        .gm-card.visible { opacity: 1; transform: translateY(0); }
-        .gm-card:hover { border-color: var(--primary); }
+
+        .gm-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gm-card:hover {
+            border-color: var(--primary);
+        }
+
         .gm-card img {
-            width: 100%; height: 100%; object-fit: cover;
-            filter: grayscale(100%); transition: 0.5s;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: 0.5s;
         }
-        .gm-card:hover img { filter: grayscale(0%); transform: scale(1.1); }
+
+        .gm-card:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.1);
+        }
+
         .gm-info {
-            position: absolute; bottom: 0; left: 0; width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
             padding: 20px;
             background: linear-gradient(to top, var(--dark) 0%, transparent 100%);
-            transform: translateY(20px); transition: 0.4s;
+            transform: translateY(20px);
+            transition: 0.4s;
         }
-        .gm-card:hover .gm-info { transform: translateY(0); }
-        .gm-name { font-family: var(--font-head); font-size: 1.5rem; text-transform: uppercase; }
-        .gm-rank { color: var(--primary); font-weight: bold; }
+
+        .gm-card:hover .gm-info {
+            transform: translateY(0);
+        }
+
+        .gm-name {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .gm-rank {
+            color: var(--primary);
+            font-weight: bold;
+        }
 
         /* --- TOURNAMENTS --- */
         .tourney-row {
@@ -235,15 +355,35 @@
             background: linear-gradient(90deg, transparent 0%, transparent 100%);
             opacity: 0;
         }
-        .tourney-row.visible { opacity: 1; }
+
+        .tourney-row.visible {
+            opacity: 1;
+        }
+
         .tourney-row:hover {
-            background: linear-gradient(90deg, rgba(255,226,62,0.1) 0%, transparent 100%);
+            background: linear-gradient(90deg, rgba(255, 226, 62, 0.1) 0%, transparent 100%);
             border-left: 5px solid var(--primary);
             padding-left: 40px;
         }
-        .t-date { color: #888; font-weight: bold; min-width: 80px; }
-        .t-name { font-size: 1.5rem; font-family: var(--font-head); flex-grow: 1; margin: 0 20px; }
-        .t-prize { color: var(--primary); font-size: 1.2rem; font-weight: bold; }
+
+        .t-date {
+            color: #888;
+            font-weight: bold;
+            min-width: 80px;
+        }
+
+        .t-name {
+            font-size: 1.5rem;
+            font-family: var(--font-head);
+            flex-grow: 1;
+            margin: 0 20px;
+        }
+
+        .t-prize {
+            color: var(--primary);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
 
         /* --- PRICING --- */
         .price-card {
@@ -252,19 +392,49 @@
             padding: 40px;
             text-align: center;
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            opacity: 0; /* Assuming scroll trigger handles this */
+            opacity: 0;
+            /* Assuming scroll trigger handles this */
         }
-        .price-card.visible { opacity: 1; }
+
+        .price-card.visible {
+            opacity: 1;
+        }
+
         .price-card:hover {
-            transform: scale(1.05); /* slightly reduced scale for better mobile ux */
+            transform: scale(1.05);
+            /* slightly reduced scale for better mobile ux */
             border-color: var(--primary);
             box-shadow: 0 0 40px rgba(255, 62, 62, 0.1);
             z-index: 10;
         }
-        .price-tier { color: var(--primary); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; display: block;}
-        .price-amt { font-size: 3rem; font-family: var(--font-head); display: block; margin-bottom: 20px; }
-        .price-list { list-style: none; text-align: left; margin-bottom: 30px; color: #aaa; }
-        .price-list li { margin-bottom: 10px; border-bottom: 1px solid #222; padding-bottom: 5px; }
+
+        .price-tier {
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .price-amt {
+            font-size: 3rem;
+            font-family: var(--font-head);
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .price-list {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 30px;
+            color: #aaa;
+        }
+
+        .price-list li {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #222;
+            padding-bottom: 5px;
+        }
 
         /* --- FOOTER --- */
         footer {
@@ -273,39 +443,87 @@
             padding: 50px 10% 20px;
             margin-top: 50px;
         }
+
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
             margin-bottom: 40px;
         }
-        .f-col h3 { font-family: var(--font-head); font-size: 1.5rem; margin-bottom: 20px; text-transform: uppercase; }
-        .f-col h3 span { color: var(--primary); }
-        .f-col h4 { color: var(--primary); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
-        .f-col p { color: #888; line-height: 1.6; }
-        .f-col a { display: block; color: #fff; text-decoration: none; margin-bottom: 10px; transition: 0.3s; }
-        .f-col a:hover { color: var(--primary); padding-left: 10px; }
-        .copyright { text-align: center; color: #555; font-size: 0.9rem; border-top: 1px solid #222; padding-top: 20px; }
+
+        .f-col h3 {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .f-col h3 span {
+            color: var(--primary);
+        }
+
+        .f-col h4 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .f-col p {
+            color: #888;
+            line-height: 1.6;
+        }
+
+        .f-col a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: 0.3s;
+        }
+
+        .f-col a:hover {
+            color: var(--primary);
+            padding-left: 10px;
+        }
+
+        .copyright {
+            text-align: center;
+            color: #555;
+            font-size: 0.9rem;
+            border-top: 1px solid #222;
+            padding-top: 20px;
+        }
 
         /* =========================================
            MOBILE & TABLET ADJUSTMENTS (MEDIA QUERIES)
            ========================================= */
         @media (max-width: 768px) {
+
             /* Adjust Nav for Mobile */
             nav {
                 flex-direction: column;
                 padding: 15px 5%;
                 height: auto;
             }
-            .logo { margin-bottom: 15px; }
-            .logo br { display: none; } /* keep logo on one line if possible or let wrap naturally */
-            
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            .logo br {
+                display: none;
+            }
+
+            /* keep logo on one line if possible or let wrap naturally */
+
             .nav-links {
                 width: 100%;
                 justify-content: center;
                 flex-wrap: wrap;
                 gap: 10px;
             }
+
             .nav-links button {
                 margin: 0;
                 padding: 8px 15px;
@@ -313,22 +531,36 @@
             }
 
             /* Adjust Hero */
-            header { padding-top: 120px; } /* Push down so nav doesn't cover text */
-            
+            header {
+                padding-top: 120px;
+            }
+
+            /* Push down so nav doesn't cover text */
+
             /* Stack Tournament Info */
             .tourney-row {
                 flex-direction: column;
                 text-align: center;
                 gap: 10px;
             }
-            .tourney-row:hover { padding-left: 30px; border-left-width: 0; border-bottom: 2px solid var(--primary); }
-            
+
+            .tourney-row:hover {
+                padding-left: 30px;
+                border-left-width: 0;
+                border-bottom: 2px solid var(--primary);
+            }
+
             /* Section Padding */
-            section { padding: 60px 5%; }
-            
+            section {
+                padding: 60px 5%;
+            }
+
             /* Footer Grid */
-            footer { padding: 40px 5% 20px; }
+            footer {
+                padding: 40px 5% 20px;
+            }
         }
+
         :root {
             --primary: #ffe23e;
             --dark-bg: #0a0a0a;
@@ -353,10 +585,20 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 2px solid var(--primary);
-            position: sticky; top: 0; z-index: 1000;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
-        .logo { font-family: 'Russo One'; font-size: 1.5rem; text-transform: uppercase; }
-        .logo span { color: var(--primary); }
+
+        .logo {
+            font-family: 'Russo One';
+            font-size: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
 
         /* --- ADMIN PANEL --- */
         .admin-bar {
@@ -367,66 +609,594 @@
             flex-wrap: wrap;
             align-items: center;
         }
+
         .admin-bar input {
-            background: #222; border: 1px solid var(--border);
-            padding: 8px 12px; color: #fff; border-radius: 4px; flex: 1; min-width: 200px;
+            background: #222;
+            border: 1px solid var(--border);
+            padding: 8px 12px;
+            color: #fff;
+            border-radius: 4px;
+            flex: 1;
+            min-width: 200px;
         }
+
         .admin-bar button {
-            background: var(--primary); border: none; padding: 8px 20px;
-            font-family: 'Russo One'; cursor: pointer; border-radius: 4px; transition: 0.2s;
+            background: var(--primary);
+            border: none;
+            padding: 8px 20px;
+            font-family: 'Russo One';
+            cursor: pointer;
+            border-radius: 4px;
+            transition: 0.2s;
         }
-        .admin-bar button:hover { transform: scale(1.05); }
+
+        .admin-bar button:hover {
+            transform: scale(1.05);
+        }
 
         /* --- MAIN LAYOUT --- */
         .container {
-            max-width: 1400px; margin: 40px auto; padding: 0 20px;
-            display: grid; grid-template-columns: 1fr 380px; gap: 30px;
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 30px;
         }
 
         /* --- LIVE SECTION --- */
         .live-viewer {
-            background: var(--panel); border-radius: 12px; overflow: hidden;
-            border: 1px solid var(--border); height: fit-content;
+            background: var(--panel);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            height: fit-content;
         }
-        .viewer-header {
-            background: #222; padding: 15px 20px; border-bottom: 1px solid var(--border);
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .live-dot { height: 10px; width: 10px; background: #ff4d4d; border-radius: 50%; display: inline-block; margin-right: 10px; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        iframe { width: 100%; height: 650px; border: none; }
-        .placeholder-text { padding: 100px 20px; text-align: center; color: #666; }
+        .viewer-header {
+            background: #222;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .live-dot {
+            height: 10px;
+            width: 10px;
+            background: #ff4d4d;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 10px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        iframe {
+            width: 100%;
+            height: 650px;
+            border: none;
+        }
+
+        .placeholder-text {
+            padding: 100px 20px;
+            text-align: center;
+            color: #666;
+        }
 
         /* --- SIDEBAR LIST --- */
-        .sidebar-title { font-family: 'Russo One'; color: var(--primary); margin-bottom: 20px; text-transform: uppercase; }
-        .tournament-list { list-style: none; padding: 0; margin: 0; }
-        .t-card {
-            background: #111; padding: 15px; border-radius: 8px; margin-bottom: 12px;
-            border-left: 4px solid #444; cursor: pointer; transition: 0.3s;
+        .sidebar-title {
+            font-family: 'Russo One';
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-transform: uppercase;
         }
-        .t-card:hover { background: #222; border-left-color: var(--primary); }
-        .t-card.active { background: #222; border-left-color: var(--primary); box-shadow: 0 0 15px rgba(255,226,62,0.1); }
-        .t-card h4 { margin: 0 0 5px 0; font-size: 1rem; }
-        .t-card p { margin: 0; font-size: 0.8rem; color: #888; }
+
+        .tournament-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .t-card {
+            background: #111;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border-left: 4px solid #444;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .t-card:hover {
+            background: #222;
+            border-left-color: var(--primary);
+        }
+
+        .t-card.active {
+            background: #222;
+            border-left-color: var(--primary);
+            box-shadow: 0 0 15px rgba(255, 226, 62, 0.1);
+        }
+
+        .t-card h4 {
+            margin: 0 0 5px 0;
+            font-size: 1rem;
+        }
+
+        .t-card p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: #888;
+        }
 
         /* --- FIDE CALENDAR SECTION --- */
-        .fide-section { grid-column: 1 / -1; margin-top: 50px; }
-        .fide-table-wrapper { background: var(--panel); border-radius: 12px; padding: 20px; border: 1px solid var(--border); overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; text-align: left; }
-        th { color: var(--primary); font-family: 'Russo One'; padding: 15px; border-bottom: 2px solid #333; }
-        td { padding: 15px; border-bottom: 1px solid #222; font-size: 0.95rem; }
-        .tag { padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; }
-        .standard { background: #3498db; } .rapid { background: #e67e22; } .blitz { background: #e74c3c; }
+        .fide-section {
+            grid-column: 1 / -1;
+            margin-top: 50px;
+        }
+
+        .fide-table-wrapper {
+            background: var(--panel);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th {
+            color: var(--primary);
+            font-family: 'Russo One';
+            padding: 15px;
+            border-bottom: 2px solid #333;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #222;
+            font-size: 0.95rem;
+        }
+
+        .tag {
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .standard {
+            background: #3498db;
+        }
+
+        .rapid {
+            background: #e67e22;
+        }
+
+        .blitz {
+            background: #e74c3c;
+        }
 
         @media (max-width: 1000px) {
-            .container { grid-template-columns: 1fr; }
+            .container {
+                grid-template-columns: 1fr;
+            }
         }
-         footer { padding: 40px 5% 20px; }
-        
 
+        footer {
+            padding: 40px 5% 20px;
+        }
+
+        /* =========================================
+   1. GLOBAL VARIABLES & RESET
+   ========================================= */
+        :root {
+            --primary: #ffe23e;
+            /* Adrenaline Yellow */
+            --dark-bg: #0a0a0a;
+            /* Deep Black */
+            --panel: #1a1a1a;
+            /* Dark Grey Panels */
+            --accent: #2d2d2d;
+            /* Lighter Grey */
+            --text: #ffffff;
+            --text-dim: #888888;
+            --border: #333333;
+            --danger: #ff4d4d;
+            --font-head: 'Russo One', sans-serif;
+            --font-body: 'Saira', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* =========================================
+   2. NAVIGATION
+   ========================================= */
+        nav {
+            background: #000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-family: var(--font-head);
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-links button {
+            background: transparent;
+            border: 1px solid var(--text);
+            color: var(--text);
+            padding: 8px 18px;
+            font-family: var(--font-head);
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.85rem;
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+        }
+
+        .nav-links button:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--dark-bg);
+        }
+
+        /* =========================================
+   3. TOURNAMENT VIEWER (THE MAIN STAGE)
+   ========================================= */
+        /* The top section containing the FIDE iframe */
+        .tn-elem__8309354121679753557921 {
+            margin: 40px auto;
+            max-width: 1100px;
+            background: #000;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        iframe.iframe-game {
+            width: 100%;
+            border: none;
+            background: #fff;
+            /* Most FIDE results pages have white backgrounds */
+        }
+
+        /* =========================================
+   4. SCOREBOARD (Tilda Classes)
+   ========================================= */
+        .t396__artboard {
+            background: var(--panel);
+            border-top: 1px solid var(--primary);
+            border-bottom: 1px solid var(--primary);
+            padding: 40px 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 250px;
+        }
+
+        /* Player Names */
+        .tn-elem__8331039801732541130599 .tn-atom,
+        .tn-elem__8331039801732541168215 .tn-atom {
+            font-family: var(--font-head);
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+        /* The Score: 7.5 - 6.5 */
+        .tn-elem__8331039801732541180364 .tn-atom {
+            font-family: var(--font-head);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--primary);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 20px;
+            border-radius: 4px;
+        }
+
+        /* Match Progress SVG */
+        .tn-elem__8331039801732539259648 {
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .tn-elem__8331039801732539259648 img {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 5px var(--primary));
+        }
+
+        /* =========================================
+   5. FOOTER
+   ========================================= */
+        footer {
+            background: #050505;
+            padding: 60px 10% 20px;
+            margin-top: 80px;
+            border-top: 4px solid var(--primary);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .f-col h3 {
+            font-family: var(--font-head);
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .f-col h3 span {
+            color: var(--primary);
+            font-size: 0.8rem;
+        }
+
+        .f-col h4 {
+            color: var(--primary);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .f-col a {
+            display: block;
+            color: var(--text-dim);
+            text-decoration: none;
+            margin-bottom: 8px;
+            transition: 0.3s;
+        }
+
+        .f-col a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            color: #444;
+            padding-top: 20px;
+            border-top: 1px solid #111;
+            font-size: 0.8rem;
+        }
+
+        /* =========================================
+   6. RESPONSIVE ADJUSTMENTS
+   ========================================= */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .t396__artboard {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+
+            .tn-elem {
+                position: relative !important;
+                /* Overriding Tilda inline positioning for mobile */
+                left: auto !important;
+                top: auto !important;
+                margin-bottom: 15px;
+                width: 100% !important;
+            }
+        }
+
+        /* --- SCOREBOARD CONTAINER --- */
+        .t396__artboard {
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%) !important;
+            height: auto !important;
+            min-height: 250px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 40px 20px !important;
+            border-bottom: 2px solid var(--primary);
+            position: relative;
+        }
+
+        /* Wrapper for Player - Score - Player */
+        .t396__artboard::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        /* THE DUEL LAYOUT: Force elements into a row */
+        .t396__artboard {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            flex-direction: row !important;
+            gap: 20px;
+        }
+
+        /* Common style for Player Names & Score */
+        .tn-elem {
+            position: static !important;
+            /* Disables the messy absolute positioning */
+            width: auto !important;
+            height: auto !important;
+        }
+
+        /* PLAYER NAMES (Gukesh & Ding) */
+        .tn-elem__8331039801732541130599 .tn-atom,
+        .tn-elem__8331039801732541168215 .tn-atom {
+            font-family: 'Russo One', sans-serif !important;
+            font-size: clamp(1.2rem, 3vw, 2.5rem) !important;
+            letter-spacing: 2px;
+            color: #fff !important;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        /* THE SCORE (7½ - 6½) */
+        .tn-elem__8331039801732541180364 {
+            order: 2;
+            /* Keeps it in the middle */
+        }
+
+        .tn-elem__8331039801732541180364 .tn-atom {
+            background: var(--primary) !important;
+            color: #000 !important;
+            font-family: 'Russo One', sans-serif !important;
+            font-size: clamp(1.5rem, 4vw, 3rem) !important;
+            padding: 10px 30px !important;
+            clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0 50%);
+            box-shadow: 0 0 20px rgba(255, 226, 62, 0.4);
+            margin: 0 20px;
+        }
+
+        /* POSITIONING PLAYERS */
+        .tn-elem__8331039801732541130599 {
+            order: 1;
+            text-align: right;
+            flex: 1;
+        }
+
+        /* Gukesh */
+        .tn-elem__8331039801732541168215 {
+            order: 3;
+            text-align: left;
+            flex: 1;
+        }
+
+        /* Ding */
+
+        /* MATCH PROGRESS BAR (The SVG Image) */
+        .tn-elem__8331039801732539259648 {
+            order: 4;
+            width: 100% !important;
+            text-align: center !important;
+        }
+
+        /* --- PLAYER PHOTOS STYLING --- */
+        .player-photo {
+            position: absolute;
+            top: 0;
+            width: 35%;
+            /* Adjust based on how much screen they should take */
+            height: 100%;
+            z-index: 0;
+            /* Sits behind the names */
+            overflow: hidden;
+            pointer-events: none;
+            /* Allows clicking through to text */
+        }
+
+        .player-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) brightness(0.4) contrast(1.2);
+            /* Black and White + Darkened */
+            transition: filter 0.5s ease;
+        }
+
+        /* Position Left (Gukesh) */
+        .photo-left {
+            left: 0;
+            mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0));
+            -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0));
+        }
+
+        /* Position Right (Ding) */
+        .photo-right {
+            right: 0;
+            mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0));
+            -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0));
+        }
+
+        /* Hover Effect: The player "lights up" slightly when the section is hovered */
+        .t396__artboard:hover .player-photo img {
+            filter: grayscale(100%) brightness(0.6) contrast(1.1);
+        }
+
+        /* Ensure names stay on top of photos */
+        .tn-elem__8331039801732541130599,
+        .tn-elem__8331039801732541168215,
+        .tn-elem__8331039801732541180364 {
+            z-index: 2 !important;
+        }
+
+        /* Responsive: Hide photos on mobile to keep the score readable */
+        @media (max-width: 640px) {
+            .player-photo {
+                display: none;
+            }
+        }
     </style>
 </head>
+
 <body>
 
     <nav>
@@ -439,123 +1209,91 @@
         </div>
     </nav>
 
-    <div class="admin-bar">
-        <span style="font-weight: bold; color: var(--primary);">ADMIN:</span>
-        <input type="text" id="manualName" placeholder="Tournament Name (e.g. Academy Open)">
-        <input type="text" id="manualUrl" placeholder="Paste LiveChess Cloud or Lichess Link">
-        <button onclick="addNewTournament()">Add to List</button>
+    <div class="t396__elem tn-elem tn-elem__8309354121679753557921" data-elem-id="1679753557921" data-elem-type="html"
+        data-field-top-value="157" data-field-left-value="0" data-field-height-value="840" data-field-width-value="1100"
+        data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="grid"
+        data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px"
+        data-field-widthunits-value="px" data-field-top-res-320-value="34" data-field-height-res-320-value="800"
+        data-field-width-res-320-value="100" data-field-container-res-320-value="window"
+        data-field-widthunits-res-320-value="%" data-field-top-res-480-value="43" data-field-left-res-480-value="0"
+        data-field-width-res-480-value="100" data-field-container-res-480-value="window"
+        data-field-widthunits-res-480-value="%" data-field-top-res-640-value="68" data-field-left-res-640-value="0"
+        data-field-height-res-640-value="928" data-field-width-res-640-value="100"
+        data-field-container-res-640-value="window" data-field-widthunits-res-640-value="%"
+        data-field-top-res-960-value="107" data-field-left-res-960-value="10" data-field-height-res-960-value="1021"
+        data-field-width-res-960-value="917" data-field-top-res-1200-value="152" data-field-left-res-1200-value="0"
+        data-fields="width,height,top,left,container,axisx,axisy,widthunits,heightunits,leftunits,topunits"
+        style="width: 917px; left: 91.5px; top: 107px; height: 1021px;">
+        <div class="tn-atom tn-atom__html"> <iframe id="emb1" class="iframe-game"
+                src="https://results.fide.com/match2024/game1.html"
+                style="z-index:1000; display:block;padding:0; margin:0; width: 100%; height: 800px;border:0;left:0; right:0;"
+                vspace="0" hspace="0" width="1366px" height="768px"></iframe> </div>
     </div>
-
-    <div class="container">
-        <div class="live-viewer" id="viewerBox">
-            <div class="viewer-header">
-                <div><span class="live-dot"></span> <span id="activeTitle">Select a Tournament to Watch</span></div>
-                <div id="activeStatus" style="font-size: 0.7rem; color: #888;">OFFLINE</div>
+    <div class="t396">
+        <div class="t396__artboard rendered" data-artboard-recid="833103980"
+            data-artboard-screens="320,480,640,960,1200" data-artboard-height="330" data-artboard-valign="center"
+            data-artboard-upscale="grid" data-artboard-height-res-320="130" data-artboard-height-res-480="210"
+            data-artboard-height-res-640="260" data-artboard-height-res-960="280" data-artboard-proxy-min-offset-top="0"
+            data-artboard-proxy-min-height="280" data-artboard-proxy-max-height="280">
+            <div class="t396__carrier" data-artboard-recid="833103980"></div>
+            <div class="t396__filter" data-artboard-recid="833103980"></div>
+            <div class="t396__elem tn-elem tn-elem__8331039801732541180364" data-elem-id="1732541180364"
+                data-elem-type="text" data-field-top-value="56" data-field-left-value="452" data-field-width-value="269"
+                data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid"
+                data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value=""
+                data-field-widthunits-value="px" data-field-top-res-320-value="25" data-field-left-res-320-value="117"
+                data-field-width-res-320-value="87" data-field-container-res-320-value="grid"
+                data-field-top-res-480-value="32" data-field-left-res-480-value="150"
+                data-field-width-res-480-value="167" data-field-top-res-640-value="19"
+                data-field-left-res-640-value="230" data-field-width-res-640-value="171"
+                data-field-container-res-640-value="grid" data-field-top-res-960-value="54"
+                data-field-left-res-960-value="346" data-field-width-res-960-value="249"
+                data-field-container-res-960-value="grid"
+                data-fields="top,left,width,height,container,axisx,axisy,widthunits,leftunits,topunits"
+                style="top: 54px; left: 406px; width: 249px; height: auto;">
+                <div class="tn-atom" field="tn_text_1732541180364" style="line-height: 71px;">7½ - 6½</div>
             </div>
-            <div id="iframeContainer">
-                <div class="placeholder-text">
-                    <p>No broadcast active. Select a game from the sidebar or add a manual link above.</p>
-                </div>
+            <div class="t396__elem tn-elem tn-elem__8331039801732541130599" data-elem-id="1732541130599"
+                data-elem-type="text" data-field-top-value="66" data-field-left-value="196" data-field-width-value="345"
+                data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid"
+                data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value=""
+                data-field-widthunits-value="px" data-field-top-res-320-value="25" data-field-left-res-320-value="10"
+                data-field-width-res-320-value="107" data-field-container-res-320-value="grid"
+                data-field-top-res-480-value="43" data-field-left-res-480-value="17" data-field-top-res-640-value="21"
+                data-field-left-res-640-value="30" data-field-width-res-640-value="210"
+                data-field-container-res-640-value="grid" data-field-top-res-960-value="61"
+                data-field-left-res-960-value="90" data-field-width-res-960-value="345"
+                data-field-container-res-960-value="grid"
+                data-fields="top,left,width,height,container,axisx,axisy,widthunits,leftunits,topunits"
+                style="top: 61px; left: 150px; width: 345px; height: auto;">
+                <div class="tn-atom" field="tn_text_1732541130599" style="line-height: 62px;">GUKESH D.</div>
+            </div>
+            <div class="t396__elem tn-elem tn-elem__8331039801732541168215" data-elem-id="1732541168215"
+                data-elem-type="text" data-field-top-value="67" data-field-left-value="729" data-field-width-value="275"
+                data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid"
+                data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value=""
+                data-field-widthunits-value="px" data-field-top-res-320-value="25" data-field-left-res-320-value="204"
+                data-field-width-res-320-value="141" data-field-container-res-320-value="grid"
+                data-field-top-res-480-value="43" data-field-left-res-480-value="317"
+                data-field-width-res-480-value="141" data-field-top-res-640-value="21"
+                data-field-left-res-640-value="401" data-field-width-res-640-value="209"
+                data-field-container-res-640-value="grid" data-field-top-res-960-value="61"
+                data-field-left-res-960-value="595" data-field-width-res-960-value="274"
+                data-field-container-res-960-value="grid"
+                data-fields="top,left,width,height,container,axisx,axisy,widthunits,leftunits,topunits"
+                style="top: 61px; left: 655px; width: 274px; height: auto;">
+                <div class="tn-atom" field="tn_text_1732541168215" style="line-height: 62px;">DING LIREN</div>
+            </div>
+            <div class="player-photo photo-left">
+                <img src="Assets/gurkesh.jpg" alt="Gukesh D">
+            </div>
+
+            <div class="player-photo photo-right">
+                <img src="Assets/ding.jpg" alt="Ding Liren">
             </div>
         </div>
-
-        <aside>
-            <h3 class="sidebar-title">Live Feeds</h3>
-            <div id="tournamentList" class="tournament-list">
-                <div class="t-card" onclick="loadStream('https://view.livechesscloud.com/#90356d53-4279-4085-bd18-394fde57a00c', 'LiveChess Cloud Broadcast', this)">
-                    <h4>LiveChess Cloud Feed</h4>
-                    <p>DGT Live Boards • Active Round</p>
-                </div>
-            </div>
-        </aside>
-
-        <div class="fide-section">
-            <h3 class="sidebar-title">Upcoming <span>FIDE Calendar</span></h3>
-            <div class="fide-table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Event Name</th>
-                            <th>Location</th>
-                            <th>Type</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Dec 25 – 31, 2025</td>
-                            <td>FIDE World Rapid & Blitz Championships</td>
-                            <td>Doha, Qatar</td>
-                            <td><span class="tag rapid">Rapid</span> <span class="tag blitz">Blitz</span></td>
-                        </tr>
-                        <tr>
-                            <td>Jan 10 – 11, 2026</td>
-                            <td>2nd Khelo Chess India FIDE Rated</td>
-                            <td>Bhopal, India</td>
-                            <td><span class="tag standard">Standard</span></td>
-                        </tr>
-                        <tr>
-                            <td>Jan 16 – Feb 01, 2026</td>
-                            <td>Tata Steel Chess Masters 2026</td>
-                            <td>Wijk aan Zee, NED</td>
-                            <td><span class="tag standard">Standard</span></td>
-                        </tr>
-                        <tr>
-                            <td>Mar 28 – Apr 15, 2026</td>
-                            <td>FIDE Candidates Tournament 2026</td>
-                            <td>TBD</td>
-                            <td><span class="tag standard">Standard</span></td>
-                        </tr>
-                        <tr>
-                            <td>Apr 18 – 29, 2026</td>
-                            <td>World Senior Team Championships</td>
-                            <td>Durres, Albania</td>
-                            <td><span class="tag standard">Standard</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
     </div>
 
-    <script>
-        function loadStream(url, title, element) {
-            // Update active state in UI
-            document.querySelectorAll('.t-card').forEach(card => card.classList.remove('active'));
-            element.classList.add('active');
-
-            // Update Header
-            document.getElementById('activeTitle').innerText = title;
-            document.getElementById('activeStatus').innerText = "LIVE STREAMING";
-            document.getElementById('activeStatus').style.color = "#ffe23e";
-
-            // Inject Iframe
-            const container = document.getElementById('iframeContainer');
-            container.innerHTML = `<iframe src="${url}" allowfullscreen></iframe>`;
-        }
-
-        function addNewTournament() {
-            const name = document.getElementById('manualName').value;
-            const url = document.getElementById('manualUrl').value;
-
-            if(!name || !url) {
-                alert("Please fill in both fields!");
-                return;
-            }
-
-            const list = document.getElementById('tournamentList');
-            const newCard = document.createElement('div');
-            newCard.className = 't-card';
-            newCard.innerHTML = `<h4>${name}</h4><p>Manual Entry • Real-time Data</p>`;
-            newCard.onclick = function() { loadStream(url, name, newCard); };
-
-            list.prepend(newCard); // Add to top of list
-            
-            // Clear inputs
-            document.getElementById('manualName').value = "";
-            document.getElementById('manualUrl').value = "";
-        }
-    </script>
     <footer>
         <div class="footer-content">
             <div class="f-col">
@@ -576,4 +1314,5 @@
     </footer>
     <script src="tournament-logic.js"></script>
 </body>
+
 </html>
