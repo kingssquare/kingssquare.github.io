@@ -39,7 +39,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 15px 5%; /* Changed to percentage for flexibility */
+            padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -62,9 +62,7 @@
         .logo span { color: var(--primary); font-size: 1rem; display: block;}
 
         .nav-links { display: flex; align-items: center; }
-        
         .nav-links a { text-decoration: none; }
-        
         .nav-links button {
             background: transparent;
             border: 1px solid var(--light);
@@ -88,7 +86,7 @@
         /* --- HERO SECTION --- */
         header {
             height: 100vh;
-            min-height: 600px; /* Safety for small phones */
+            min-height: 600px;
             position: relative;
             display: flex;
             align-items: center;
@@ -102,8 +100,8 @@
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                linear-gradient(rgba(255, 62, 62, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 62, 62, 0.1) 1px, transparent 1px);
+                linear-gradient(rgba(255, 226, 62, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 226, 62, 0.1) 1px, transparent 1px);
             background-size: 50px 50px;
             transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
             animation: gridMove 20s linear infinite;
@@ -115,7 +113,6 @@
         
         h1 {
             font-family: var(--font-head);
-            /* CLAMP: Minimum 3rem, Preferred 10vw, Maximum 6rem */
             font-size: clamp(3rem, 10vw, 6rem); 
             line-height: 0.9;
             text-transform: uppercase;
@@ -145,15 +142,14 @@
             transform: translateY(-5px);
         }
 
-        /* Floating Pieces */
         .floater {
             position: absolute;
-            font-size: clamp(5rem, 15vw, 10rem); /* Responsive size */
+            font-size: clamp(5rem, 15vw, 10rem);
             opacity: 0.1;
             color: var(--light);
             z-index: 1;
             transition: transform 0.1s linear;
-            pointer-events: none; /* Allows clicking through them */
+            pointer-events: none;
         }
         .p-king { top: 15%; right: 5%; }
         .p-knight { bottom: 15%; left: 5%; }
@@ -175,6 +171,68 @@
         .ticker-content { display: inline-block; animation: tickerScroll 25s linear infinite; }
         @keyframes tickerScroll { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
 
+        /* --- SLIDESHOW STYLES --- */
+        .slideshow-section {
+            width: 100%;
+            height: 60vh;
+            min-height: 400px;
+            position: relative;
+            overflow: hidden;
+            background: var(--darker);
+            border-bottom: 4px solid var(--primary);
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide.active { opacity: 1; }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7) grayscale(30%);
+            transition: transform 6s linear;
+        }
+
+        .slide.active img { transform: scale(1.15); }
+
+        .slide-overlay {
+            position: absolute;
+            bottom: 50px;
+            left: 10%;
+            z-index: 20;
+            text-decoration: none;
+        }
+
+        .slide-caption {
+            background: rgba(0, 0, 0, 0.85);
+            padding: 20px 40px;
+            border-left: 6px solid var(--primary);
+            clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+            transform: translateX(-50px);
+            opacity: 0;
+            transition: 0.8s ease 0.5s;
+        }
+
+        .slide.active .slide-caption { transform: translateX(0); opacity: 1; }
+
+        .slide-caption h3 {
+            font-family: var(--font-head);
+            color: var(--primary);
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            text-transform: uppercase;
+            font-style: italic;
+        }
+
         /* --- SECTIONS COMMON --- */
         section { padding: 80px 10%; position: relative; }
         
@@ -189,15 +247,12 @@
         }
         .section-title.visible { opacity: 1; transform: translateX(0); }
 
-        /* --- GRID SYSTEMS --- */
         .gm-grid, .pricing-grid {
             display: grid;
-            /* Auto-fit with slightly smaller min-width for mobile support */
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
         
-        /* GM Card */
         .gm-card {
             background: var(--accent);
             height: 400px;
@@ -252,11 +307,11 @@
             padding: 40px;
             text-align: center;
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            opacity: 0; /* Assuming scroll trigger handles this */
+            opacity: 0;
         }
         .price-card.visible { opacity: 1; }
         .price-card:hover {
-            transform: scale(1.05); /* slightly reduced scale for better mobile ux */
+            transform: scale(1.05);
             border-color: var(--primary);
             box-shadow: 0 0 40px rgba(255, 62, 62, 0.1);
             z-index: 10;
@@ -287,46 +342,16 @@
         .f-col a:hover { color: var(--primary); padding-left: 10px; }
         .copyright { text-align: center; color: #555; font-size: 0.9rem; border-top: 1px solid #222; padding-top: 20px; }
 
-        /* =========================================
-           MOBILE & TABLET ADJUSTMENTS (MEDIA QUERIES)
-           ========================================= */
         @media (max-width: 768px) {
-            /* Adjust Nav for Mobile */
-            nav {
-                flex-direction: column;
-                padding: 15px 5%;
-                height: auto;
-            }
+            nav { flex-direction: column; padding: 15px 5%; height: auto; }
             .logo { margin-bottom: 15px; }
-            .logo br { display: none; } /* keep logo on one line if possible or let wrap naturally */
-            
-            .nav-links {
-                width: 100%;
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-            .nav-links button {
-                margin: 0;
-                padding: 8px 15px;
-                font-size: 0.8rem;
-            }
-
-            /* Adjust Hero */
-            header { padding-top: 120px; } /* Push down so nav doesn't cover text */
-            
-            /* Stack Tournament Info */
-            .tourney-row {
-                flex-direction: column;
-                text-align: center;
-                gap: 10px;
-            }
+            .logo br { display: none; }
+            .nav-links { width: 100%; justify-content: center; flex-wrap: wrap; gap: 10px; }
+            .nav-links button { margin: 0; padding: 8px 15px; font-size: 0.8rem; }
+            header { padding-top: 120px; }
+            .tourney-row { flex-direction: column; text-align: center; gap: 10px; }
             .tourney-row:hover { padding-left: 30px; border-left-width: 0; border-bottom: 2px solid var(--primary); }
-            
-            /* Section Padding */
             section { padding: 60px 5%; }
-            
-            /* Footer Grid */
             footer { padding: 40px 5% 20px; }
         }
     </style>
@@ -345,25 +370,57 @@
 
     <header id="hero">
         <div class="bg-grid"></div>
-        
         <div class="floater p-king" data-speed="2">♚</div>
         <div class="floater p-knight" data-speed="-2">♞</div>
         <div class="floater p-rook" data-speed="1">♜</div>
 
         <div class="hero-content">
-            <h1>Dominate<br><span>The Board</span></h1>
+            <h1>Learn Chess<br><span>With Ethics</span></h1>
             <p style="font-size: 1.2rem; color: #888; margin-top: 10px;">High-Velocity Chess Training for the Modern Era</p>
-            <button class="cta-btn">Start Training</button>
+            <a href="schedule.html"><button class="cta-btn">Class Schedule</button></a>
         </div>
     </header>
 
     <div class="ticker">
         <div class="ticker-content">
-            Upcoming: BLITZ KINGS OPEN 2024 /// GM NAKAMURA SEMINAR: JULY 12 /// 500+ NEW PUZZLES ADDED /// JOIN THE ELITE ///
+            Admissions are Completely Free for Our member School Students in Nugegoda and Pannipitiya Branches — Join the Elite Today!
         </div>
     </div>
 
-    <section>
+    <div class="slideshow-section">
+        <div class="slide active">
+            <a href="https://example.com/gallery1" class="slide-overlay">
+                <div class="slide-caption"><h3>Master the Opening</h3></div>
+            </a>
+            <img src="Assets/Slide1.jpg" alt="Academy Life 1">
+        </div>
+        <div class="slide">
+            <a href="https://example.com/gallery2" class="slide-overlay">
+                <div class="slide-caption"><h3>Dynamic Tactics</h3></div>
+            </a>
+            <img src="Assets/Slide2.jpg" alt="Academy Life 2">
+        </div>
+        <div class="slide">
+            <a href="https://example.com/gallery3" class="slide-overlay">
+                <div class="slide-caption"><h3>Tournament Spirit</h3></div>
+            </a>
+            <img src="Assets/Slide3.jpg" alt="Academy Life 3">
+        </div>
+        <div class="slide">
+            <a href="https://example.com/gallery4" class="slide-overlay">
+                <div class="slide-caption"><h3>Ethics & Discipline</h3></div>
+            </a>
+            <img src="Assets/Slide4.jpg" alt="Academy Life 4">
+        </div>
+        <div class="slide">
+            <a href="https://example.com/gallery5" class="slide-overlay">
+                <div class="slide-caption"><h3>Global Champions</h3></div>
+            </a>
+            <img src="Assets/Slide5.jpg" alt="Academy Life 5">
+        </div>
+    </div>
+
+    <section id="coaches">
         <h2 class="section-title scroll-trigger">Our Coaches</h2>
         <div class="gm-grid">
             <div class="gm-card scroll-trigger" style="transition-delay: 0.1s;">
@@ -377,28 +434,21 @@
                 <img src="Assets/Udan.jpg" alt="Coach">
                 <div class="gm-info">
                     <div class="gm-name">Udan Rathnayake</div>
-                    <div class="gm-rank">National Instructor</div>
+                    <div class="gm-rank">FIDE National Instructor</div>
                 </div>
             </div>
             <div class="gm-card scroll-trigger" style="transition-delay: 0.3s;">
                 <img src="Assets/Sandeepa.jpg" alt="Coach">
                 <div class="gm-info">
                     <div class="gm-name">Sandeepana Prabuddha</div>
-                    <div class="gm-rank">Well-Experienced Chess Coach</div>
+                    <div class="gm-rank">Divisional Instructor</div>
                 </div>
             </div>
             <div class="gm-card scroll-trigger" style="transition-delay: 0.3s;">
-                <img src="Assets/Sandeepa.jpg" alt="Coach">
+                <img src="Assets/Kanishka.jpg" alt="Coach">
                 <div class="gm-info">
-                    <div class="gm-name">Sandeepana Prabuddha</div>
-                    <div class="gm-rank">Well-Experienced Chess Coach</div>
-                </div>
-            </div>
-            <div class="gm-card scroll-trigger" style="transition-delay: 0.3s;">
-                <img src="Assets/Sandeepa.jpg" alt="Coach">
-                <div class="gm-info">
-                    <div class="gm-name">Sandeepana Prabuddha</div>
-                    <div class="gm-rank">Well-Experienced Chess Coach</div>
+                    <div class="gm-name">Kanishka Dulanjana</div>
+                    <div class="gm-rank">Divisional Instructor</div>
                 </div>
             </div>
         </div>
@@ -494,10 +544,7 @@
         });
 
         // --- 2. SCROLL REVEAL ANIMATION ---
-        const observerOptions = {
-            threshold: 0.1
-        };
-
+        const observerOptions = { threshold: 0.1 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -508,6 +555,20 @@
 
         const scrollElements = document.querySelectorAll(".scroll-trigger");
         scrollElements.forEach(el => observer.observe(el));
+
+        // --- 3. AUTO SLIDESHOW LOGIC ---
+        let slideIndex = 0;
+        const slides = document.querySelectorAll(".slide");
+
+        function showSlides() {
+            slides.forEach(slide => slide.classList.remove("active"));
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1; }
+            slides[slideIndex - 1].classList.add("active");
+            setTimeout(showSlides, 5000); // Change image every 5 seconds
+        }
+        
+        showSlides();
     </script>
 </body>
 </html>
