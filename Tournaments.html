@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournament Center | King's Square Chess Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Saira:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- RESET & VARS --- */
+        :root {
+            --primary: #ffe23e; /* Adrenaline Red/Yellow */
+            --dark: #0a0a0a;
+            --darker: #050505;
+            --light: #F0F0F0;
+            --lightdark: #222222;
+            --accent: #2d2d2d;
+            --font-head: 'Russo One', sans-serif;
+            --font-body: 'Saira', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- UTILITY ANIMATIONS --- */
+        @keyframes slideInUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 15px 5%; /* Changed to percentage for flexibility */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary);
+            transition: 0.3s ease;
+        }
+        
+        .logo { 
+            font-family: var(--font-head); 
+            font-size: 1.5rem; 
+            color: var(--light); 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            line-height: 1.1;
+            text-align: center;
+        }
+        .logo span { color: var(--primary); font-size: 1rem; display: block;}
+
+        .nav-links { display: flex; align-items: center; }
+        
+        .nav-links a { text-decoration: none; }
+        
+        .nav-links button {
+            background: transparent;
+            border: 1px solid var(--light);
+            color: var(--light);
+            padding: 8px 20px;
+            margin-left: 15px;
+            font-family: var(--font-head);
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+            white-space: nowrap;
+        }
+        .nav-links button:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--dark);
+            transform: scale(1.05);
+        }
+
+        /* --- HERO SECTION --- */
+        header {
+            height: 100vh;
+            min-height: 600px; /* Safety for small phones */
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            perspective: 1000px;
+            padding: 0 20px;
+        }
+        
+        .bg-grid {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                linear-gradient(rgba(255, 62, 62, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 62, 62, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+            animation: gridMove 20s linear infinite;
+            opacity: 0.3;
+        }
+        @keyframes gridMove { from { background-position: 0 0; } to { background-position: 0 1000px; } }
+
+        .hero-content { z-index: 10; text-align: center; width: 100%; }
+        
+        h1 {
+            font-family: var(--font-head);
+            /* CLAMP: Minimum 3rem, Preferred 10vw, Maximum 6rem */
+            font-size: clamp(3rem, 10vw, 6rem); 
+            line-height: 0.9;
+            text-transform: uppercase;
+            font-style: italic;
+            text-shadow: 10px 10px 0px rgba(255, 255, 255, 0.1);
+            animation: slideInUp 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+        h1 span { color: var(--primary); display: block; }
+        
+        .cta-btn {
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            background: var(--primary);
+            color: var(--lightdark);
+            border: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+            transition: 0.3s;
+            animation: slideInUp 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+        .cta-btn:hover {
+            box-shadow: 0 0 30px var(--primary);
+            transform: translateY(-5px);
+        }
+
+        /* Floating Pieces */
+        .floater {
+            position: absolute;
+            font-size: clamp(5rem, 15vw, 10rem); /* Responsive size */
+            opacity: 0.1;
+            color: var(--light);
+            z-index: 1;
+            transition: transform 0.1s linear;
+            pointer-events: none; /* Allows clicking through them */
+        }
+        .p-king { top: 15%; right: 5%; }
+        .p-knight { bottom: 15%; left: 5%; }
+        .p-rook { top: 40%; left: 50%; filter: blur(4px); opacity: 0.05; }
+
+        /* --- TICKER --- */
+        .ticker {
+            background: var(--primary);
+            color: var(--dark);
+            padding: 12px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            font-family: var(--font-head);
+            font-style: italic;
+            font-size: 1.2rem;
+            border-top: 2px solid var(--light);
+            border-bottom: 2px solid var(--light);
+        }
+        .ticker-content { display: inline-block; animation: tickerScroll 25s linear infinite; }
+        @keyframes tickerScroll { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+
+        /* --- SECTIONS COMMON --- */
+        section { padding: 80px 10%; position: relative; }
+        
+        .section-title {
+            font-family: var(--font-head);
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            border-left: 10px solid var(--primary);
+            padding-left: 20px;
+            opacity: 0; transform: translateX(-50px); transition: 1s all ease;
+        }
+        .section-title.visible { opacity: 1; transform: translateX(0); }
+
+        /* --- GRID SYSTEMS --- */
+        .gm-grid, .pricing-grid {
+            display: grid;
+            /* Auto-fit with slightly smaller min-width for mobile support */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        /* GM Card */
+        .gm-card {
+            background: var(--accent);
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #444;
+            transition: 0.4s;
+            opacity: 0; transform: translateY(50px);
+        }
+        .gm-card.visible { opacity: 1; transform: translateY(0); }
+        .gm-card:hover { border-color: var(--primary); }
+        .gm-card img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: grayscale(100%); transition: 0.5s;
+        }
+        .gm-card:hover img { filter: grayscale(0%); transform: scale(1.1); }
+        .gm-info {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, var(--dark) 0%, transparent 100%);
+            transform: translateY(20px); transition: 0.4s;
+        }
+        .gm-card:hover .gm-info { transform: translateY(0); }
+        .gm-name { font-family: var(--font-head); font-size: 1.5rem; text-transform: uppercase; }
+        .gm-rank { color: var(--primary); font-weight: bold; }
+
+        /* --- TOURNAMENTS --- */
+        .tourney-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px;
+            border-bottom: 1px solid #333;
+            transition: 0.3s;
+            background: linear-gradient(90deg, transparent 0%, transparent 100%);
+            opacity: 0;
+        }
+        .tourney-row.visible { opacity: 1; }
+        .tourney-row:hover {
+            background: linear-gradient(90deg, rgba(255,226,62,0.1) 0%, transparent 100%);
+            border-left: 5px solid var(--primary);
+            padding-left: 40px;
+        }
+        .t-date { color: #888; font-weight: bold; min-width: 80px; }
+        .t-name { font-size: 1.5rem; font-family: var(--font-head); flex-grow: 1; margin: 0 20px; }
+        .t-prize { color: var(--primary); font-size: 1.2rem; font-weight: bold; }
+
+        /* --- PRICING --- */
+        .price-card {
+            background: var(--darker);
+            border: 1px solid #333;
+            padding: 40px;
+            text-align: center;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0; /* Assuming scroll trigger handles this */
+        }
+        .price-card.visible { opacity: 1; }
+        .price-card:hover {
+            transform: scale(1.05); /* slightly reduced scale for better mobile ux */
+            border-color: var(--primary);
+            box-shadow: 0 0 40px rgba(255, 62, 62, 0.1);
+            z-index: 10;
+        }
+        .price-tier { color: var(--primary); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; display: block;}
+        .price-amt { font-size: 3rem; font-family: var(--font-head); display: block; margin-bottom: 20px; }
+        .price-list { list-style: none; text-align: left; margin-bottom: 30px; color: #aaa; }
+        .price-list li { margin-bottom: 10px; border-bottom: 1px solid #222; padding-bottom: 5px; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--darker);
+            border-top: 5px solid var(--primary);
+            padding: 50px 10% 20px;
+            margin-top: 50px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .f-col h3 { font-family: var(--font-head); font-size: 1.5rem; margin-bottom: 20px; text-transform: uppercase; }
+        .f-col h3 span { color: var(--primary); }
+        .f-col h4 { color: var(--primary); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .f-col p { color: #888; line-height: 1.6; }
+        .f-col a { display: block; color: #fff; text-decoration: none; margin-bottom: 10px; transition: 0.3s; }
+        .f-col a:hover { color: var(--primary); padding-left: 10px; }
+        .copyright { text-align: center; color: #555; font-size: 0.9rem; border-top: 1px solid #222; padding-top: 20px; }
+
+        /* =========================================
+           MOBILE & TABLET ADJUSTMENTS (MEDIA QUERIES)
+           ========================================= */
+        @media (max-width: 768px) {
+            /* Adjust Nav for Mobile */
+            nav {
+                flex-direction: column;
+                padding: 15px 5%;
+                height: auto;
+            }
+            .logo { margin-bottom: 15px; }
+            .logo br { display: none; } /* keep logo on one line if possible or let wrap naturally */
+            
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .nav-links button {
+                margin: 0;
+                padding: 8px 15px;
+                font-size: 0.8rem;
+            }
+
+            /* Adjust Hero */
+            header { padding-top: 120px; } /* Push down so nav doesn't cover text */
+            
+            /* Stack Tournament Info */
+            .tourney-row {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            .tourney-row:hover { padding-left: 30px; border-left-width: 0; border-bottom: 2px solid var(--primary); }
+            
+            /* Section Padding */
+            section { padding: 60px 5%; }
+            
+            /* Footer Grid */
+            footer { padding: 40px 5% 20px; }
+        }
+        :root {
+            --primary: #ffe23e;
+            --dark-bg: #0a0a0a;
+            --panel: #1a1a1a;
+            --text: #ffffff;
+            --border: #333;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text);
+            font-family: 'Saira', sans-serif;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            background: #000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--primary);
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .logo { font-family: 'Russo One'; font-size: 1.5rem; text-transform: uppercase; }
+        .logo span { color: var(--primary); }
+
+        /* --- ADMIN PANEL --- */
+        .admin-bar {
+            background: #111;
+            padding: 15px 5%;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .admin-bar input {
+            background: #222; border: 1px solid var(--border);
+            padding: 8px 12px; color: #fff; border-radius: 4px; flex: 1; min-width: 200px;
+        }
+        .admin-bar button {
+            background: var(--primary); border: none; padding: 8px 20px;
+            font-family: 'Russo One'; cursor: pointer; border-radius: 4px; transition: 0.2s;
+        }
+        .admin-bar button:hover { transform: scale(1.05); }
+
+        /* --- MAIN LAYOUT --- */
+        .container {
+            max-width: 1400px; margin: 40px auto; padding: 0 20px;
+            display: grid; grid-template-columns: 1fr 380px; gap: 30px;
+        }
+
+        /* --- LIVE SECTION --- */
+        .live-viewer {
+            background: var(--panel); border-radius: 12px; overflow: hidden;
+            border: 1px solid var(--border); height: fit-content;
+        }
+        .viewer-header {
+            background: #222; padding: 15px 20px; border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .live-dot { height: 10px; width: 10px; background: #ff4d4d; border-radius: 50%; display: inline-block; margin-right: 10px; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
+        iframe { width: 100%; height: 650px; border: none; }
+        .placeholder-text { padding: 100px 20px; text-align: center; color: #666; }
+
+        /* --- SIDEBAR LIST --- */
+        .sidebar-title { font-family: 'Russo One'; color: var(--primary); margin-bottom: 20px; text-transform: uppercase; }
+        .tournament-list { list-style: none; padding: 0; margin: 0; }
+        .t-card {
+            background: #111; padding: 15px; border-radius: 8px; margin-bottom: 12px;
+            border-left: 4px solid #444; cursor: pointer; transition: 0.3s;
+        }
+        .t-card:hover { background: #222; border-left-color: var(--primary); }
+        .t-card.active { background: #222; border-left-color: var(--primary); box-shadow: 0 0 15px rgba(255,226,62,0.1); }
+        .t-card h4 { margin: 0 0 5px 0; font-size: 1rem; }
+        .t-card p { margin: 0; font-size: 0.8rem; color: #888; }
+
+        /* --- FIDE CALENDAR SECTION --- */
+        .fide-section { grid-column: 1 / -1; margin-top: 50px; }
+        .fide-table-wrapper { background: var(--panel); border-radius: 12px; padding: 20px; border: 1px solid var(--border); overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th { color: var(--primary); font-family: 'Russo One'; padding: 15px; border-bottom: 2px solid #333; }
+        td { padding: 15px; border-bottom: 1px solid #222; font-size: 0.95rem; }
+        .tag { padding: 3px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; }
+        .standard { background: #3498db; } .rapid { background: #e67e22; } .blitz { background: #e74c3c; }
+
+        @media (max-width: 1000px) {
+            .container { grid-template-columns: 1fr; }
+        }
+         footer { padding: 40px 5% 20px; }
+        
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">KING'S SQUARE<br><span>Chess Academy</span></div>
+        <div class="nav-links">
+            <a href="index.html"><button>Home</button></a>
+            <a href="coaches.html"><button>Coaches</button></a>
+            <a href="Tournaments.html"><button>Tournaments</button></a>
+            <a href="schedule.html"><button>Schedule</button></a>
+        </div>
+    </nav>
+
+    <div class="admin-bar">
+        <span style="font-weight: bold; color: var(--primary);">ADMIN:</span>
+        <input type="text" id="manualName" placeholder="Tournament Name (e.g. Academy Open)">
+        <input type="text" id="manualUrl" placeholder="Paste LiveChess Cloud or Lichess Link">
+        <button onclick="addNewTournament()">Add to List</button>
+    </div>
+
+    <div class="container">
+        <div class="live-viewer" id="viewerBox">
+            <div class="viewer-header">
+                <div><span class="live-dot"></span> <span id="activeTitle">Select a Tournament to Watch</span></div>
+                <div id="activeStatus" style="font-size: 0.7rem; color: #888;">OFFLINE</div>
+            </div>
+            <div id="iframeContainer">
+                <div class="placeholder-text">
+                    <p>No broadcast active. Select a game from the sidebar or add a manual link above.</p>
+                </div>
+            </div>
+        </div>
+
+        <aside>
+            <h3 class="sidebar-title">Live Feeds</h3>
+            <div id="tournamentList" class="tournament-list">
+                <div class="t-card" onclick="loadStream('https://view.livechesscloud.com/#90356d53-4279-4085-bd18-394fde57a00c', 'LiveChess Cloud Broadcast', this)">
+                    <h4>LiveChess Cloud Feed</h4>
+                    <p>DGT Live Boards • Active Round</p>
+                </div>
+            </div>
+        </aside>
+
+        <div class="fide-section">
+            <h3 class="sidebar-title">Upcoming <span>FIDE Calendar</span></h3>
+            <div class="fide-table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Event Name</th>
+                            <th>Location</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Dec 25 – 31, 2025</td>
+                            <td>FIDE World Rapid & Blitz Championships</td>
+                            <td>Doha, Qatar</td>
+                            <td><span class="tag rapid">Rapid</span> <span class="tag blitz">Blitz</span></td>
+                        </tr>
+                        <tr>
+                            <td>Jan 10 – 11, 2026</td>
+                            <td>2nd Khelo Chess India FIDE Rated</td>
+                            <td>Bhopal, India</td>
+                            <td><span class="tag standard">Standard</span></td>
+                        </tr>
+                        <tr>
+                            <td>Jan 16 – Feb 01, 2026</td>
+                            <td>Tata Steel Chess Masters 2026</td>
+                            <td>Wijk aan Zee, NED</td>
+                            <td><span class="tag standard">Standard</span></td>
+                        </tr>
+                        <tr>
+                            <td>Mar 28 – Apr 15, 2026</td>
+                            <td>FIDE Candidates Tournament 2026</td>
+                            <td>TBD</td>
+                            <td><span class="tag standard">Standard</span></td>
+                        </tr>
+                        <tr>
+                            <td>Apr 18 – 29, 2026</td>
+                            <td>World Senior Team Championships</td>
+                            <td>Durres, Albania</td>
+                            <td><span class="tag standard">Standard</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function loadStream(url, title, element) {
+            // Update active state in UI
+            document.querySelectorAll('.t-card').forEach(card => card.classList.remove('active'));
+            element.classList.add('active');
+
+            // Update Header
+            document.getElementById('activeTitle').innerText = title;
+            document.getElementById('activeStatus').innerText = "LIVE STREAMING";
+            document.getElementById('activeStatus').style.color = "#ffe23e";
+
+            // Inject Iframe
+            const container = document.getElementById('iframeContainer');
+            container.innerHTML = `<iframe src="${url}" allowfullscreen></iframe>`;
+        }
+
+        function addNewTournament() {
+            const name = document.getElementById('manualName').value;
+            const url = document.getElementById('manualUrl').value;
+
+            if(!name || !url) {
+                alert("Please fill in both fields!");
+                return;
+            }
+
+            const list = document.getElementById('tournamentList');
+            const newCard = document.createElement('div');
+            newCard.className = 't-card';
+            newCard.innerHTML = `<h4>${name}</h4><p>Manual Entry • Real-time Data</p>`;
+            newCard.onclick = function() { loadStream(url, name, newCard); };
+
+            list.prepend(newCard); // Add to top of list
+            
+            // Clear inputs
+            document.getElementById('manualName').value = "";
+            document.getElementById('manualUrl').value = "";
+        }
+    </script>
+    <footer>
+        <div class="footer-content">
+            <div class="f-col">
+                <h3>KING'S SQUARE<span><br>Chess Academy</span></h3>
+                <p>Forging the next generation of chess elite.</p>
+            </div>
+            <div class="f-col">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="schedule.html">Class Schedule</a>
+                <a href="Tournaments.html">Tournaments</a>
+                <a href="coaches.html">Our Coaches</a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2024 KING'S SQUARE Chess Academy.
+        </div>
+    </footer>
+    <script src="tournament-logic.js"></script>
+</body>
+</html>
