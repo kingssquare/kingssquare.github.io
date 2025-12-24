@@ -200,6 +200,45 @@
             nav { flex-direction: column; height: auto; padding: 10px; }
             .nav-links { margin-top: 10px; }
         }
+        @media (max-width: 768px) {
+            /* Adjust Nav for Mobile */
+            nav {
+                flex-direction: column;
+                padding: 15px 5%;
+                height: auto;
+            }
+            .logo { margin-bottom: 15px; }
+            .logo br { display: none; } /* keep logo on one line if possible or let wrap naturally */
+            
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .nav-links button {
+                margin: 0;
+                padding: 8px 15px;
+                font-size: 0.8rem;
+            }
+
+            /* Adjust Hero */
+            header { padding-top: 120px; } /* Push down so nav doesn't cover text */
+            
+            /* Stack Tournament Info */
+            .tourney-row {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            .tourney-row:hover { padding-left: 30px; border-left-width: 0; border-bottom: 2px solid var(--primary); }
+            
+            /* Section Padding */
+            section { padding: 60px 5%; }
+            
+            /* Footer Grid */
+            footer { padding: 40px 5% 20px; }
+        }
     </style>
 </head>
 
@@ -217,7 +256,7 @@
 
     <header class="page-header">
         <h1 class="page-title">Our Coaches</h1>
-        <p class="page-subtitle">Learn from the World's Most Aggressive Minds</p>
+        <p class="page-subtitle">Learn from the Sri Lanka's Well Experienced Team</p>
     </header>
 
     <div class="roster-grid">
@@ -243,8 +282,8 @@
         <div class="coach-card">
             <img src="Assets/Udan.jpg" class="coach-img" alt="Sarah">
             <div class="coach-details">
-                <div class="coach-name">Sarah Chen</div>
-                <span class="coach-title">IM | Defensive Strategist</span>
+                <div class="coach-name">Udan Rathnayake</div>
+                <span class="coach-title">FIDE National Instructor</span>
                 <p class="coach-bio">Known for rock-solid defense and converting small advantages into wins.</p>
 
                 <div class="coach-socials">
@@ -261,8 +300,8 @@
         <div class="coach-card">
             <img src="Assets/Sandeepa.jpg" class="coach-img" alt="Marcus">
             <div class="coach-details">
-                <div class="coach-name">Marcus Thorne</div>
-                <span class="coach-title">Grandmaster | Calculation King</span>
+                <div class="coach-name">Sandeepana Pabuddha</div>
+                <span class="coach-title">Divisional Instructor</span>
                 <p class="coach-bio">Focuses on complex middlegame strategies and theoretical endgames.</p>
 
                 <div class="coach-socials">
@@ -277,10 +316,10 @@
         </div>
 
         <div class="coach-card">
-            <img src="Assets/tharuka.jpg" class="coach-img" alt="Tharuka">
+            <img src="Assets/Kanishka.jpg" class="coach-img" alt="Tharuka">
             <div class="coach-details">
-                <div class="coach-name">Tharuka Gimhani</div>
-                <span class="coach-title">FIDE Instructor</span>
+                <div class="coach-name">Kanishka Dulanjana</div>
+                <span class="coach-title">Divisional Instructor</span>
                 <p class="coach-bio">Dynamic approach focusing on tournament prep and board vision.</p>
 
                 <div class="coach-socials">
@@ -297,8 +336,8 @@
         <div class="coach-card">
             <img src="Assets/tharuka.jpg" class="coach-img" alt="Tharuka">
             <div class="coach-details">
-                <div class="coach-name">Tharuka Gimhani</div>
-                <span class="coach-title">FIDE Instructor</span>
+                <div class="coach-name">Udara Rathnayake</div>
+                <span class="coach-title">FIDE National Instructor</span>
                 <p class="coach-bio">Dynamic approach focusing on tournament prep and board vision.</p>
 
                 <div class="coach-socials">
@@ -315,62 +354,8 @@
         <div class="coach-card">
             <img src="Assets/tharuka.jpg" class="coach-img" alt="Tharuka">
             <div class="coach-details">
-                <div class="coach-name">Tharuka Gimhani</div>
-                <span class="coach-title">FIDE Instructor</span>
-                <p class="coach-bio">Dynamic approach focusing on tournament prep and board vision.</p>
-
-                <div class="coach-socials">
-                    <a href="https://ratings.fide.com/" target="_blank" title="FIDE Profile">
-                        <img src="Assets/FIDE_logo_top.png" class="fide-logo" alt="FIDE">
-                    </a>
-                    <a href="#" target="_blank"><img src="Assets/fb.png" alt="FB"></a>
-                    <a href="#" target="_blank"><img src="Assets/insta.png" alt="IG"></a>
-                    <a href="#" target="_blank"><img src="Assets/whatsapp.png" alt="WA"></a>
-                </div>
-            </div>
-        </div>
-
-        <div class="coach-card">
-            <img src="Assets/tharuka.jpg" class="coach-img" alt="Tharuka">
-            <div class="coach-details">
-                <div class="coach-name">Tharuka Gimhani</div>
-                <span class="coach-title">FIDE Instructor</span>
-                <p class="coach-bio">Dynamic approach focusing on tournament prep and board vision.</p>
-
-                <div class="coach-socials">
-                    <a href="https://ratings.fide.com/" target="_blank" title="FIDE Profile">
-                        <img src="Assets/FIDE_logo_top.png" class="fide-logo" alt="FIDE">
-                    </a>
-                    <a href="#" target="_blank"><img src="Assets/fb.png" alt="FB"></a>
-                    <a href="#" target="_blank"><img src="Assets/insta.png" alt="IG"></a>
-                    <a href="#" target="_blank"><img src="Assets/whatsapp.png" alt="WA"></a>
-                </div>
-            </div>
-        </div>
-
-        <div class="coach-card">
-            <img src="Assets/tharuka.jpg" class="coach-img" alt="Tharuka">
-            <div class="coach-details">
-                <div class="coach-name">Tharuka Gimhani</div>
-                <span class="coach-title">FIDE Instructor</span>
-                <p class="coach-bio">Dynamic approach focusing on tournament prep and board vision.</p>
-
-                <div class="coach-socials">
-                    <a href="https://ratings.fide.com/" target="_blank" title="FIDE Profile">
-                        <img src="Assets/FIDE_logo_top.png" class="fide-logo" alt="FIDE">
-                    </a>
-                    <a href="#" target="_blank"><img src="Assets/fb.png" alt="FB"></a>
-                    <a href="#" target="_blank"><img src="Assets/insta.png" alt="IG"></a>
-                    <a href="#" target="_blank"><img src="Assets/whatsapp.png" alt="WA"></a>
-                </div>
-            </div>
-        </div>
-
-        <div class="coach-card">
-            <img src="Assets/tharuka.jpg" class="coach-img" alt="Tharuka">
-            <div class="coach-details">
-                <div class="coach-name">Tharuka Gimhani</div>
-                <span class="coach-title">FIDE Instructor</span>
+                <div class="coach-name">Prabashi Rathnayake</div>
+                <span class="coach-title">Senior Instructor</span>
                 <p class="coach-bio">Dynamic approach focusing on tournament prep and board vision.</p>
 
                 <div class="coach-socials">
