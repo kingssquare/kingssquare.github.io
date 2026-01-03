@@ -16,23 +16,258 @@
 </head>
 <body class="antialiased text-slate-900">
 
-    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-200">
-                    <i class="fas fa-chess-king text-xl"></i>
+                <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-indigo-200">
+                    <i class="fas fa-chess-knight text-xl"></i>
                 </div>
-                <h1 class="text-xl font-bold tracking-tight text-slate-800">KSCA Improvement Portal</h1>
+                <h1 class="text-xl font-extrabold tracking-tight text-slate-800">KSCA Analytics</h1>
             </div>
-            <div class="relative hidden md:block">
-                <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                <input type="text" id="globalSearch" placeholder="Search by name..." 
-                       class="pl-10 pr-4 py-2 bg-slate-100 border-none rounded-full text-sm focus:ring-2 focus:ring-blue-500 outline-none w-64 transition-all">
+            <div class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-500">
+                <a href="#overview" class="hover:text-indigo-600 transition-colors">Overview</a>
+                <a href="#strategy" class="hover:text-indigo-600 transition-colors">Strategy</a>
+                <a href="#profiles" class="hover:text-indigo-600 transition-colors">Coach Profiles</a>
             </div>
         </div>
     </nav>
 
     <main class="max-w-7xl mx-auto px-6 py-10">
+        
+        <header class="mb-12">
+            <h2 class="text-4xl font-extrabold text-slate-900 tracking-tight">Coach Improvement Analysis</h2>
+            <p class="mt-3 text-lg text-slate-600 max-w-2xl">A comprehensive analysis of member feedback to drive academy growth and standard training programs.</p>
+        </header>
+
+        <section id="overview" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="bg-white p-6 rounded-3xl custom-shadow border border-slate-100 transition-transform hover:-translate-y-1">
+                <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-4"><i class="fas fa-users text-xl"></i></div>
+                <p class="text-slate-500 text-sm font-bold uppercase tracking-wider">Total Profiles</p>
+                <h3 class="text-3xl font-extrabold mt-1" id="kpi-total">20</h3>
+            </div>
+            <div class="bg-white p-6 rounded-3xl custom-shadow border border-slate-100 transition-transform hover:-translate-y-1">
+                <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mb-4"><i class="fas fa-chalkboard-teacher text-xl"></i></div>
+                <p class="text-slate-500 text-sm font-bold uppercase tracking-wider">Active Coaches</p>
+                <h3 class="text-3xl font-extrabold mt-1" id="kpi-active">17</h3>
+            </div>
+            <div class="bg-white p-6 rounded-3xl custom-shadow border border-slate-100 transition-transform hover:-translate-y-1">
+                <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center mb-4"><i class="fas fa-award text-xl"></i></div>
+                <p class="text-slate-500 text-sm font-bold uppercase tracking-wider">FIDE Rated</p>
+                <h3 class="text-3xl font-extrabold mt-1" id="kpi-fide">5</h3>
+            </div>
+            <div class="bg-white p-6 rounded-3xl custom-shadow border border-slate-100 transition-transform hover:-translate-y-1">
+                <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center mb-4"><i class="fas fa-chart-line text-xl"></i></div>
+                <p class="text-slate-500 text-sm font-bold uppercase tracking-wider">Target Level</p>
+                <h3 class="text-3xl font-extrabold mt-1">Advanced</h3>
+            </div>
+        </section>
+
+        <section id="strategy" class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <div class="bg-white p-8 rounded-[2rem] custom-shadow border border-slate-100">
+                <h4 class="text-xl font-bold mb-6 flex items-center gap-3">
+                    <span class="w-2 h-8 bg-indigo-600 rounded-full"></span>
+                    Preferred Assessment Methods
+                </h4>
+                <div class="h-[300px]">
+                    <canvas id="assessmentChart"></canvas>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-[2rem] custom-shadow border border-slate-100">
+                <h4 class="text-xl font-bold mb-6 flex items-center gap-3">
+                    <span class="w-2 h-8 bg-emerald-500 rounded-full"></span>
+                    Education & Development Process
+                </h4>
+                <div class="h-[300px]">
+                    <canvas id="educationChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <div class="bg-white p-8 rounded-[2rem] custom-shadow border border-slate-100">
+                <h4 class="font-bold text-slate-800 mb-6">Theory Knowledge Level</h4>
+                <canvas id="theoryChart"></canvas>
+            </div>
+            <div class="bg-white p-8 rounded-[2rem] custom-shadow border border-slate-100">
+                <h4 class="font-bold text-slate-800 mb-6">Gender Representation</h4>
+                <canvas id="genderChart"></canvas>
+            </div>
+            <div class="bg-white p-8 rounded-[2rem] custom-shadow border border-slate-100">
+                <h4 class="font-bold text-slate-800 mb-6">Competitive Background</h4>
+                <canvas id="achievementChart"></canvas>
+            </div>
+        </section>
+
+        <section id="profiles">
+            <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-8">
+                <div>
+                    <h3 class="text-3xl font-extrabold text-slate-900">Individual Profiles</h3>
+                    <p class="text-slate-500 mt-1">Detailed breakdown of each participant's status and goals.</p>
+                </div>
+                <div class="relative w-full md:w-80">
+                    <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" id="profileSearch" placeholder="Search by name or title..." 
+                           class="w-full pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-2xl focus:ring-4 focus:ring-indigo-100 outline-none transition-all custom-shadow">
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="profile-container">
+                </div>
+        </section>
+    </main>
+
+
+    <script>
+        // Data injected from Python analysis
+        const dashboardData = {
+            "stats": {"total_participants": 20, "active_coaches": 17, "fide_rated": 5, "gender_dist": {"Female": 11, "Male": 9}, "theory_dist": {"Good": 7, "Normal": 6, "Very Good": 5, "Need to Improve": 2}, "achievement_dist": {"Provincial": 7, "International": 4, "National": 4, "Zonal": 4}, "assessment_scores": {"Interview": 49, "Placement Exam": 47, "Demonstration": 59, "Tournament": 49, "Feedback": 54}, "education_scores": {"Self Studies": 34, "Materials (PDF/Video)": 56, "Training Program": 60, "Tournaments": 30}},
+            "profiles": [
+                {"name": "Voji", "gender": "Female", "designation": "Assistant Coach", "theory": "Good", "achievement": "International", "fide": "Yes", "fields": ["Coaching", "Playing"], "active": "Yes"},
+                {"name": "Thamidu maduranga ", "gender": "Male", "designation": "Head Coach, Assistant Coach", "theory": "Normal", "achievement": "Provincial", "fide": "No", "fields": ["Coaching", "Arbitering", "Playing"], "active": "Yes"},
+                {"name": "W.M.Tharuka Gimhani Weerasinghe", "gender": "Female", "designation": "Assistant Coach", "theory": "Very Good", "achievement": "International", "fide": "No", "fields": ["Coaching", "Arbitering"], "active": "Yes"},
+                {"name": "Supundi Dinaya Goonerathne", "gender": "Female", "designation": "Head Coach", "theory": "Good", "achievement": "National", "fide": "No", "fields": ["Coaching", "Arbitering"], "active": "Yes"},
+                {"name": "Shamod Matheesha ", "gender": "Male", "designation": "Assistant Coach", "theory": "Normal", "achievement": "Zonal", "fide": "No", "fields": ["Coaching"], "active": "Yes"},
+                {"name": "Sandeepana Prabuddha", "gender": "Male", "designation": "Head Coach, Assistant Coach", "theory": "Good", "achievement": "Provincial", "fide": "No", "fields": ["Coaching"], "active": "Yes"},
+                {"name": "M C H Jananath Suraweera", "gender": "Male", "designation": "Assistant Coach", "theory": "Very Good", "achievement": "Provincial", "fide": "Yes", "fields": ["Coaching", "Arbitering", "Playing"], "active": "Yes"},
+                {"name": "Kavithi Kusalya Mahanama ", "gender": "Female", "designation": "Junior Coach", "theory": "Good", "achievement": "Provincial", "fide": "No", "fields": ["Coaching"], "active": "Yes"},
+                {"name": "Ashmitha Senuri Kotalawala ", "gender": "Female", "designation": "Assistant Coach, Junior Coach", "theory": "Normal", "achievement": "Provincial", "fide": "No", "fields": ["Coaching"], "active": "Yes"},
+                {"name": "Praveen Bandara ", "gender": "Male", "designation": "Head Coach, Assistant Coach", "theory": "Good", "achievement": "nan", "fide": "No", "fields": ["Coaching", "Arbitering"], "active": "Yes"},
+                {"name": "Thisitha Bashana Mihindupriya ", "gender": "Male", "designation": "Junior Coach", "theory": "Need to Improve", "achievement": "International", "fide": "Yes", "fields": ["Playing"], "active": "No"},
+                {"name": "Vimukthi Deraniyagala", "gender": "Male", "designation": "Head Coach, Assistant Coach, Junior Coach", "theory": "Very Good", "achievement": "International", "fide": "Yes", "fields": ["Coaching", "Arbitering", "Playing"], "active": "Yes"},
+                {"name": "G.D.Maheshika Jeewanthi ", "gender": "Female", "designation": "Assistant Coach", "theory": "Good", "achievement": "Zonal", "fide": "No", "fields": ["Coaching", "Arbitering"], "active": "No"},
+                {"name": "Senuli", "gender": "Female", "designation": "Head Coach, Assistant Coach, Junior Coach", "theory": "Normal", "achievement": "Provincial", "fide": "No", "fields": ["Coaching", "Arbitering"], "active": "Yes"},
+                {"name": "Rehan Balasooriya ", "gender": "Male", "designation": "Assistant Coach", "theory": "Normal", "achievement": "Zonal", "fide": "No", "fields": ["Coaching", "Playing"], "active": "Yes"},
+                {"name": "Prabashi Pradeepani", "gender": "Female", "designation": "Head Coach, Assistant Coach", "theory": "Good", "achievement": "National", "fide": "Yes", "fields": ["Coaching"], "active": "Yes"},
+                {"name": "Chethika induwari ", "gender": "Female", "designation": "Assistant Coach", "theory": "Very Good", "achievement": "Provincial", "fide": "No", "fields": ["Coaching", "Arbitering"], "active": "Yes"},
+                {"name": "Tharushi Sooriyaarachchi ", "gender": "Female", "designation": "Assistant Coach", "theory": "Need to Improve", "achievement": "National", "fide": "No", "fields": ["Coaching"], "active": "No"},
+                {"name": "Amodi Dewmini Dissanayake", "gender": "Female", "designation": "Assistant Coach, Junior Coach", "theory": "Very Good", "achievement": "National", "fide": "No", "fields": ["Coaching", "Playing"], "active": "Yes"},
+                {"name": "Yoshan", "gender": "Male", "designation": "Assistant Coach", "theory": "Normal", "achievement": "Zonal", "fide": "No", "fields": ["Coaching"], "active": "Yes"}
+            ]
+        };
+
+        // Initialize Charts
+        document.addEventListener('DOMContentLoaded', () => {
+            const ctx1 = document.getElementById('assessmentChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(dashboardData.stats.assessment_scores),
+                    datasets: [{
+                        label: 'Weighted Score',
+                        data: Object.values(dashboardData.stats.assessment_scores),
+                        backgroundColor: '#6366f1',
+                        borderRadius: 10
+                    }]
+                },
+                options: { indexAxis: 'y', maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            });
+
+            const ctx2 = document.getElementById('educationChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(dashboardData.stats.education_scores),
+                    datasets: [{
+                        label: 'Weighted Score',
+                        data: Object.values(dashboardData.stats.education_scores),
+                        backgroundColor: '#10b981',
+                        borderRadius: 10
+                    }]
+                },
+                options: { indexAxis: 'y', maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            });
+
+            // Theory Knowledge Chart
+            new Chart(document.getElementById('theoryChart'), {
+                type: 'polarArea',
+                data: {
+                    labels: Object.keys(dashboardData.stats.theory_dist),
+                    datasets: [{
+                        data: Object.values(dashboardData.stats.theory_dist),
+                        backgroundColor: ['#6366f1', '#10b981', '#f59e0b', '#ef4444']
+                    }]
+                },
+                options: { plugins: { legend: { position: 'bottom' } } }
+            });
+
+            // Gender Distribution
+            new Chart(document.getElementById('genderChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(dashboardData.stats.gender_dist),
+                    datasets: [{
+                        data: Object.values(dashboardData.stats.gender_dist),
+                        backgroundColor: ['#ec4899', '#3b82f6'],
+                        hoverOffset: 15
+                    }]
+                },
+                options: { cutout: '70%', plugins: { legend: { position: 'bottom' } } }
+            });
+
+            // Achievements Bar
+            new Chart(document.getElementById('achievementChart'), {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(dashboardData.stats.achievement_dist),
+                    datasets: [{
+                        data: Object.values(dashboardData.stats.achievement_dist),
+                        backgroundColor: '#8b5cf6',
+                        borderRadius: 8
+                    }]
+                },
+                options: { plugins: { legend: { display: false } } }
+            });
+
+            renderProfiles(dashboardData.profiles);
+        });
+
+        // Search Logic
+        const profileSearch = document.getElementById('profileSearch');
+        profileSearch.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const filtered = dashboardData.profiles.filter(p => 
+                p.name.toLowerCase().includes(query) || 
+                p.designation.toLowerCase().includes(query)
+            );
+            renderProfiles(filtered);
+        });
+
+        function renderProfiles(profiles) {
+            const container = document.getElementById('profile-container');
+            container.innerHTML = profiles.map(p => `
+                <div class="bg-white p-6 rounded-[2rem] border border-slate-100 custom-shadow hover:ring-2 hover:ring-indigo-100 transition-all group">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-2xl flex items-center justify-center font-bold text-white shadow-inner ${p.gender === 'Female' ? 'bg-pink-400' : 'bg-blue-400'}">
+                            ${p.name.charAt(0)}
+                        </div>
+                        <div class="overflow-hidden">
+                            <h5 class="font-bold text-slate-800 truncate" title="${p.name}">${p.name}</h5>
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">${p.fide === 'Yes' ? 'FIDE Rated' : 'Unrated'}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between text-xs">
+                            <span class="text-slate-400 font-medium">Knowledge</span>
+                            <span class="font-bold ${p.theory === 'Need to Improve' ? 'text-red-500' : 'text-slate-700'}">${p.theory}</span>
+                        </div>
+                        <div class="flex justify-between text-xs">
+                            <span class="text-slate-400 font-medium">Achievement</span>
+                            <span class="font-bold text-slate-700">${p.achievement !== 'nan' ? p.achievement : 'N/A'}</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2">
+                        ${p.fields.map(f => `<span class="px-3 py-1 bg-slate-50 text-[10px] font-extrabold text-slate-500 rounded-lg border border-slate-100 uppercase tracking-tight">${f}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+<body class="antialiased text-slate-900">
+<main class="max-w-7xl mx-auto px-6 py-10">
         
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
             <div class="lg:col-span-2 bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-100">
