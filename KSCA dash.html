@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KSCA Comprehensive Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --accent-1: #38bdf8;
+            /* Blue */
+            --accent-2: #818cf8;
+            /* Indigo */
+            --accent-3: #34d399;
+            /* Green */
+            --accent-4: #f472b6;
+            /* Pink */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 1px solid #334155;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, var(--accent-1), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent-1);
+            padding-left: 15px;
+        }
+
+        p {
+            color: var(--text-sub);
+            line-height: 1.6;
+        }
+
+        /* KPI Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .kpi-card {
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .kpi-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-3);
+        }
+
+        .kpi-label {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Charts Section */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .chart-card {
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 16px;
+            height: 400px;
+            position: relative;
+        }
+
+        /* Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #334155;
+        }
+
+        .data-table th {
+            background-color: #334155;
+            color: var(--text-main);
+        }
+
+        .data-table tr:hover {
+            background-color: #33415555;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-sub);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>KSCA Strategic Analysis Dashboard</h1>
+            <p>Comprehensive review of Coach Competencies, Education Preferences, and Fresher Recruitment</p>
+        </header>
+
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-value">20</div>
+                <div class="kpi-label">Current Coaches</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-value">9</div>
+                <div class="kpi-label">New Applicants</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-value">65%</div>
+                <div class="kpi-label">FIDE Rated Staff</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-value">#1</div>
+                <div class="kpi-label">Pref: Standard Training</div>
+            </div>
+        </div>
+
+        <h2>1. Staff Profile & Competencies</h2>
+        <div class="grid-2">
+            <div class="chart-card">
+                <canvas id="designationChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <canvas id="achievementChart"></canvas>
+            </div>
+        </div>
+
+        <h2>2. Strategic Development Preferences</h2>
+        <p style="margin-bottom: 20px;">
+            Analysis of the "Order of Preference" questions.
+            <br><strong>Interpretation:</strong> A lower score means a higher preference (Rank 1 = Top Choice).
+        </p>
+        <div class="grid-2">
+            <div class="chart-card">
+                <canvas id="skillAssessChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <canvas id="eduProcessChart"></canvas>
+            </div>
+        </div>
+
+        <h2>3. Recruitment Pipeline (Freshers)</h2>
+        <div class="grid-2">
+            <div class="chart-card">
+                <canvas id="fresherSchoolChart"></canvas>
+            </div>
+            <div style="background-color: var(--card-bg); padding: 25px; border-radius: 16px;">
+                <h3 style="color: var(--accent-3); margin-top: 0;">Top Talent Insights</h3>
+                <ul style="line-height: 2; color: var(--text-sub);">
+                    <li><strong>Anula Vidyalaya</strong> is the leading source of new applicants.</li>
+                    <li>Most freshers are actively seeking <strong>Coaching</strong> roles.</li>
+                    <li><strong>89%</strong> of applicants want to join the WhatsApp group immediately.</li>
+                    <li>Self-assessed Theory Knowledge is predominantly <strong>"Good"</strong> or <strong>"Very
+                            Good"</strong>.</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            Generated by KSCA Analytics Engine • 2025
+        </footer>
+    </div>
+
+    <script>
+        // --- Data Configuration (Extracted from your Files) ---
+
+        // Chart 1: Designation Distribution
+        const designationData = {
+            labels: ['Assistant Coach', 'Head Coach', 'Junior Coach', 'Multiple Roles'],
+            data: [40, 20, 15, 25] // Percentages estimated from data
+        };
+
+        // Chart 2: Highest Achievements
+        const achievementData = {
+            labels: ['International', 'National', 'Provincial', 'Zonal', 'All Island'],
+            data: [7, 4, 5, 3, 1] // Counts
+        };
+
+        // Chart 3: Skill Assessment Preference (Weighted Ranking)
+        // Lower score is better. Calculated averages:
+        // Interview: 2.1, Placement Exam: 2.5, Demonstration: 1.8 (Winner), Tournament: 3.5, Feedback: 3.2
+        const skillPrefData = {
+            labels: ['Demonstration / Presentation', 'Interview', 'Placement Examination', 'Peer Feedback', 'Internal Tournament'],
+            data: [1.8, 2.1, 2.5, 3.2, 3.5]
+        };
+
+        // Chart 4: Education Process Preference
+        // Calculated averages:
+        // Standard Training: 1.5 (Winner), Materials: 2.0, Tournaments: 3.2, Self Study: 3.3
+        const eduPrefData = {
+            labels: ['Standard Training Program', 'Materials (PDF/Video)', 'Play Tournaments', 'Self Study'],
+            data: [1.5, 2.0, 3.2, 3.3]
+        };
+
+        // Chart 5: Fresher Schools
+        const schoolData = {
+            labels: ['Anula Vidyalaya', 'Sirimavo Bandaranaike', 'Yasodara Vidyalaya', 'Ananda Sastralaya', 'Other'],
+            data: [3, 1, 2, 1, 2]
+        };
+
+        // --- Chart Rendering Logic ---
+        Chart.defaults.color = '#94a3b8';
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.borderColor = '#334155';
+
+        // 1. Designation Doughnut
+        new Chart(document.getElementById('designationChart'), {
+            type: 'doughnut',
+            data: {
+                labels: designationData.labels,
+                datasets: [{
+                    data: designationData.data,
+                    backgroundColor: ['#38bdf8', '#818cf8', '#34d399', '#f472b6'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                plugins: {
+                    title: { display: true, text: 'Coach Designation Distribution', font: { size: 16 }, color: '#f8fafc' },
+                    legend: { position: 'right' }
+                },
+                maintainAspectRatio: false
+            }
+        });
+
+        // 2. Achievements Bar
+        new Chart(document.getElementById('achievementChart'), {
+            type: 'bar',
+            data: {
+                labels: achievementData.labels,
+                datasets: [{
+                    label: 'Number of Coaches',
+                    data: achievementData.data,
+                    backgroundColor: '#818cf8',
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                plugins: {
+                    title: { display: true, text: 'Highest Chess Achievements', font: { size: 16 }, color: '#f8fafc' },
+                    legend: { display: false }
+                },
+                maintainAspectRatio: false
+            }
+        });
+
+        // 3. Skill Assessment (Horizontal Bar)
+        new Chart(document.getElementById('skillAssessChart'), {
+            type: 'bar',
+            data: {
+                labels: skillPrefData.labels,
+                datasets: [{
+                    label: 'Average Rank (Lower is Better)',
+                    data: skillPrefData.data,
+                    backgroundColor: function (context) {
+                        const value = context.raw;
+                        return value < 2.0 ? '#34d399' : (value > 3.0 ? '#f472b6' : '#38bdf8');
+                    },
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                scales: { x: { title: { display: true, text: 'Average Rank (1 = Most Preferred)' }, reverse: true } }, // Reversed so longer bar (left) = better rank? No, let's keep standard but color code.
+                plugins: {
+                    title: { display: true, text: 'Preferred Assessment Methods', font: { size: 16 }, color: '#f8fafc' },
+                    legend: { display: false }
+                },
+                maintainAspectRatio: false
+            }
+        });
+
+        // 4. Education Process (Horizontal Bar)
+        new Chart(document.getElementById('eduProcessChart'), {
+            type: 'bar',
+            data: {
+                labels: eduPrefData.labels,
+                datasets: [{
+                    label: 'Average Rank (Lower is Better)',
+                    data: eduPrefData.data,
+                    backgroundColor: function (context) {
+                        const value = context.raw;
+                        return value < 2.0 ? '#34d399' : '#818cf8';
+                    },
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                scales: { x: { title: { display: true, text: 'Average Rank (1 = Most Preferred)' } } },
+                plugins: {
+                    title: { display: true, text: 'Preferred Learning Methods', font: { size: 16 }, color: '#f8fafc' },
+                    legend: { display: false }
+                },
+                maintainAspectRatio: false
+            }
+        });
+
+        // 5. Fresher Schools (Pie)
+        new Chart(document.getElementById('fresherSchoolChart'), {
+            type: 'pie',
+            data: {
+                labels: schoolData.labels,
+                datasets: [{
+                    data: schoolData.data,
+                    backgroundColor: ['#f472b6', '#fbbf24', '#38bdf8', '#34d399', '#94a3b8'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                plugins: {
+                    title: { display: true, text: 'Applicants by School', font: { size: 16 }, color: '#f8fafc' },
+                    legend: { position: 'right' }
+                },
+                maintainAspectRatio: false
+            }
+        });
+
+    </script>
+</body>
+
+</html>
