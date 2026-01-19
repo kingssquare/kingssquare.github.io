@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KSCA | Member Database</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <style>
+        :root {
+            /* Friendly Theme Variables */
+            --primary: #4A90E2;       /* Soft Royal Blue */
+            --primary-dark: #357ABD;
+            --secondary: #FFD700;     /* Gold Accent */
+            --bg-body: #f4f7f6;       /* Very light grey/blue tint */
+            --card-bg: #ffffff;
+            --text-dark: #2c3e50;
+            --text-muted: #7f8c8d;
+            --shadow-soft: 0 10px 30px rgba(0,0,0,0.05);
+            --shadow-hover: 0 15px 35px rgba(74, 144, 226, 0.15);
+            --radius: 20px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            -webkit-touch-callout: none;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #4A90E2 0%, #00d2ff 100%);
+            padding: 80px 0 60px;
+            text-align: center;
+            color: white;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 0 4px 20px rgba(74, 144, 226, 0.3);
+            margin-bottom: 40px;
+        }
+
+        .hero-title {
+            font-weight: 700;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .hero-subtitle {
+            font-weight: 300;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 576px) {
+            .hero-section {
+                padding: 50px 0 40px;
+                margin-bottom: 30px;
+            }
+
+            .hero-subtitle {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* --- Navigation --- */
+        .nav-pills-custom {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: -30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 576px) {
+            .nav-pills-custom {
+                gap: 10px;
+                margin-top: -25px;
+                margin-bottom: 30px;
+            }
+        }
+
+        .nav-btn {
+            background: white;
+            color: var(--primary);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .nav-btn:hover,
+        .nav-btn:active {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            color: var(--primary-dark);
+        }
+
+        @media (max-width: 576px) {
+            .nav-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* --- Cards --- */
+        .profile-card {
+            background: var(--card-bg);
+            border: none;
+            border-radius: var(--radius);
+            padding: 25px;
+            height: 100%;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-card:hover,
+        .profile-card:active {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        @media (max-width: 576px) {
+            .profile-card {
+                padding: 20px;
+            }
+        }
+
+        .card-top-accent {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), #00d2ff);
+        }
+
+        /* --- Header in Card --- */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .avatar-circle {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #f6f8fb, #e2e6ea);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            flex-shrink: 0;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .profile-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            line-height: 1.2;
+        }
+
+        .gender-badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        /* --- Pills & Tags --- */
+        .badge-pill {
+            background: rgba(74, 144, 226, 0.1);
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 5px;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        /* --- Info Grid --- */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 6px 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .info-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            width: 45%;
+        }
+
+        .info-content {
+            color: var(--text-dark);
+            font-weight: 500;
+            text-align: right;
+            width: 55%;
+            word-break: break-word;
+        }
+
+        /* --- Special Highlights --- */
+        .contact-box {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        .contact-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 5px;
+            font-size: 0.85rem;
+            min-height: 44px;
+        }
+        
+        .contact-row i { color: var(--primary); width: 20px; text-align: center;}
+
+        .achievement-box {
+            margin-top: 10px;
+            padding: 15px;
+            background: linear-gradient(135deg, #fff9e6 0%, #fff 100%);
+            border: 1px solid #ffeeba;
+            border-radius: 12px;
+        }
+        
+        .achievement-title {
+            color: #d4ac0d;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* --- Search --- */
+        .search-container {
+            background: white;
+            border-radius: 50px;
+            padding: 5px 25px;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            border: 1px solid #eee;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-container input {
+            background: transparent;
+            border: none;
+            color: var(--text-dark);
+            padding: 15px;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        .search-container input:focus { outline: none; }
+
+        @media (max-width: 576px) {
+            .search-container {
+                padding: 5px 15px;
+                margin-bottom: 30px;
+            }
+
+            .search-container input {
+                padding: 12px;
+                font-size: 16px;
+            }
+        }
+
+        /* --- Footer --- */
+        footer {
+            margin-top: 80px;
+            padding: 40px 0;
+            background: white;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+
+        /* Analytics Cards */
+        .chart-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow-soft);
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero-section">
+        <div class="container" data-aos="fade-down">
+            <h1 class="hero-title"><i class="fas fa-chess-king"></i> KSCA Portal</h1>
+            <p class="hero-subtitle">Freshers Information & Intelligence System</p>
+        </div>
+    </section>
+
+    <div class="container sticky-top" style="top: 20px; z-index: 100;">
+        <div class="nav-pills-custom" data-aos="fade-up">
+            <a href="#analysis" class="nav-btn"><i class="fas fa-chart-pie me-2"></i>Analytics</a>
+            <a href="#profiles" class="nav-btn"><i class="fas fa-users me-2"></i>Profiles</a>
+        </div>
+    </div>
+
+    <div class="container py-4">
+        
+        <section id="analysis" class="mb-5">
+            <div class="row g-4">
+                <div class="col-lg-6" data-aos="fade-up">
+                    <div class="chart-card">
+                        <div id="genderPlot"></div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="chart-card">
+                        <div id="prefPlot"></div>
+                    </div>
+                </div>
+                <div class="col-lg-7" data-aos="fade-up">
+                    <div class="chart-card">
+                        <div id="schoolPlot"></div>
+                    </div>
+                </div>
+                <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
+                    <div class="chart-card">
+                        <div id="theoryPlot"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="profiles">
+            <div class="text-center mb-4" data-aos="fade-up">
+                <h2 class="fw-bold" style="color: var(--primary);">Academy Freshers</h2>
+                <p class="text-muted">Total Records: <span id="totalCount" class="fw-bold text-dark">0</span></p>
+            </div>
+
+            <div class="search-container" data-aos="fade-up">
+                <i class="fas fa-search text-primary"></i>
+                <input type="text" id="memberSearch" placeholder="Search by name, school, preference..." onkeyup="filterProfiles()">
+            </div>
+
+            <div class="row g-4" id="memberGrid">
+                </div>
+        </section>
+    </div>
+
+    <footer>
+        <h4 style="color: var(--primary); font-weight: 800;">KSCA</h4>
+        <p class="text-muted small">© 2025 King's Square Chess Academy<br>Confidential Admin Data</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+
+        // COMPLETE DATA FROM UPLOADED FILE
+        const profiles = [
+            { "Name": "K.L.A.Udumbara Emandi", "Gender": "Female", "Email": "udumbaraemandi@gmail.com", "Phone number": "0755155631", "School": "Sirimavo Bandaranaike Vidyalaya", "Finished AL": "2nd Attempt", "Join KSCA": "Yes", "Preferences": "Coaching", "Last Year": "2024", "Active Field": "Playing", "Achievement": "All Island", "FIDE Rated": "No", "Theory": "Very Good", "Whatsapp": "Yes" },
+            { "Name": "VINUJI SEDARA DISSANAYAKA", "Gender": "Female", "Email": "sedaradissanayaka07@gmail.com", "Phone number": "0701112077", "School": "CO/YASODARA VIDYALAYA", "Finished AL": "Yes", "Join KSCA": "Partial", "Preferences": "Coaching", "Last Year": "2023", "Active Field": "Coaching", "Achievement": "None", "FIDE Rated": "Yes", "Theory": "Average", "Whatsapp": "Yes" },
+            { "Name": "Thiyuranee Dimansa Jayathilaka", "Gender": "Female", "Email": "tdimansajayathilaka@gmail.com", "Phone number": "0768277328", "School": "Yasodara Vidyalaya", "Finished AL": "Yes", "Join KSCA": "Yes", "Preferences": "Coaching", "Last Year": "2023", "Active Field": "Playing", "Achievement": "Provincial", "FIDE Rated": "No", "Theory": "Good", "Whatsapp": "Yes" },
+            { "Name": "Kithmini Dinuma Rajapaksha", "Gender": "Female", "Email": "raja91hu@gmail.com", "Phone number": "0751239400", "School": "Anula Vidyalaya, Nugegoda", "Finished AL": "2nd Attempt", "Join KSCA": "Partial", "Preferences": "Coaching, Arbitering", "Last Year": "2025", "Active Field": "Playing", "Achievement": "International", "FIDE Rated": "No", "Theory": "Very Good", "Whatsapp": "Yes" },
+            { "Name": "A.J.M. Binadie Oshala Jayasundara", "Gender": "Female", "Email": "10jgoshala.jayasundara@gmail.com", "Phone number": "0702804034", "School": "Anula Vidyalaya, Nugegoda", "Finished AL": "Yes", "Join KSCA": "Partial", "Preferences": "Coaching, Playing", "Last Year": "2019", "Active Field": "Playing", "Achievement": "None", "FIDE Rated": "No", "Theory": "Average/Improve", "Whatsapp": "Yes" },
+            { "Name": "Yasisuru Weerasekara", "Gender": "Male", "Email": "yasisurusawbagaya@gmail.com", "Phone number": "0742529324", "School": "Ananda Sastralaya Kotte", "Finished AL": "Yes", "Join KSCA": "Yes", "Preferences": "Coaching, Playing, Arbitering", "Last Year": "2025", "Active Field": "Coaching, Arbitering", "Achievement": "Provincial", "FIDE Rated": "Yes (Inactive)", "Theory": "Good", "Whatsapp": "Yes" },
+            { "Name": "W.P.Chanuli Sethmini Wijesekara", "Gender": "Female", "Email": "chanuliwijesekara333@gmail.com", "Phone number": "0701278595", "School": "Co/ Lindsay Girls' School", "Finished AL": "No", "Join KSCA": "Partial", "Preferences": "Coaching, Playing, Arbitering", "Last Year": "2025", "Active Field": "Playing", "Achievement": "Zonal", "FIDE Rated": "No", "Theory": "Average", "Whatsapp": "Yes" },
+            { "Name": "Radinsa Thewmini", "Gender": "Female", "Email": "thewminiradinsa02@gmail.com", "Phone number": "0719296532", "School": "Dharmapala Vidayalaya Pannipitiya", "Finished AL": "Yes", "Join KSCA": "Yes", "Preferences": "Coaching, Playing, Arbitering", "Last Year": "2024", "Active Field": "Playing", "Achievement": "None", "FIDE Rated": "No", "Theory": "Average", "Whatsapp": "Yes" },
+            { "Name": "M.A.ISUMI METHLINI PERERA", "Gender": "Female", "Email": "isumimethliniperera@gmail.com", "Phone number": "0758054158", "School": "Sirimavo Bandaranaike Vidyalaya", "Finished AL": "Yes", "Join KSCA": "Yes", "Preferences": "Coaching, Playing, Arbitering", "Last Year": "2024", "Active Field": "Playing, Arbitering", "Achievement": "Provincial", "FIDE Rated": "Yes", "Theory": "Very Good", "Whatsapp": "Yes" },
+            { "Name": "D.A.Imalshi Abisheka Deshani", "Gender": "Female", "Email": "imalshideshani2006@gmail.com", "Phone number": "0704410405", "School": "Dharmapala Vidyalaya pannipitiya", "Finished AL": "2nd Attempt", "Join KSCA": "Yes", "Preferences": "Playing, Arbitering", "Last Year": "2023", "Active Field": "Playing", "Achievement": "International", "FIDE Rated": "Yes (Inactive)", "Theory": "Good", "Whatsapp": "Yes" },
+            { "Name": "Omali Dasithma Gunarathne", "Gender": "Female", "Email": "omaligunarathne0@gmail.com", "Phone number": "0705758843", "School": "Anula Vidyalaya, Nugegoda", "Finished AL": "Yes", "Join KSCA": "Yes", "Preferences": "Coaching", "Last Year": "2016", "Active Field": "Playing", "Achievement": "None", "FIDE Rated": "No", "Theory": "Need to Improve", "Whatsapp": "Yes" },
+            { "Name": "D.P.Manilka Yashasvi Ranaweera", "Gender": "Male", "Email": "manilkaranaweera123@gmail.com", "Phone number": "0762904224", "School": "President's college Maharagama", "Finished AL": "Yes", "Join KSCA": "Partial", "Preferences": "Coaching, Playing, Arbitering", "Last Year": "2022", "Active Field": "Playing", "Achievement": "None", "FIDE Rated": "No", "Theory": "Good", "Whatsapp": "Yes" },
+            { "Name": "Sadaru Manusara", "Gender": "Male", "Email": "sadarumrt2006@gmail.com", "Phone number": "0764259362", "School": "Dharmapala College Panniptiya", "Finished AL": "2nd Attempt", "Join KSCA": "Yes", "Preferences": "Coaching, Playing, Arbitering", "Last Year": "2023", "Active Field": "Playing", "Achievement": "National", "FIDE Rated": "Yes (Inactive)", "Theory": "Very Good", "Whatsapp": "Yes" },
+            { "Name": "Udara Chethani Samaraweera", "Gender": "Female", "Email": "samaraweeraudara4@gmail.com", "Phone number": "0701588107", "School": "Sirimavo Bandranaike Vidyalaya", "Finished AL": "No", "Join KSCA": "Partial", "Preferences": "Coaching, Playing", "Last Year": "2025", "Active Field": "Playing", "Achievement": "All Island", "FIDE Rated": "No", "Theory": "Good", "Whatsapp": "Yes" },
+            { "Name": "Vethum Weerasinghe", "Gender": "Male", "Email": "vethumw@gmail.com", "Phone number": "0719093581", "School": "Mahanama College, Col 03", "Finished AL": "Yes", "Join KSCA": "Yes", "Preferences": "Coaching, Playing, Arbitering", "Last Year": "2024", "Active Field": "Playing", "Achievement": "Provincial", "FIDE Rated": "No", "Theory": "Very Good", "Whatsapp": "Yes" }
+        ];
+
+        document.getElementById('totalCount').innerText = profiles.length;
+
+        // --- CALCULATE ANALYTICS DYNAMICALLY ---
+        
+        // 1. Gender Stats
+        let femaleCount = profiles.filter(p => p.Gender.trim().toLowerCase() === 'female').length;
+        let maleCount = profiles.filter(p => p.Gender.trim().toLowerCase() === 'male').length;
+
+        // 2. Preference Stats (Counting individual tags)
+        let prefCounts = { Coaching: 0, Playing: 0, Arbitering: 0 };
+        profiles.forEach(p => {
+            if(p.Preferences.includes('Coaching')) prefCounts.Coaching++;
+            if(p.Preferences.includes('Playing')) prefCounts.Playing++;
+            if(p.Preferences.includes('Arbitering')) prefCounts.Arbitering++;
+        });
+
+        // 3. Theory Stats
+        let theoryCounts = {};
+        profiles.forEach(p => {
+            let t = p.Theory.split(',')[0].trim(); // Take first part if comma exists
+            if (t.includes('Improve')) t = 'Needs Imp.';
+            theoryCounts[t] = (theoryCounts[t] || 0) + 1;
+        });
+
+        // 4. School Stats
+        let schoolCounts = {};
+        profiles.forEach(p => {
+            let s = p.School.replace('College', '').replace('Vidyalaya', '').replace('Girls\' School', '').replace(/[^a-zA-Z ]/g, "").trim();
+            // Simple mapping for cleaner chart
+            if(s.includes('Anula')) s = 'Anula';
+            else if(s.includes('Dharmapala')) s = 'Dharmapala';
+            else if(s.includes('Sirimavo')) s = 'Sirimavo';
+            else if(s.includes('Yasodara')) s = 'Yasodara';
+            else if(s.includes('Ananda')) s = 'Ananda Sas.';
+            else if(s.includes('President')) s = 'President\'s';
+            else if(s.includes('Mahanama')) s = 'Mahanama';
+            else if(s.includes('Lindsay')) s = 'Lindsay';
+            
+            schoolCounts[s] = (schoolCounts[s] || 0) + 1;
+        });
+        // Sort schools by count
+        let sortedSchools = Object.entries(schoolCounts).sort((a,b) => b[1] - a[1]);
+
+
+        // --- PLOT CHARTS ---
+        const layoutConfig = {
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            font: { color: '#2c3e50', family: 'Poppins' },
+            margin: { t: 40, b: 40, l: 40, r: 40 },
+            height: 300
+        };
+
+        // Gender Chart
+        Plotly.newPlot('genderPlot', [{
+            labels: ["Female", "Male"], 
+            values: [femaleCount, maleCount], 
+            type: 'pie', 
+            hole: 0.5, 
+            marker: { colors: ['#4A90E2', '#FFD700'] }
+        }], { ...layoutConfig, title: '<b>Gender Ratio</b>' });
+
+        // Preferences Chart
+        Plotly.newPlot('prefPlot', [{
+            x: ["Coaching", "Playing", "Arbitering"], 
+            y: [prefCounts.Coaching, prefCounts.Playing, prefCounts.Arbitering], 
+            type: 'bar', 
+            marker: { color: ['#4A90E2', '#50E3C2', '#FFD700'] }
+        }], { ...layoutConfig, title: '<b>Role Preferences</b>' });
+
+        // School Chart
+        Plotly.newPlot('schoolPlot', [{
+            y: sortedSchools.map(x => x[0]), 
+            x: sortedSchools.map(x => x[1]),
+            type: 'bar', 
+            orientation: 'h', 
+            marker: { color: '#4A90E2' }
+        }], { ...layoutConfig, title: '<b>Schools Breakdown</b>', margin: { ...layoutConfig.margin, l: 100 } });
+
+        // Theory Chart
+        Plotly.newPlot('theoryPlot', [{
+            labels: Object.keys(theoryCounts), 
+            values: Object.values(theoryCounts), 
+            type: 'donut',
+            marker: { colors: ['#50E3C2', '#4A90E2', '#FFD700', '#FF6B6B'] } 
+        }], { ...layoutConfig, title: '<b>Theory Knowledge</b>' });
+
+
+        // --- RENDER PROFILES ---
+        const grid = document.getElementById('memberGrid');
+
+        function renderProfiles(data) {
+            grid.innerHTML = '';
+            data.forEach((p) => {
+                const initial = p['Name'].charAt(0).toUpperCase();
+                
+                // Color code badges based on content
+                const prefTags = p['Preferences'].split(',').map(tag => {
+                    let colorClass = 'text-primary';
+                    return `<span class="badge-pill">${tag.trim()}</span>`;
+                }).join('');
+
+                const cardHtml = `
+                    <div class="col-12 col-md-6 col-xl-4" data-aos="fade-up">
+                        <div class="profile-card">
+                            <div class="card-top-accent"></div>
+                            
+                            <div class="profile-header">
+                                <div class="avatar-circle">${initial}</div>
+                                <div>
+                                    <h5 class="profile-name text-truncate" style="max-width: 200px;" title="${p['Name']}">${p['Name']}</h5>
+                                    <span class="gender-badge">${p['Gender']}</span>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                ${prefTags}
+                            </div>
+
+                            <div class="contact-box">
+                                <div class="contact-row">
+                                    <i class="fas fa-envelope"></i>
+                                    <span class="text-truncate">${p["Email"]}</span>
+                                </div>
+                                <div class="contact-row">
+                                    <i class="fas fa-phone"></i>
+                                    <span>${p["Phone number"]}</span>
+                                </div>
+                            </div>
+
+                            <div class="info-grid">
+                                <div class="info-row">
+                                    <span class="info-label">School</span>
+                                    <span class="info-content text-truncate">${p["School"]}</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">A/L Status</span>
+                                    <span class="info-content">${p["Finished AL"]}</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Availability</span>
+                                    <span class="info-content">${p["Join KSCA"] === 'Yes' ? 'Full' : 'Partial'}</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Active Field</span>
+                                    <span class="info-content">${p["Active Field"]}</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">FIDE Rated</span>
+                                    <span class="info-content">${p["FIDE Rated"]}</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Theory</span>
+                                    <span class="info-content">${p["Theory"]}</span>
+                                </div>
+                            </div>
+
+                            <div class="achievement-box">
+                                <span class="achievement-title"><i class="fas fa-trophy me-1"></i> Highest Achievement</span>
+                                <div class="text-dark small">${p['Achievement']}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += cardHtml;
+            });
+        }
+
+        renderProfiles(profiles);
+
+        function filterProfiles() {
+            const query = document.getElementById('memberSearch').value.toLowerCase();
+            const filtered = profiles.filter(p => Object.values(p).some(val => String(val).toLowerCase().includes(query)));
+            renderProfiles(filtered);
+        }
+
+        window.onresize = function() {
+            const plots = ['genderPlot', 'prefPlot', 'schoolPlot', 'theoryPlot'];
+            plots.forEach(id => Plotly.Plots.resize(id));
+        };
+    </script>
+</body>
+</html>
