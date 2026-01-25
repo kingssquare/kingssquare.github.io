@@ -355,6 +355,102 @@
 .daily-card.silver { border-left: 5px solid #cfd2d6; }
 .daily-card.bronze { border-left: 5px solid #d97a38; }
 
+/* === GLOBAL RESPONSIVE FIXES === */
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+img, iframe {
+    max-width: 100%;
+    height: auto;
+}
+@media (max-width: 900px) {
+    nav {
+        flex-direction: column;
+        gap: 12px;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .nav-links button {
+        margin: 0;
+        padding: 10px 16px;
+        font-size: 0.8rem;
+    }
+
+    .live-tag {
+        font-size: 0.7rem;
+    }
+}
+@media (max-width: 900px) {
+    .podium-wrap {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .podium-card {
+        width: 90%;
+        max-width: 320px;
+    }
+
+    .podium-card.first {
+        transform: none;
+        order: -1;
+    }
+}
+@media (max-width: 600px) {
+    .daily-name {
+        font-size: 1rem;
+    }
+
+    .daily-points {
+        font-size: 1.3rem;
+    }
+
+    .daily-rank {
+        font-size: 0.7rem;
+    }
+}
+@media (max-width: 800px) {
+    .standings-card {
+        overflow-x: auto;
+    }
+
+    .standings-table {
+        min-width: 520px;
+    }
+
+    .standings-table th,
+    .standings-table td {
+        padding: 14px 18px;
+        font-size: 0.85rem;
+    }
+}
+@media (max-width: 700px) {
+    .section-title {
+        font-size: 2rem;
+        text-align: center;
+    }
+}
+@media (max-width: 600px) {
+    .broadcast-frame {
+        height: 40vh;
+        border-width: 2px;
+    }
+}
+button, a {
+    touch-action: manipulation;
+}
+
+
     </style>
 </head>
 
@@ -533,5 +629,4 @@
         &copy; 2025 FIDE BROADCAST CORE // STATUS: ONLINE
     </footer>
 </body>
-
 </html>
