@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>King's Square Weekly Tournament</title>
-    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Saira:wght@400;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <title>ELITE BROADCAST | FIDE World 2025</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Russo+One&family=Saira:wght@400;700&family=JetBrains+Mono:wght@400&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --primary: #ffe23e;
@@ -18,7 +20,12 @@
             --font-mono: 'JetBrains Mono', monospace;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
 
         body {
             background-color: var(--dark);
@@ -30,10 +37,13 @@
         /* --- BACKGROUND GRID --- */
         .grid-bg {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                linear-gradient(90deg, rgba(255,226,62,0.03) 1px, transparent 1px),
-                linear-gradient(rgba(255,226,62,0.03) 1px, transparent 1px);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(90deg, rgba(255, 226, 62, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(255, 226, 62, 0.03) 1px, transparent 1px);
             background-size: 40px 40px;
             z-index: -1;
         }
@@ -41,7 +51,8 @@
         /* --- NAVIGATION --- */
         nav {
             position: fixed;
-            top: 0; width: 100%;
+            top: 0;
+            width: 100%;
             padding: 15px 5%;
             display: flex;
             justify-content: space-between;
@@ -52,8 +63,16 @@
             border-bottom: 2px solid var(--primary);
         }
 
-        .logo { font-family: var(--font-head); font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; }
-        .logo span { color: var(--primary); }
+        .logo {
+            font-family: var(--font-head);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
 
         .live-tag {
             background: #ff3e3e;
@@ -67,9 +86,17 @@
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 62, 62, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(255, 62, 62, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 62, 62, 0); }
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 62, 62, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(255, 62, 62, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 62, 62, 0);
+            }
         }
 
         /* --- SECTIONS --- */
@@ -88,17 +115,25 @@
         }
 
         /* --- SECTION 1: LIVE BROADCAST (WIDE) --- */
-        #broadcast { padding-top: 140px; }
+        #broadcast {
+            padding-top: 140px;
+        }
+
         .broadcast-frame {
             width: 100%;
             height: 75vh;
             background: #000;
             border: 4px solid var(--accent);
             position: relative;
-            box-shadow: 0 0 50px rgba(0,0,0,1);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 1);
         }
-        .broadcast-frame iframe { width: 100%; height: 100%; border: none; }
-        
+
+        .broadcast-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
         .broadcast-meta {
             margin-top: 15px;
             display: flex;
@@ -107,103 +142,108 @@
             font-size: 0.8rem;
             color: var(--primary);
         }
+
         /* --- PODIUM SECTION --- */
-.podium-wrap {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 40px;
-    margin-top: 60px;
-}
+        .podium-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 40px;
+            margin-top: 60px;
+        }
 
-.podium-card {
-    background: linear-gradient(180deg, #1a1a1a, #0c0c0c);
-    border: 2px solid #222;
-    width: 260px;
-    padding: 30px 20px;
-    text-align: center;
-    position: relative;
-    clip-path: polygon(0 0, 100% 6%, 100% 100%, 0 94%);
-    transition: 0.4s;
-}
+        .podium-card {
+            background: linear-gradient(180deg, #1a1a1a, #0c0c0c);
+            border: 2px solid #222;
+            width: 260px;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            clip-path: polygon(0 0, 100% 6%, 100% 100%, 0 94%);
+            transition: 0.4s;
+        }
 
-.podium-card:hover {
-    transform: translateY(-12px);
-    border-color: var(--primary);
-}
+        .podium-card:hover {
+            transform: translateY(-12px);
+            border-color: var(--primary);
+        }
 
-.podium-card.first {
-    transform: translateY(-40px);
-    border-color: var(--primary);
-}
+        .podium-card.first {
+            transform: translateY(-40px);
+            border-color: var(--primary);
+        }
 
-.podium-rank {
-    font-family: var(--font-mono);
-    color: var(--primary);
-    letter-spacing: 2px;
-    font-size: 0.9rem;
-}
+        .podium-rank {
+            font-family: var(--font-mono);
+            color: var(--primary);
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+        }
 
-.podium-trophy {
-    font-size: 64px;
-    margin: 15px 0;
-}
+        .podium-trophy {
+            font-size: 64px;
+            margin: 15px 0;
+        }
 
-.podium-name {
-    font-family: var(--font-head);
-    font-size: 1.4rem;
-    text-transform: uppercase;
-}
+        .podium-name {
+            font-family: var(--font-head);
+            font-size: 1.4rem;
+            text-transform: uppercase;
+        }
 
-.podium-stats {
-    margin-top: 15px;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: #aaa;
-    line-height: 1.8;
-}
+        .podium-stats {
+            margin-top: 15px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: #aaa;
+            line-height: 1.8;
+        }
 
-/* --- CREATIVE DAILY STANDINGS --- */
-.matchday-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 25px;
-    margin-top: 40px;
-}
+        /* --- CREATIVE DAILY STANDINGS --- */
+        .matchday-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
 
-.matchday-card {
-    background: var(--accent);
-    border-left: 4px solid var(--primary);
-    padding: 25px;
-    transition: 0.3s;
-}
+        .matchday-card {
+            background: var(--accent);
+            border-left: 4px solid var(--primary);
+            padding: 25px;
+            transition: 0.3s;
+        }
 
-.matchday-card:hover {
-    transform: scale(1.03);
-    background: rgba(255,226,62,0.05);
-}
+        .matchday-card:hover {
+            transform: scale(1.03);
+            background: rgba(255, 226, 62, 0.05);
+        }
 
-.matchday-rank {
-    font-family: var(--font-mono);
-    color: var(--primary);
-    font-size: 1.1rem;
-}
+        .matchday-rank {
+            font-family: var(--font-mono);
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
 
-.matchday-player {
-    font-family: var(--font-head);
-    text-transform: uppercase;
-    margin: 10px 0;
-}
+        .matchday-player {
+            font-family: var(--font-head);
+            text-transform: uppercase;
+            margin: 10px 0;
+        }
 
-.matchday-points {
-    font-family: var(--font-mono);
-    font-size: 1.4rem;
-}
+        .matchday-points {
+            font-family: var(--font-mono);
+            font-size: 1.4rem;
+        }
 
 
         /* --- SECTION 2: STANDINGS (DATA FOCUS) --- */
-        #standings { background: rgba(255,255,255,0.02); padding-top: 60px; padding-bottom: 80px; }
-        
+        #standings {
+            background: rgba(255, 255, 255, 0.02);
+            padding-top: 60px;
+            padding-bottom: 80px;
+        }
+
         .standings-card {
             background: var(--accent);
             border: 1px solid #333;
@@ -239,17 +279,36 @@
         .standings-table td {
             padding: 18px 30px;
             font-size: 1.1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
 
-        .standings-table tr:hover { background: rgba(255,226,62,0.05); }
+        .standings-table tr:hover {
+            background: rgba(255, 226, 62, 0.05);
+        }
 
-        .rank-box { color: var(--primary); font-family: var(--font-mono); font-weight: bold; width: 60px; }
-        .pts-box { font-family: var(--font-mono); color: var(--primary); text-align: right; font-weight: bold; }
+        .rank-box {
+            color: var(--primary);
+            font-family: var(--font-mono);
+            font-weight: bold;
+            width: 60px;
+        }
+
+        .pts-box {
+            font-family: var(--font-mono);
+            color: var(--primary);
+            text-align: right;
+            font-weight: bold;
+        }
 
         /* --- SCHEDULE SECTION --- */
-        #schedule { padding-top: 60px; }
-        .tourney-list { border: 1px solid var(--accent); }
+        #schedule {
+            padding-top: 60px;
+        }
+
+        .tourney-list {
+            border: 1px solid var(--accent);
+        }
+
         .tourney-row {
             display: grid;
             grid-template-columns: 120px 1fr 200px;
@@ -257,13 +316,36 @@
             border-bottom: 1px solid var(--accent);
             transition: 0.3s;
         }
-        .tourney-row:hover { background: rgba(255, 226, 62, 0.05); transform: scale(1.01); }
-        .t-date { font-family: var(--font-mono); color: var(--primary); }
-        .t-name { font-family: var(--font-head); text-transform: uppercase; }
-        .t-prize { font-family: var(--font-mono); font-size: 0.8rem; color: #666; text-align: right; }
+
+        .tourney-row:hover {
+            background: rgba(255, 226, 62, 0.05);
+            transform: scale(1.01);
+        }
+
+        .t-date {
+            font-family: var(--font-mono);
+            color: var(--primary);
+        }
+
+        .t-name {
+            font-family: var(--font-head);
+            text-transform: uppercase;
+        }
+
+        .t-prize {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: #666;
+            text-align: right;
+        }
 
         /* --- PLAYER CARDS --- */
-        .player-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .player-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
         .player-card {
             position: relative;
             background: var(--accent);
@@ -272,19 +354,59 @@
             transition: 0.4s;
             filter: grayscale(100%);
         }
-        .player-card:hover { filter: grayscale(0%); transform: translateY(-10px); clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
-        .player-card img { width: 100%; height: 100%; object-fit: cover; }
-        .card-overlay { position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px; background: linear-gradient(transparent, var(--darker)); }
-        .p-name { font-family: var(--font-head); font-size: 1.5rem; text-transform: uppercase; }
+
+        .player-card:hover {
+            filter: grayscale(0%);
+            transform: translateY(-10px);
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .player-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            background: linear-gradient(transparent, var(--darker));
+        }
+
+        .p-name {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            text-transform: uppercase;
+        }
 
         /* RESPONSIVE */
         @media (max-width: 800px) {
-            .tourney-row { grid-template-columns: 1fr; gap: 5px; }
-            .t-prize { text-align: left; }
-            .broadcast-frame { height: 50vh; }
+            .tourney-row {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+
+            .t-prize {
+                text-align: left;
+            }
+
+            .broadcast-frame {
+                height: 50vh;
+            }
         }
-        .nav-links { display: flex; align-items: center; }
-        .nav-links a { text-decoration: none; }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+        }
+
         .nav-links button {
             background: transparent;
             border: 1px solid var(--light);
@@ -298,159 +420,284 @@
             clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
             white-space: nowrap;
         }
+
         .nav-links button:hover {
             background: var(--primary);
             border-color: var(--primary);
             color: var(--dark);
             transform: scale(1.05);
         }
+
         /* === DAILY TOTAL STANDINGS === */
-.daily-standings-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 22px;
-    margin-top: 50px;
-}
+        .daily-standings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px;
+            margin-top: 50px;
+        }
 
-.daily-card {
-    background: linear-gradient(160deg, #141414, #0a0a0a);
-    border: 1px solid #222;
-    padding: 22px;
-    position: relative;
-    transition: 0.35s;
-}
+        .daily-card {
+            background: linear-gradient(160deg, #141414, #0a0a0a);
+            border: 1px solid #222;
+            padding: 22px;
+            position: relative;
+            transition: 0.35s;
+        }
 
-.daily-card:hover {
-    transform: translateY(-8px);
-    border-color: var(--primary);
-}
+        .daily-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+        }
 
-.daily-rank {
-    position: absolute;
-    top: -14px;
-    right: 15px;
-    background: var(--accent);
-    color: var(--primary);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    padding: 4px 10px;
-    border: 1px solid var(--primary);
-}
+        .daily-rank {
+            position: absolute;
+            top: -14px;
+            right: 15px;
+            background: var(--accent);
+            color: var(--primary);
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border: 1px solid var(--primary);
+        }
 
-.daily-name {
-    font-family: var(--font-head);
-    text-transform: uppercase;
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-}
+        .daily-name {
+            font-family: var(--font-head);
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
 
-.daily-points {
-    font-family: var(--font-mono);
-    font-size: 1.6rem;
-    color: var(--primary);
-}
+        .daily-points {
+            font-family: var(--font-mono);
+            font-size: 1.6rem;
+            color: var(--primary);
+        }
 
-/* Top 3 Highlight */
-.daily-card.gold { border-left: 5px solid #ffe23e; }
-.daily-card.silver { border-left: 5px solid #cfd2d6; }
-.daily-card.bronze { border-left: 5px solid #d97a38; }
+        /* Top 3 Highlight */
+        .daily-card.gold {
+            border-left: 5px solid #ffe23e;
+        }
 
-/* === GLOBAL RESPONSIVE FIXES === */
-html, body {
-    width: 100%;
-    overflow-x: hidden;
-}
+        .daily-card.silver {
+            border-left: 5px solid #cfd2d6;
+        }
 
-img, iframe {
-    max-width: 100%;
-    height: auto;
-}
-@media (max-width: 900px) {
-    nav {
-        flex-direction: column;
-        gap: 12px;
-        padding: 15px;
-        text-align: center;
-    }
+        .daily-card.bronze {
+            border-left: 5px solid #d97a38;
+        }
 
-    .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
+        /* === GLOBAL RESPONSIVE FIXES === */
+        html,
+        body {
+            width: 100%;
+            overflow-x: hidden;
+        }
 
-    .nav-links button {
-        margin: 0;
-        padding: 10px 16px;
-        font-size: 0.8rem;
-    }
+        img,
+        iframe {
+            max-width: 100%;
+            height: auto;
+        }
 
-    .live-tag {
-        font-size: 0.7rem;
-    }
-}
-@media (max-width: 900px) {
-    .podium-wrap {
-        flex-direction: column;
-        align-items: center;
-        gap: 25px;
-    }
+        @media (max-width: 900px) {
+            nav {
+                flex-direction: column;
+                gap: 12px;
+                padding: 15px;
+                text-align: center;
+            }
 
-    .podium-card {
-        width: 90%;
-        max-width: 320px;
-    }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
 
-    .podium-card.first {
-        transform: none;
-        order: -1;
-    }
-}
-@media (max-width: 600px) {
-    .daily-name {
-        font-size: 1rem;
-    }
+            .nav-links button {
+                margin: 0;
+                padding: 10px 16px;
+                font-size: 0.8rem;
+            }
 
-    .daily-points {
-        font-size: 1.3rem;
-    }
+            .live-tag {
+                font-size: 0.7rem;
+            }
+        }
 
-    .daily-rank {
-        font-size: 0.7rem;
-    }
-}
-@media (max-width: 800px) {
-    .standings-card {
-        overflow-x: auto;
-    }
+        @media (max-width: 900px) {
+            .podium-wrap {
+                flex-direction: column;
+                align-items: center;
+                gap: 25px;
+            }
 
-    .standings-table {
-        min-width: 520px;
-    }
+            .podium-card {
+                width: 90%;
+                max-width: 320px;
+            }
 
-    .standings-table th,
-    .standings-table td {
-        padding: 14px 18px;
-        font-size: 0.85rem;
-    }
-}
-@media (max-width: 700px) {
-    .section-title {
-        font-size: 2rem;
-        text-align: center;
-    }
-}
-@media (max-width: 600px) {
-    .broadcast-frame {
-        height: 40vh;
-        border-width: 2px;
-    }
-}
-button, a {
-    touch-action: manipulation;
-}
+            .podium-card.first {
+                transform: none;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .daily-name {
+                font-size: 1rem;
+            }
+
+            .daily-points {
+                font-size: 1.3rem;
+            }
+
+            .daily-rank {
+                font-size: 0.7rem;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .standings-card {
+                overflow-x: auto;
+            }
+
+            .standings-table {
+                min-width: 520px;
+            }
+
+            .standings-table th,
+            .standings-table td {
+                padding: 14px 18px;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .section-title {
+                font-size: 2rem;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .broadcast-frame {
+                height: 40vh;
+                border-width: 2px;
+            }
+        }
+
+        button,
+        a {
+            touch-action: manipulation;
+        }
+
+        /* === ATTENDANCE SECTION === */
+        #attendance {
+            background: rgba(255, 255, 255, 0.02);
+            padding-top: 60px;
+            padding-bottom: 80px;
+        }
+
+        .attendance-card {
+            background: var(--accent);
+            border: 1px solid #222;
+            overflow-x: auto;
+        }
+
+        .attendance-table {
+            width: 100%;
+            min-width: 900px;
+            /* allows horizontal scroll on mobile */
+            border-collapse: collapse;
+        }
+
+        .attendance-table th {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #777;
+            padding: 16px 20px;
+            border-bottom: 1px solid #222;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .attendance-table td {
+            padding: 14px 20px;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .attendance-table tr:hover {
+            background: rgba(255, 226, 62, 0.05);
+        }
+
+        .attendance-name {
+            font-family: var(--font-head);
+            text-transform: uppercase;
+        }
+
+        .attendance-score {
+            color: var(--primary);
+            text-align: center;
+        }
+
+        /* === ATTENDANCE STATUS BADGES === */
+        .attendance-status {
+            display: inline-block;
+            min-width: 78px;
+            padding: 4px 10px;
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 3px;
+            border: 1px solid;
+        }
+
+        .attendance-status.present {
+            color: #21ff7a;
+            border-color: #21ff7a;
+            background: rgba(33, 255, 122, 0.08);
+        }
+
+        .attendance-status.absent {
+            color: #ff4c4c;
+            border-color: #ff4c4c;
+            background: rgba(255, 76, 76, 0.08);
+        }
+        .attendance-status.non {
+            color: #535353;
+            border-color: #535353;
+            background: rgba(83, 83, 83, 0.08);
+        }
+        .attendance-status.free {
+            color: #01b2f8;
+            border-color: #01b2f8;
+            background: rgb(0, 78, 180);
+        
+        }
+
+        /* Compact on mobile */
+        @media (max-width: 600px) {
+            .attendance-status {
+                min-width: 64px;
+                font-size: 0.65rem;
+            }
+        }
 
 
+        /* Mobile text scaling */
+        @media (max-width: 600px) {
+
+            .attendance-table th,
+            .attendance-table td {
+                font-size: 0.75rem;
+                padding: 12px 14px;
+            }
+        }
     </style>
 </head>
 
@@ -468,107 +715,293 @@ button, a {
     </nav><br><br>
 
     <section id="players" class="container">
-    <center><h2 class="section-title">Freshers TOP <span style="color:var(--primary)">PODIUM</span></h2></center>
+        <center>
+            <h2 class="section-title">Freshers TOP <span style="color:var(--primary)">PODIUM</span></h2>
+        </center>
 
-    <div class="podium-wrap">
+        <div class="podium-wrap">
 
-        <!-- 2nd -->
-        <div class="podium-card">
-            <div class="podium-rank">2ND PLACE</div>
-            <div class="podium-trophy">🥈</div>
-            <div class="podium-name">VSWeerasinghe</div>
-            <div class="podium-stats">
-                Performance: 1733<br>
-                Games: 5<br>
-                Win Rate: 80%
+            <div class="podium-card">
+                <div class="podium-rank">2ND PLACE</div>
+                <div class="podium-trophy">🥈</div>
+                <div class="podium-name">VSWeerasinghe</div>
+                <div class="podium-stats">
+                    Performance: 1733<br>
+                    Games: 5<br>
+                    Win Rate: 80%
+                </div>
             </div>
-        </div>
 
-        <!-- 1st -->
-        <div class="podium-card first">
-            <div class="podium-rank">1ST PLACE</div>
-            <div class="podium-trophy">🥇</div>
-            <div class="podium-name">Isumi06</div>
-            <div class="podium-stats">
-                Performance: 2026<br>
-                Games: 4<br>
-                Win Rate: 100%
+            <div class="podium-card first">
+                <div class="podium-rank">1ST PLACE</div>
+                <div class="podium-trophy">🏆</div>
+                <div class="podium-name">Isumi06</div>
+                <div class="podium-stats">
+                    Performance: 2026<br>
+                    Games: 4<br>
+                    Win Rate: 100%
+                </div>
             </div>
-        </div>
 
-        <!-- 3rd -->
-        <div class="podium-card">
-            <div class="podium-rank">3RD PLACE</div>
-            <div class="podium-trophy">🥉</div>
-            <div class="podium-name">diisha</div>
-            <div class="podium-stats">
-                Performance: 1589<br>
-                Games: 4<br>
-                Win Rate: 75%
+            <div class="podium-card">
+                <div class="podium-rank">3RD PLACE</div>
+                <div class="podium-trophy">🥉</div>
+                <div class="podium-name">diisha</div>
+                <div class="podium-stats">
+                    Performance: 1589<br>
+                    Games: 4<br>
+                    Win Rate: 75%
+                </div>
             </div>
+
         </div>
+    </section>
 
-    </div>
-</section>
+    <section class="container">
+        <h2 class="section-title">
+            Overall <span style="color:var(--primary)">Leaderboard</span>
+        </h2>
 
-<section class="container">
-    <h2 class="section-title">
-        Overall <span style="color:var(--primary)">Leaderboard</span>
-    </h2>
+        <div class="daily-standings-grid">
 
-    <div class="daily-standings-grid">
+            <div class="daily-card gold">
+                <div class="daily-rank">#01</div>
+                <div class="daily-name">Isumi06</div>
+                <div class="daily-points">12 pts</div>
+            </div>
 
-        <div class="daily-card gold">
-            <div class="daily-rank">#01</div>
-            <div class="daily-name">Isumi06</div>
-            <div class="daily-points">12 pts</div>
+            <div class="daily-card silver">
+                <div class="daily-rank">#02</div>
+                <div class="daily-name">VSWeerasinghe</div>
+                <div class="daily-points">10 pts</div>
+            </div>
+
+            <div class="daily-card bronze">
+                <div class="daily-rank">#03</div>
+                <div class="daily-name">diisha</div>
+                <div class="daily-points">8 pts</div>
+            </div>
+
+            <div class="daily-card">
+                <div class="daily-rank">#04</div>
+                <div class="daily-name">AEB003</div>
+                <div class="daily-points">6 pts</div>
+            </div>
+
+            <div class="daily-card">
+                <div class="daily-rank">#05</div>
+                <div class="daily-name">oshi_2006</div>
+                <div class="daily-points">4 pts</div>
+            </div>
+
+            <div class="daily-card">
+                <div class="daily-rank">#06</div>
+                <div class="daily-name">manilka1234</div>
+                <div class="daily-points">4 pts</div>
+            </div>
+
+            <div class="daily-card">
+                <div class="daily-rank">#07</div>
+                <div class="daily-name">Chanu2006</div>
+                <div class="daily-points">2 pts</div>
+            </div>
+
+            <div class="daily-card">
+                <div class="daily-rank">#08</div>
+                <div class="daily-name">Radinsa_Thewmini</div>
+                <div class="daily-points">0 pts</div>
+            </div>
+
         </div>
+    </section>
 
-        <div class="daily-card silver">
-            <div class="daily-rank">#02</div>
-            <div class="daily-name">VSWeerasinghe</div>
-            <div class="daily-points">10 pts</div>
+    <section id="attendance" class="container">
+        <h2 class="section-title">Attendance <span style="color:var(--primary)">Record</span></h2>
+        <div class="attendance-card">
+            <table class="attendance-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>UserName</th>
+                        <th>Day 01</th>
+                        <th>Day 02</th>
+                        <th>Day 03</th>
+                        <th>Day 04</th>
+                        <th>Day 05</th>
+                        <th>Day 06</th>
+                        <th>Day 07</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="attendance-name">K.L.A.Udumbara Emandi</td>
+                        <td>-</td>
+                        <td class="attendance-score"><span class="attendance-status absent">Absent</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                    </tr>
+                    <tr>
+                        <td class="attendance-name">VINUJI SEDARA DISSANAYAKA</td>
+                        <td>-</td>
+                        <td class="attendance-score"><span class="attendance-status absent">Absent</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                    </tr>
+                    <tr>
+                        <td class="attendance-name">Thiyuranee Dimansa Jayathilaka </td>
+                        <td>-</td>
+                        <td class="attendance-score"><span class="attendance-status present">Present</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                    </tr>
+                    <tr>
+                        <td class="attendance-name">Kithmini Dinuma Rajapaksha </td>
+                        <td>-</td>
+                        <td class="attendance-score"><span class="attendance-status absent">Absent</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                    </tr>
+                    <tr>
+                        <td class="attendance-name">A.J.M. Binadie Oshala Jayasundara</td>
+                        <td>-</td>
+                        <td class="attendance-score"><span class="attendance-status absent">Absent</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                    </tr>
+                    <tr>
+                        <td class="attendance-name">Yasisuru Weerasekara</td>
+                        <td>-</td>
+                        <td class="attendance-score"><span class="attendance-status absent">Absent</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                    </tr>
+                    <tr>
+                        <td class="attendance-name">W.P.Chanuli Sethmini Wijesekara </td>
+                        <td>Chanu2006</td>
+                        <td class="attendance-score"><span class="attendance-status present">Present</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                    </tr>
+                    <tr>
+                        <td class="attendance-name">Radinsa Thewmini </td>
+                        <td>Radinsa_Thewmini</td>
+                        <td class="attendance-score"><span class="attendance-status present">Present</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                    </tr>
+                    <tr>
+                        <td class="attendance-name">M.A.ISUMI METHLINI PERERA</td>
+                        <td>Isumi06</td>
+                        <td class="attendance-score"><span class="attendance-status present">Present</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                    </tr>
+                    <tr>
+                        <td class="attendance-name">D.A.Imalshi Abisheka Deshani </td>
+                        <td>deshi_123</td>
+                        <td class="attendance-score"><span class="attendance-status absent">Absent</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                    </tr>
+                    <tr>
+                        <td class="attendance-name">Omali Dasithma Gunarathne</td>
+                        <td>-</td>
+                        <td class="attendance-score"><span class="attendance-status absent">Absent</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                    </tr>
+                    <tr>
+                        <td class="attendance-name">D.P.Manilka Yashasvi Ranaweera </td>
+                        <td>manilka1234</td>
+                        <td class="attendance-score"><span class="attendance-status present">Present</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                    </tr>
+                    <tr>
+                        <td class="attendance-name">Sadaru Manusara </td>
+                        <td>-</td>
+                        <td class="attendance-score"><span class="attendance-status absent">Absent</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                    </tr>
+                    <tr>
+                        <td class="attendance-name">Udara Chethani Samaraweera </td>
+                        <td>-</td>
+                        <td class="attendance-score"><span class="attendance-status absent">Absent</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                    </tr>
+                    <tr>
+                        <td class="attendance-name">Vethum Weerasinghe</td>
+                        <td>VSWeerasinghe</td>
+                        <td class="attendance-score"><span class="attendance-status present">Present</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                        <td class="attendance-score"><span class="attendance-status non">-</span></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-
-        <div class="daily-card bronze">
-            <div class="daily-rank">#03</div>
-            <div class="daily-name">diisha</div>
-            <div class="daily-points">8 pts</div>
-        </div>
-
-        <div class="daily-card">
-            <div class="daily-rank">#04</div>
-            <div class="daily-name">AEB003</div>
-            <div class="daily-points">6 pts</div>
-        </div>
-
-        <div class="daily-card">
-            <div class="daily-rank">#05</div>
-            <div class="daily-name">oshi_2006</div>
-            <div class="daily-points">4 pts</div>
-        </div>
-
-        <div class="daily-card">
-            <div class="daily-rank">#06</div>
-            <div class="daily-name">manilka1234</div>
-            <div class="daily-points">4 pts</div>
-        </div>
-
-        <div class="daily-card">
-            <div class="daily-rank">#07</div>
-            <div class="daily-name">Chanu2006</div>
-            <div class="daily-points">2 pts</div>
-        </div>
-
-        <div class="daily-card">
-            <div class="daily-rank">#08</div>
-            <div class="daily-name">Radinsa_Thewmini</div>
-            <div class="daily-points">0 pts</div>
-        </div>
-
-    </div>
-</section>
-
+    </section>
 
     <section id="standings" class="container">
         <h2 class="section-title">24th Jan<span style="color:var(--primary)">STANDINGS</span></h2>
@@ -586,27 +1019,54 @@ button, a {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td class="rank-box">01</td><td>Isumi06</td><td class="pts-box">20</td></tr>
-                    <tr><td class="rank-box">02</td><td>VSWeerasinghe</td><td class="pts-box">10</td></tr>
-                    <tr><td class="rank-box">03</td><td>diisha</td><td class="pts-box">8</td></tr>
-                    <tr><td class="rank-box">04</td><td>AEB003</td><td class="pts-box">6</td></tr>
-                    <tr><td class="rank-box">05</td><td>oshi_2006</td><td class="pts-box">4</td></tr>
-                    <tr><td class="rank-box">06</td><td>manilka1234</td><td class="pts-box">4</td></tr>
-                    <tr><td class="rank-box">07</td><td>Chanu2006</td><td class="pts-box">2</td></tr>
-                    <tr><td class="rank-box">08</td><td>Radinsa_Thewmini</td><td class="pts-box">0</td></tr>
+                    <tr>
+                        <td class="rank-box">01</td>
+                        <td>Isumi06</td>
+                        <td class="pts-box">20</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-box">02</td>
+                        <td>VSWeerasinghe</td>
+                        <td class="pts-box">10</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-box">03</td>
+                        <td>diisha</td>
+                        <td class="pts-box">8</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-box">04</td>
+                        <td>AEB003</td>
+                        <td class="pts-box">6</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-box">05</td>
+                        <td>oshi_2006</td>
+                        <td class="pts-box">4</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-box">06</td>
+                        <td>manilka1234</td>
+                        <td class="pts-box">4</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-box">07</td>
+                        <td>Chanu2006</td>
+                        <td class="pts-box">2</td>
+                    </tr>
+                    <tr>
+                        <td class="rank-box">08</td>
+                        <td>Radinsa_Thewmini</td>
+                        <td class="pts-box">0</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
     </section>
 
-    
-
-
-    
-
     <footer style="text-align: center; padding: 60px; color: #333; font-family: var(--font-mono); font-size: 0.7rem;">
-        &copy; KSCA2026 // STATUS: ONLINE
+        &copy; 2025 FIDE BROADCAST CORE // STATUS: ONLINE
     </footer>
 </body>
-</html>
 
+</html>
