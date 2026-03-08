@@ -96,6 +96,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            margin-left: 15px;
         }
         
         .map-btn {
@@ -106,6 +107,7 @@
             display: flex; align-items: center; justify-content: center;
             border-radius: 50%;
             transition: 0.3s;
+            text-decoration: none;
         }
         .map-btn:hover { background: var(--primary); color: var(--dark); transform: scale(1.1); }
         .map-btn svg { width: 20px; height: 20px; fill: currentColor; }
@@ -148,7 +150,7 @@
             color: var(--dark);
             padding: 20px;
             text-align: center;
-            min-width: 140px;
+            min-width: 160px;
             display: flex; flex-direction: column; justify-content: center;
         }
         .day { font-family: var(--font-head); font-size: 2rem; line-height: 1; }
@@ -156,7 +158,7 @@
 
         /* Details */
         .details-box {
-            padding: 25px;
+            padding: 20px;
             flex: 1;
         }
         .location-label {
@@ -167,25 +169,14 @@
             font-family: var(--font-head); font-size: 1.4rem; 
             text-transform: uppercase; color: #fff;
         }
-        .rank { font-size: 0.9rem; color: #888; margin-bottom: 15px; }
+        .rank { font-size: 0.9rem; color: #888; margin-bottom: 15px; font-style: italic;}
         
-        .tags { display: flex; gap: 10px; flex-wrap: wrap; }
+        .tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
         .tag {
             font-size: 0.75rem; padding: 4px 10px; border: 1px solid #444; 
             border-radius: 20px; color: #ccc;
         }
-
-        /* Fee Zone */
-        .fee-box {
-            background: rgba(0,0,0,0.3);
-            padding: 25px;
-            border-top: 1px dashed #444;
-            display: flex; flex-direction: column; justify-content: center;
-            min-width: 200px;
-        }
-        .fee-label { color: #888; font-size: 0.9rem; margin-bottom: 5px; }
-        .fee-amount { font-family: var(--font-head); font-size: 1.5rem; color: var(--primary); }
-        .contact-num { font-family: monospace; color: #fff; margin-top: 10px; display: block; }
+        .tag.new-intake { border-color: var(--primary); color: var(--primary); }
 
         /* --- NEW CLASSES ALERT --- */
         .alert-box {
@@ -199,33 +190,74 @@
         }
         .alert-box h2 { font-family: var(--font-head); color: var(--primary); margin-bottom: 20px; }
         .town-list {
-            list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 20px;
+            list-style: none; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 15px; margin-top: 20px;
         }
         .town-list li {
             background: #000; border: 1px solid #333; padding: 10px 20px;
             font-family: var(--font-head); text-transform: uppercase; font-size: 0.9rem;
-            transition: 0.3s;
+            transition: 0.3s; border-radius: 5px; width: fit-content;
         }
         .town-list li:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-3px); }
+
+        /* --- GET IN TOUCH SECTION --- */
+        .get-in-touch {
+            background: var(--darker);
+            padding: 50px 20px;
+            text-align: center;
+            border-top: 2px dashed #333;
+            margin-top: 60px;
+            border-radius: 10px;
+        }
+        .get-in-touch h2 {
+            font-family: var(--font-head);
+            color: var(--primary);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-size: 2.5rem;
+        }
+        .get-in-touch p {
+            color: #ccc;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        .number-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .number-links a {
+            color: var(--dark);
+            background: var(--primary);
+            padding: 12px 30px;
+            text-decoration: none;
+            font-family: var(--font-head);
+            font-size: 1.3rem;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .number-links a:hover {
+            background: #fff;
+            transform: scale(1.05);
+        }
 
         /* --- MEDIA QUERIES --- */
         @media (min-width: 768px) {
             .ticket-content { flex-direction: row; }
             .class-ticket { flex-direction: row; }
-            .fee-box { border-top: none; border-left: 1px dashed #444; text-align: right; }
         }
 
         @media (max-width: 768px) {
             nav { flex-direction: column; height: auto; padding: 15px; }
             .nav-links { margin-top: 15px; }
-            .class-ticket:hover { transform: translateY(-5px); } /* Vertical move on mobile */
+            .class-ticket:hover { transform: translateY(-5px); }
             .time-box { flex-direction: row; justify-content: space-between; align-items: center; text-align: left; }
             .day { font-size: 1.5rem; }
             .hours { margin-top: 0; }
         }
 
         /* --- FOOTER --- */
-        footer { background: var(--darker); border-top: 4px solid var(--primary); padding: 50px 5% 20px; margin-top: 50px; }
+        footer { background: var(--darker); border-top: 4px solid var(--primary); padding: 50px 5% 20px; }
         .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 30px; }
         .footer-content h3 { font-family: var(--font-head); margin-bottom: 15px; }
         .footer-content a { color: #888; text-decoration: none; display: block; margin-bottom: 5px; transition:0.3s;}
@@ -239,68 +271,36 @@
         <div class="nav-links">
             <a href="index.html"><button>Home</button></a>
             <a href="coaches.html"><button>Coaches</button></a>
-            <a href="tournaments.html"><button>Tournaments</button></a>
+            <a href="tournaments.html"><button>Pheonix Chess Championship</button></a>
             <a href="schedule.html" class="active"><button style="background:var(--primary); color:var(--dark); border-color:var(--primary);">Schedule</button></a>
         </div>
     </nav>
 
     <header class="page-header">
         <h1 class="page-title">Class <span>Schedule</span></h1>
-        <div class="page-subtitle">Master the Game at a Location Near You</div>
+        <div class="page-subtitle">2026 Admissions Now Open</div>
     </header>
 
     <div class="container">
 
         <div class="branch-section">
             <div class="branch-header">
-                <a href="https://maps.app.goo.gl/3unBYHzQNJB7W6X77" target="_blank" class="map-btn" title="Open Map">
+                <a href="#" class="map-btn" title="Open Map">
                     <svg viewBox="0 0 24 24"><path d="M12 2C8.134 2 5 5.134 5 9c0 6 7 13 7 13s7-7 7-13c0-3.866-3.134-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
                 </a>
-                <div class="branch-title">&nbsp; Nugegoda (Head Office)</div>
+                <div class="branch-title">Colombo</div>
             </div>
-
             <div class="class-ticket">
-                <div class="bg-watermark">TUE</div>
+                <div class="bg-watermark">SAT</div>
                 <div class="ticket-content">
                     <div class="time-box">
-                        <div class="day">TUE</div>
-                        <div class="hours">5:00 PM - 7:00 PM</div>
+                        <div class="day">SAT</div>
+                        <div class="hours">11:00 AM - 1:00 PM</div>
                     </div>
                     <div class="details-box">
-                        <span class="location-label">King's Square HQ</span>
-                        <div class="instructor">NI Udan Rathnayake</div>
-                        <div class="rank">National Instructor</div>
-                        <div class="tags">
-                            <span class="tag">Beginner</span><span class="tag">Intermediate</span><span class="tag">Advanced</span>
-                        </div>
-                    </div>
-                    <div class="fee-box">
-                        <span class="fee-label">Class Fee</span>
-                        <div class="fee-amount">Rs. 2500/=</div>
-                        <span class="contact-num">📞 071 666 8363</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="class-ticket">
-                <div class="bg-watermark">THU</div>
-                <div class="ticket-content">
-                    <div class="time-box">
-                        <div class="day">THU</div>
-                        <div class="hours">5:00 PM - 7:00 PM</div>
-                    </div>
-                    <div class="details-box">
-                        <span class="location-label">King's Square HQ</span>
-                        <div class="instructor">FI Thejan Rathnayake</div>
-                        <div class="rank">FIDE Instructor</div>
-                        <div class="tags">
-                            <span class="tag">All Levels</span>
-                        </div>
-                    </div>
-                    <div class="fee-box">
-                        <span class="fee-label">Class Fee</span>
-                        <div class="fee-amount">Rs. 2500/=</div>
-                        <span class="contact-num">📞 071 666 8363</span>
+                        <span class="location-label">Wycherely Inter School</span>
+                        <div class="instructor">Sandeepana Prabuddha</div>
+                        <div class="tags"><span class="tag">All Levels</span></div>
                     </div>
                 </div>
             </div>
@@ -308,12 +308,104 @@
 
         <div class="branch-section">
             <div class="branch-header">
-                <a href="https://maps.app.goo.gl/qfEARydnLKkg94q47" target="_blank" class="map-btn" title="Open Map">
+                <a href="#" class="map-btn" title="Open Map">
                     <svg viewBox="0 0 24 24"><path d="M12 2C8.134 2 5 5.134 5 9c0 6 7 13 7 13s7-7 7-13c0-3.866-3.134-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
                 </a>
-                <div class="branch-title">&nbsp; Pannipitiya (Free Birds)</div>
+                <div class="branch-title">Kotikawatta</div>
             </div>
+            <div class="class-ticket">
+                <div class="bg-watermark">WED</div>
+                <div class="ticket-content">
+                    <div class="time-box">
+                        <div class="day">WED</div>
+                        <div class="hours">5:30 PM - 7:30 PM</div>
+                    </div>
+                    <div class="details-box">
+                        <span class="location-label">Sipleeme Institute</span>
+                        <div class="instructor">FI Thejan Rathnayake</div>
+                        <div class="tags"><span class="tag">All Levels</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="branch-section">
+            <div class="branch-header">
+                <a href="#" class="map-btn" title="Open Map">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.134 2 5 5.134 5 9c0 6 7 13 7 13s7-7 7-13c0-3.866-3.134-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+                </a>
+                <div class="branch-title">Mulleriyawa</div>
+            </div>
+            <div class="class-ticket">
+                <div class="bg-watermark">SUN</div>
+                <div class="ticket-content">
+                    <div class="time-box">
+                        <div class="day">SUN</div>
+                        <div class="hours">5:30 PM - 7:00 PM</div>
+                    </div>
+                    <div class="details-box">
+                        <span class="location-label">Ganasara Institute</span>
+                        <div class="instructor">FI Thejan Rathnayake</div>
+                        <div class="tags"><span class="tag">All Levels</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="branch-section">
+            <div class="branch-header">
+                <a href="#" class="map-btn" title="Open Map">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.134 2 5 5.134 5 9c0 6 7 13 7 13s7-7 7-13c0-3.866-3.134-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+                </a>
+                <div class="branch-title">Rajagiriya</div>
+            </div>
+            <div class="class-ticket">
+                <div class="bg-watermark">WED</div>
+                <div class="ticket-content">
+                    <div class="time-box">
+                        <div class="day">WED</div>
+                        <div class="hours">4:30 PM - 6:30 PM</div>
+                    </div>
+                    <div class="details-box">
+                        <span class="location-label">INCA Institute</span>
+                        <div class="instructor">FI Thejan Rathnayake</div>
+                        <div class="tags"><span class="tag">All Levels</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="branch-section">
+            <div class="branch-header">
+                <a href="#" class="map-btn" title="Open Map">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.134 2 5 5.134 5 9c0 6 7 13 7 13s7-7 7-13c0-3.866-3.134-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+                </a>
+                <div class="branch-title">Malabe</div>
+            </div>
+            <div class="class-ticket">
+                <div class="bg-watermark">FRI</div>
+                <div class="ticket-content">
+                    <div class="time-box">
+                        <div class="day">FRI</div>
+                        <div class="hours">5:00 PM - 7:00 PM</div>
+                    </div>
+                    <div class="details-box">
+                        <span class="location-label">LIT Institute</span>
+                        <div class="instructor">FI Thejan Rathnayake</div>
+                        <div class="tags"><span class="tag">All Levels</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="branch-section">
+            <div class="branch-header">
+                <a href="#" class="map-btn" title="Open Map">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.134 2 5 5.134 5 9c0 6 7 13 7 13s7-7 7-13c0-3.866-3.134-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+                </a>
+                <div class="branch-title">Pannipitiya</div>
+            </div>
+            
             <div class="class-ticket">
                 <div class="bg-watermark">SAT</div>
                 <div class="ticket-content">
@@ -324,16 +416,10 @@
                     <div class="details-box">
                         <span class="location-label">Free Birds Nursery</span>
                         <div class="instructor">FI Thejan Rathnayake</div>
-                        <div class="tags"><span class="tag">Beginner</span><span class="tag">Intermediate</span></div>
-                    </div>
-                    <div class="fee-box">
-                        <span class="fee-label">Inquire for Fee</span>
-                        <div class="fee-amount">---</div>
-                        <span class="contact-num">📞 071 313 8301</span>
+                        <div class="tags"><span class="tag">All Levels</span></div>
                     </div>
                 </div>
             </div>
-
             <div class="class-ticket">
                 <div class="bg-watermark">SAT</div>
                 <div class="ticket-content">
@@ -343,17 +429,12 @@
                     </div>
                     <div class="details-box">
                         <span class="location-label">Free Birds Nursery</span>
-                        <div class="instructor">NI Udan Rathnayake</div>
-                        <div class="tags"><span class="tag">Beginner</span><span class="tag">Intermediate</span></div>
-                    </div>
-                    <div class="fee-box">
-                        <span class="fee-label">Inquire for Fee</span>
-                        <div class="fee-amount">---</div>
-                        <span class="contact-num">📞 071 313 8301</span>
+                        <div class="instructor">FI Thejan Rathnayake</div>
+                        <div class="tags"><span class="tag">All Levels</span></div>
                     </div>
                 </div>
             </div>
-             <div class="class-ticket">
+            <div class="class-ticket">
                 <div class="bg-watermark">SAT</div>
                 <div class="ticket-content">
                     <div class="time-box">
@@ -363,12 +444,36 @@
                     <div class="details-box">
                         <span class="location-label">Free Birds Nursery</span>
                         <div class="instructor">FI Thejan Rathnayake</div>
-                        <div class="tags"><span class="tag">Advanced</span></div>
+                        <div class="tags"><span class="tag">All Levels</span></div>
                     </div>
-                    <div class="fee-box">
-                        <span class="fee-label">Inquire for Fee</span>
-                        <div class="fee-amount">---</div>
-                        <span class="contact-num">📞 071 313 8301</span>
+                </div>
+            </div>
+
+            <div class="class-ticket">
+                <div class="bg-watermark">SUN</div>
+                <div class="ticket-content">
+                    <div class="time-box">
+                        <div class="day">SUN</div>
+                        <div class="hours">1:00 PM - 3:00 PM</div>
+                    </div>
+                    <div class="details-box">
+                        <span class="location-label">Free Birds Nursery</span>
+                        <div class="instructor">FI Thejan Rathnayake</div>
+                        <div class="tags"><span class="tag">All Levels</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="class-ticket">
+                <div class="bg-watermark">SUN</div>
+                <div class="ticket-content">
+                    <div class="time-box">
+                        <div class="day">SUN</div>
+                        <div class="hours">3:00 PM - 5:00 PM</div>
+                    </div>
+                    <div class="details-box">
+                        <span class="location-label">Free Birds Nursery</span>
+                        <div class="instructor">FI Thejan Rathnayake</div>
+                        <div class="tags"><span class="tag">All Levels</span></div>
                     </div>
                 </div>
             </div>
@@ -384,68 +489,57 @@
                         <div class="instructor">FI Thejan Rathnayake</div>
                         <div class="tags"><span class="tag">All Levels</span></div>
                     </div>
-                    <div class="fee-box">
-                        <span class="fee-label">Inquire for Fee</span>
-                        <div class="fee-amount">---</div>
-                        <span class="contact-num">📞 071 313 8301</span>
-                    </div>
                 </div>
             </div>
         </div>
 
         <div class="branch-section">
             <div class="branch-header">
-                <a href="https://maps.app.goo.gl/LRscnHdAmPbWJWaFA" target="_blank" class="map-btn" title="Open Map">
+                <a href="#" class="map-btn" title="Open Map">
                     <svg viewBox="0 0 24 24"><path d="M12 2C8.134 2 5 5.134 5 9c0 6 7 13 7 13s7-7 7-13c0-3.866-3.134-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
                 </a>
-                <div class="branch-title">&nbsp; Kotikawatta (Sipleeme Inst.)</div>
+                <div class="branch-title">Nugegoda (Head Office)</div>
             </div>
-
+            
             <div class="class-ticket">
-                <div class="bg-watermark">WED</div>
+                <div class="bg-watermark">TUE</div>
                 <div class="ticket-content">
                     <div class="time-box">
-                        <div class="day">WED</div>
+                        <div class="day">TUE</div>
                         <div class="hours">5:30 PM - 7:30 PM</div>
                     </div>
                     <div class="details-box">
-                        <span class="location-label">Sipleeme Institute</span>
+                        <span class="location-label">King's Square Chess Academy</span>
                         <div class="instructor">FI Thejan Rathnayake</div>
-                        <div class="tags"><span class="tag">Beginner</span><span class="tag">Intermediate</span></div>
-                    </div>
-                    <div class="fee-box">
-                        <span class="fee-label">Class Fee</span>
-                        <div class="fee-amount">Inquire</div>
-                        <span class="contact-num">📞 071 666 8363</span>
+                        <div class="tags"><span class="tag">All Levels</span></div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="branch-section">
-            <div class="branch-header">
-                <a href="https://maps.app.goo.gl/1osEJz9AL9FaRoBb7" target="_blank" class="map-btn" title="Open Map">
-                    <svg viewBox="0 0 24 24"><path d="M12 2C8.134 2 5 5.134 5 9c0 6 7 13 7 13s7-7 7-13c0-3.866-3.134-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
-                </a>
-                <div class="branch-title">&nbsp; Malabe (LIT Institute)</div>
-            </div>
-
             <div class="class-ticket">
-                <div class="bg-watermark">FRI</div>
+                <div class="bg-watermark">THU</div>
                 <div class="ticket-content">
                     <div class="time-box">
-                        <div class="day">FRI</div>
-                        <div class="hours">5:00 PM - 7:00 PM</div>
+                        <div class="day">THU</div>
+                        <div class="hours">5:30 PM - 7:30 PM</div>
                     </div>
                     <div class="details-box">
-                        <span class="location-label">LIT Institute</span>
+                        <span class="location-label">King's Square Chess Academy</span>
                         <div class="instructor">FI Thejan Rathnayake</div>
-                        <div class="tags"><span class="tag">Beginner</span><span class="tag">Intermediate</span></div>
+                        <div class="tags"><span class="tag">All Levels</span></div>
                     </div>
-                    <div class="fee-box">
-                        <span class="fee-label">Class Fee</span>
-                        <div class="fee-amount">Inquire</div>
-                        <span class="contact-num">📞 071 666 8363</span>
+                </div>
+            </div>
+            <div class="class-ticket">
+                <div class="bg-watermark">SAT</div>
+                <div class="ticket-content">
+                    <div class="time-box">
+                        <div class="day">SAT</div>
+                        <div class="hours">3:30 PM - 5:30 PM</div>
+                    </div>
+                    <div class="details-box">
+                        <span class="location-label">King's Square Chess Academy</span>
+                        <div class="instructor">FI Thejan Rathnayake</div>
+                        <div class="tags"><span class="tag">All Levels</span></div>
                     </div>
                 </div>
             </div>
@@ -453,12 +547,57 @@
 
         <div class="branch-section">
             <div class="branch-header">
-                <a href="https://www.google.com/maps/search/Nanapetha+Institute+Kesbewa" target="_blank" class="map-btn" title="Open Map">
+                <a href="#" class="map-btn" title="Open Map">
                     <svg viewBox="0 0 24 24"><path d="M12 2C8.134 2 5 5.134 5 9c0 6 7 13 7 13s7-7 7-13c0-3.866-3.134-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
                 </a>
-                <div class="branch-title">&nbsp; Kesbewa (Nanapetha Inst.)</div>
+                <div class="branch-title">Nugegoda - Heracle</div>
             </div>
+            <div class="class-ticket">
+                <div class="bg-watermark">SUN</div>
+                <div class="ticket-content">
+                    <div class="time-box">
+                        <div class="day">SUN</div>
+                        <div class="hours">2:30 PM - 4:00 PM</div>
+                    </div>
+                    <div class="details-box">
+                        <span class="location-label">Lyceum International School</span>
+                        <div class="instructor">FI Thejan Rathnayake</div>
+                        <div class="tags"><span class="tag">All Levels</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="branch-section">
+            <div class="branch-header">
+                <a href="#" class="map-btn" title="Open Map">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.134 2 5 5.134 5 9c0 6 7 13 7 13s7-7 7-13c0-3.866-3.134-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+                </a>
+                <div class="branch-title">Maharagama</div>
+            </div>
+            <div class="class-ticket">
+                <div class="bg-watermark">VARIES</div>
+                <div class="ticket-content">
+                    <div class="time-box">
+                        <div class="day">SAT/SUN/MON</div>
+                        <div class="hours">3:30 PM - 5:30 PM</div>
+                    </div>
+                    <div class="details-box">
+                        <span class="location-label">National Youth Center</span>
+                        <div class="instructor">FI Thejan Rathnayake</div>
+                        <div class="tags"><span class="tag">All Levels</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="branch-section">
+            <div class="branch-header">
+                <a href="#" class="map-btn" title="Open Map">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.134 2 5 5.134 5 9c0 6 7 13 7 13s7-7 7-13c0-3.866-3.134-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+                </a>
+                <div class="branch-title">Kesbewa</div>
+            </div>
             <div class="class-ticket">
                 <div class="bg-watermark">SUN</div>
                 <div class="ticket-content">
@@ -471,39 +610,120 @@
                         <div class="instructor">FI Thejan Rathnayake</div>
                         <div class="tags"><span class="tag">All Levels</span></div>
                     </div>
-                    <div class="fee-box">
-                        <span class="fee-label">Class Fee</span>
-                        <div class="fee-amount">Inquire</div>
-                        <span class="contact-num">📞 071 666 8363</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="branch-section">
+            <div class="branch-header">
+                <a href="#" class="map-btn" title="Open Map">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.134 2 5 5.134 5 9c0 6 7 13 7 13s7-7 7-13c0-3.866-3.134-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+                </a>
+                <div class="branch-title">Mattegoda</div>
+            </div>
+            <div class="class-ticket">
+                <div class="bg-watermark">SUN</div>
+                <div class="ticket-content">
+                    <div class="time-box">
+                        <div class="day">SUN</div>
+                        <div class="hours">3:00 PM - 5:00 PM</div>
+                    </div>
+                    <div class="details-box">
+                        <span class="location-label">Daham Sevana</span>
+                        <div class="instructor">FI Thejan Rathnayake</div>
+                        <div class="tags"><span class="tag">All Levels</span></div>
                     </div>
                 </div>
             </div>
         </div>
 
-         <div class="branch-section">
+        <div class="branch-section">
             <div class="branch-header">
-                <a href="https://maps.app.goo.gl/q3tMcQMwvPgPfQz16" target="_blank" class="map-btn" title="Open Map">
+                <a href="#" class="map-btn" title="Open Map">
                     <svg viewBox="0 0 24 24"><path d="M12 2C8.134 2 5 5.134 5 9c0 6 7 13 7 13s7-7 7-13c0-3.866-3.134-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
                 </a>
-                <div class="branch-title">&nbsp; Colombo (Wycherely)</div>
+                <div class="branch-title">Padukka</div>
             </div>
+            <div class="class-ticket">
+                <div class="bg-watermark">TUE</div>
+                <div class="ticket-content">
+                    <div class="time-box">
+                        <div class="day">TUE</div>
+                        <div class="hours">5:00 PM - 7:00 PM</div>
+                    </div>
+                    <div class="details-box">
+                        <span class="location-label">Sipmadura Institute</span>
+                        <div class="instructor">FI Thejan Rathnayake</div>
+                        <div class="tags"><span class="tag">All Levels</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="branch-section">
+            <div class="branch-header">
+                <a href="#" class="map-btn" title="Open Map">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.134 2 5 5.134 5 9c0 6 7 13 7 13s7-7 7-13c0-3.866-3.134-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+                </a>
+                <div class="branch-title">Bope</div>
+            </div>
+            <div class="class-ticket">
+                <div class="bg-watermark">FRI</div>
+                <div class="ticket-content">
+                    <div class="time-box">
+                        <div class="day">FRI</div>
+                        <div class="hours">5:30 PM - 7:30 PM</div>
+                    </div>
+                    <div class="details-box">
+                        <span class="location-label">Shakya Institute</span>
+                        <div class="instructor">FI Thejan Rathnayake</div>
+                        <div class="tags"><span class="tag">All Levels</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="branch-section">
+            <div class="branch-header">
+                <a href="#" class="map-btn" title="Open Map">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.134 2 5 5.134 5 9c0 6 7 13 7 13s7-7 7-13c0-3.866-3.134-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+                </a>
+                <div class="branch-title">Meegoda</div>
+            </div>
+            <div class="class-ticket">
+                <div class="bg-watermark">THU</div>
+                <div class="ticket-content">
+                    <div class="time-box">
+                        <div class="day">THU</div>
+                        <div class="hours">5:00 PM - 7:00 PM</div>
+                    </div>
+                    <div class="details-box">
+                        <span class="location-label">******** Institute</span>
+                        <div class="instructor">FI Thejan Rathnayake</div>
+                        <div class="tags"><span class="tag">All Levels</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="branch-section">
+            <div class="branch-header">
+                <a href="#" class="map-btn" title="Open Map">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.134 2 5 5.134 5 9c0 6 7 13 7 13s7-7 7-13c0-3.866-3.134-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+                </a>
+                <div class="branch-title">Kottawa - Pinhena</div>
+            </div>
             <div class="class-ticket">
                 <div class="bg-watermark">SAT</div>
                 <div class="ticket-content">
                     <div class="time-box">
                         <div class="day">SAT</div>
-                        <div class="hours">11:00 AM - 1:00 PM</div>
+                        <div class="hours">8:00 PM - 9:30 PM</div>
                     </div>
                     <div class="details-box">
-                        <span class="location-label">Wycherely Int. School</span>
+                        <span class="location-label">******* Institute</span>
                         <div class="instructor">FI Thejan Rathnayake</div>
-                        <div class="tags"><span class="tag">Beginner</span><span class="tag">Intermediate</span></div>
-                    </div>
-                    <div class="fee-box">
-                        <span class="fee-label">Class Fee</span>
-                        <div class="fee-amount">Inquire</div>
-                        <span class="contact-num">📞 071 666 8363</span>
+                        <div class="tags"><span class="tag">All Levels</span></div>
                     </div>
                 </div>
             </div>
@@ -511,13 +731,23 @@
 
         <div class="alert-box">
             <h2>🟢 NEW CLASSES STARTING SOON</h2>
-            <p style="color: #ccc;">We are expanding! Please update us with your preferred and most convenient town:</p>
+            <p style="color: #ccc;">New classes will be starting from November at the following locations:</p>
             <ul class="town-list">
-                <li>Pannipitiya - Free Birds</li>
-                <li>Kottawa - Sahasra</li>
-                <li>Homagama - Youth Centre</li>
-                <li>Bope</li>
+                <li>Kottawa (Sahasra) - Thursdays</li>
+                <li>Homagama (Youth Centre) - Fridays</li>
+                <li>Maradana (Athens) - Wednesdays</li>
+                <li>KSCA - Maharagama</li>
             </ul>
+        </div>
+
+        <div class="get-in-touch">
+            <h2>Get in Touch</h2>
+            <p>Please update us on your preference and most convenient town to join our classes.</p>
+            <div class="number-links">
+                <a href="tel:0716790303">071 679 0303</a>
+                <a href="tel:0713138301">071 313 8301</a>
+                <a href="tel:0716668363">071 666 8363</a>
+            </div>
         </div>
 
     </div>
@@ -529,13 +759,13 @@
                 <p style="color:#888;">Forging the next generation of chess elite.</p>
             </div>
             <div class="f-col">
-                <h4 style="color:var(--primary); text-transform:uppercase; margin-bottom:15px;">Quick Links</h4>
-                <a href="index.html">Home</a>
-                <a href="coaches.html">Coaches Roster</a>
+                <h4 style="color:var(--primary); text-transform:uppercase; margin-bottom:15px;">Contact</h4>
+                <p style="color:#888;">071 679 0303 | 071 313 8301</p>
+                <p style="color:#888;">071 666 8363</p>
             </div>
         </div>
         <div style="text-align:center; color:#555; border-top:1px solid #222; padding-top:20px;">
-            &copy; 2024 KING'S SQUARE Chess Academy.
+            © 2026 KING'S SQUARE Chess Academy.
         </div>
     </footer>
 
