@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tournament Center | King's Square Chess Academy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Saira:wght@400;600;700&display=swap"
-        rel="stylesheet">
+    <title>Phoenix Tournament - King's Square Chess Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Saira:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* --- RESET & VARS --- */
+        /* --- RESET & VARS (From Provided Theme) --- */
         :root {
-            --primary: #ffe23e;
-            /* Adrenaline Red/Yellow */
+            --primary: #ffe23e; 
+            --primary-red: #ef4444; /* Added for the 'Reborn' and 'Clash' accents */
             --dark: #0a0a0a;
             --darker: #050505;
             --light: #F0F0F0;
@@ -21,12 +20,8 @@
             --font-body: 'Saira', sans-serif;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             background-color: var(--dark);
             color: var(--light);
@@ -37,15 +32,8 @@
 
         /* --- UTILITY ANIMATIONS --- */
         @keyframes slideInUp {
-            from {
-                transform: translateY(100px);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         /* --- NAVIGATION --- */
@@ -54,7 +42,6 @@
             top: 0;
             width: 100%;
             padding: 15px 5%;
-            /* Changed to percentage for flexibility */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -64,32 +51,20 @@
             border-bottom: 2px solid var(--primary);
             transition: 0.3s ease;
         }
-
-        .logo {
-            font-family: var(--font-head);
-            font-size: 1.5rem;
-            color: var(--light);
-            text-transform: uppercase;
+        
+        .logo { 
+            font-family: var(--font-head); 
+            font-size: 1.5rem; 
+            color: var(--light); 
+            text-transform: uppercase; 
             letter-spacing: 2px;
             line-height: 1.1;
             text-align: center;
         }
+        .logo span { color: var(--primary); font-size: 1rem; display: block;}
 
-        .logo span {
-            color: var(--primary);
-            font-size: 1rem;
-            display: block;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-        }
-
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a { text-decoration: none; }
         .nav-links button {
             background: transparent;
             border: 1px solid var(--light);
@@ -103,7 +78,6 @@
             clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
             white-space: nowrap;
         }
-
         .nav-links button:hover {
             background: var(--primary);
             border-color: var(--primary);
@@ -114,70 +88,85 @@
         /* --- HERO SECTION --- */
         header {
             height: 100vh;
-            min-height: 600px;
-            /* Safety for small phones */
+            min-height: 700px;
             position: relative;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             perspective: 1000px;
             padding: 0 20px;
+            text-align: center;
         }
-
+        
         .bg-grid {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background:
-                linear-gradient(rgba(255, 62, 62, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 62, 62, 0.1) 1px, transparent 1px);
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                linear-gradient(rgba(255, 226, 62, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 226, 62, 0.1) 1px, transparent 1px);
             background-size: 50px 50px;
             transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
             animation: gridMove 20s linear infinite;
             opacity: 0.3;
         }
+        @keyframes gridMove { from { background-position: 0 0; } to { background-position: 0 1000px; } }
 
-        @keyframes gridMove {
-            from {
-                background-position: 0 0;
-            }
-
-            to {
-                background-position: 0 1000px;
-            }
-        }
-
-        .hero-content {
-            z-index: 10;
-            text-align: center;
-            width: 100%;
+        .hero-content { z-index: 10; text-align: center; width: 100%; max-width: 900px; }
+        
+        .hero-subtitle {
+            color: var(--primary);
+            font-family: var(--font-head);
+            letter-spacing: 3px;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            margin-bottom: 10px;
+            animation: slideInUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
         }
 
         h1 {
             font-family: var(--font-head);
-            /* CLAMP: Minimum 3rem, Preferred 10vw, Maximum 6rem */
-            font-size: clamp(3rem, 10vw, 6rem);
+            font-size: clamp(4rem, 12vw, 8rem); 
             line-height: 0.9;
             text-transform: uppercase;
             font-style: italic;
             text-shadow: 10px 10px 0px rgba(255, 255, 255, 0.1);
+            color: var(--primary);
+            background: linear-gradient(to right, #ffe23e, #ff8c00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             animation: slideInUp 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
         }
+        
+        .series-tag {
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            font-family: var(--font-body);
+            color: var(--light);
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
 
-        h1 span {
-            color: var(--primary);
-            display: block;
+        .reborn-badge {
+            display: inline-block;
+            background: var(--primary-red);
+            color: white;
+            font-family: var(--font-head);
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            padding: 5px 30px;
+            margin-top: 20px;
+            border: 2px solid var(--light);
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+            animation: slideInUp 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+            transform: skewX(-10deg);
         }
 
         .cta-btn {
-            margin-top: 30px;
+            margin-top: 40px;
             padding: 15px 40px;
             font-size: 1.2rem;
             background: var(--primary);
-            color: var(--lightdark);
+            color: var(--darker);
             border: none;
             font-weight: bold;
             text-transform: uppercase;
@@ -185,79 +174,65 @@
             cursor: pointer;
             clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
             transition: 0.3s;
-            animation: slideInUp 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
         }
-
         .cta-btn:hover {
             box-shadow: 0 0 30px var(--primary);
             transform: translateY(-5px);
         }
+        .cta-btn.secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        .cta-btn.secondary:hover {
+            background: var(--primary);
+            color: var(--darker);
+        }
+        .cta-btn.whatsapp {
+            background: #25D366;
+            color: var(--darker);
+        }
+        .cta-btn.whatsapp:hover {
+            box-shadow: 0 0 30px #25D366;
+        }
 
-        /* Floating Pieces */
         .floater {
             position: absolute;
             font-size: clamp(5rem, 15vw, 10rem);
-            /* Responsive size */
             opacity: 0.1;
             color: var(--light);
             z-index: 1;
             transition: transform 0.1s linear;
             pointer-events: none;
-            /* Allows clicking through them */
         }
-
-        .p-king {
-            top: 15%;
-            right: 5%;
-        }
-
-        .p-knight {
-            bottom: 15%;
-            left: 5%;
-        }
-
-        .p-rook {
-            top: 40%;
-            left: 50%;
-            filter: blur(4px);
-            opacity: 0.05;
-        }
+        .p-king { top: 15%; right: 5%; }
+        .p-knight { bottom: 15%; left: 5%; }
+        .p-rook { top: 40%; left: 50%; filter: blur(4px); opacity: 0.05; }
 
         /* --- TICKER --- */
         .ticker {
-            background: var(--primary);
-            color: var(--dark);
-            padding: 12px 0;
+            background: var(--primary-red);
+            color: var(--light);
+            padding: 15px 0;
             overflow: hidden;
             white-space: nowrap;
             font-family: var(--font-head);
             font-style: italic;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             border-top: 2px solid var(--light);
             border-bottom: 2px solid var(--light);
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
         }
-
-        .ticker-content {
-            display: inline-block;
-            animation: tickerScroll 25s linear infinite;
-        }
-
-        @keyframes tickerScroll {
-            from {
-                transform: translateX(100%);
-            }
-
-            to {
-                transform: translateX(-100%);
-            }
-        }
+        .ticker-content { display: inline-block; animation: tickerScroll 20s linear infinite; }
+        @keyframes tickerScroll { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
 
         /* --- SECTIONS COMMON --- */
-        section {
-            padding: 80px 10%;
-            position: relative;
-        }
-
+        section { padding: 80px 10%; position: relative; }
+        
         .section-title {
             font-family: var(--font-head);
             font-size: clamp(2rem, 5vw, 3rem);
@@ -265,127 +240,109 @@
             text-transform: uppercase;
             border-left: 10px solid var(--primary);
             padding-left: 20px;
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: 1s all ease;
+            opacity: 0; transform: translateX(-50px); transition: 1s all ease;
         }
+        .section-title.visible { opacity: 1; transform: translateX(0); }
 
-        .section-title.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* --- GRID SYSTEMS --- */
-        .gm-grid,
-        .pricing-grid {
-            display: grid;
-            /* Auto-fit with slightly smaller min-width for mobile support */
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        /* GM Card */
-        .gm-card {
-            background: var(--accent);
-            height: 400px;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid #444;
-            transition: 0.4s;
-            opacity: 0;
-            transform: translateY(50px);
-        }
-
-        .gm-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .gm-card:hover {
-            border-color: var(--primary);
-        }
-
-        .gm-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(100%);
-            transition: 0.5s;
-        }
-
-        .gm-card:hover img {
-            filter: grayscale(0%);
-            transform: scale(1.1);
-        }
-
-        .gm-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px;
-            background: linear-gradient(to top, var(--dark) 0%, transparent 100%);
-            transform: translateY(20px);
-            transition: 0.4s;
-        }
-
-        .gm-card:hover .gm-info {
-            transform: translateY(0);
-        }
-
-        .gm-name {
-            font-family: var(--font-head);
-            font-size: 1.5rem;
-            text-transform: uppercase;
-        }
-
-        .gm-rank {
-            color: var(--primary);
-            font-weight: bold;
-        }
-
-        /* --- TOURNAMENTS --- */
-        .tourney-row {
+        /* --- INFO BAR --- */
+        .info-bar {
+            background: var(--darker);
+            border-bottom: 2px solid var(--lightdark);
+            padding: 20px 10%;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 30px;
-            border-bottom: 1px solid #333;
-            transition: 0.3s;
-            background: linear-gradient(90deg, transparent 0%, transparent 100%);
-            opacity: 0;
-        }
-
-        .tourney-row.visible {
-            opacity: 1;
-        }
-
-        .tourney-row:hover {
-            background: linear-gradient(90deg, rgba(255, 226, 62, 0.1) 0%, transparent 100%);
-            border-left: 5px solid var(--primary);
-            padding-left: 40px;
-        }
-
-        .t-date {
-            color: #888;
-            font-weight: bold;
-            min-width: 80px;
-        }
-
-        .t-name {
-            font-size: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
             font-family: var(--font-head);
-            flex-grow: 1;
-            margin: 0 20px;
-        }
-
-        .t-prize {
-            color: var(--primary);
             font-size: 1.2rem;
-            font-weight: bold;
+            color: var(--light);
+            z-index: 20;
+            position: relative;
+        }
+        .info-item i { color: var(--primary); margin-right: 10px; font-size: 1.5rem;}
+
+        /* --- CUSTOM GRIDS & CARDS --- */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
         }
 
-        /* --- PRICING --- */
+        .dark-card {
+            background: var(--darker);
+            border: 1px solid #333;
+            padding: 40px;
+            position: relative;
+            transition: 0.4s;
+            opacity: 0; transform: translateY(50px);
+        }
+        .dark-card.visible { opacity: 1; transform: translateY(0); }
+        .dark-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(255, 226, 62, 0.05);
+        }
+        
+        .card-header {
+            font-family: var(--font-head);
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Lists and Tables within cards */
+        .custom-table { width: 100%; border-collapse: collapse; margin-bottom: 20px;}
+        .custom-table td { padding: 12px 5px; border-bottom: 1px solid #222; }
+        .custom-table td:first-child { font-family: var(--font-head); color: var(--light); font-size: 1.1rem; }
+        .custom-table td:nth-child(2) { color: #aaa; }
+        .custom-table td:last-child { color: var(--primary); font-family: monospace; font-size: 1.1rem; text-align: right;}
+
+        .prize-list { list-style: none; }
+        .prize-list li {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 0; border-bottom: 1px solid #222;
+        }
+        .prize-list li:last-child { border-bottom: none; }
+        .prize-place { font-family: var(--font-head); font-size: 1.1rem; }
+        .prize-award { color: #aaa; font-size: 0.95rem; text-align: right; }
+
+        .highlight-box {
+            background: rgba(255, 226, 62, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* --- TOURNAMENT SERIES PHASES --- */
+        .phase-row {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #333;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, var(--darker) 0%, transparent 100%);
+            transition: 0.3s;
+        }
+        .phase-row:hover { border-color: var(--light); transform: translateX(10px); }
+        .phase-row.current { border-left: 5px solid var(--primary-red); }
+        .phase-row.next { border-left: 5px solid var(--primary); }
+        .phase-row.final { border-left: 5px solid #3b82f6; }
+        
+        .phase-title { font-family: var(--font-head); font-size: 1.5rem; width: 150px;}
+        .phase-row.current .phase-title { color: var(--primary-red); }
+        .phase-row.next .phase-title { color: var(--primary); }
+        .phase-row.final .phase-title { color: #3b82f6; }
+        
+        .phase-desc { color: #aaa; flex-grow: 1; }
+
+        /* --- PRICING/REGISTRATION STYLES --- */
         .price-card {
             background: var(--darker);
             border: 1px solid #333;
@@ -393,48 +350,24 @@
             text-align: center;
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             opacity: 0;
-            /* Assuming scroll trigger handles this */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
-
-        .price-card.visible {
-            opacity: 1;
-        }
-
+        .price-card.visible { opacity: 1; }
         .price-card:hover {
             transform: scale(1.05);
-            /* slightly reduced scale for better mobile ux */
             border-color: var(--primary);
-            box-shadow: 0 0 40px rgba(255, 62, 62, 0.1);
+            box-shadow: 0 0 40px rgba(255, 226, 62, 0.1);
             z-index: 10;
         }
-
-        .price-tier {
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .price-amt {
-            font-size: 3rem;
-            font-family: var(--font-head);
-            display: block;
-            margin-bottom: 20px;
-        }
-
-        .price-list {
-            list-style: none;
-            text-align: left;
-            margin-bottom: 30px;
-            color: #aaa;
-        }
-
-        .price-list li {
-            margin-bottom: 10px;
-            border-bottom: 1px solid #222;
-            padding-bottom: 5px;
-        }
+        .price-tier { color: var(--primary); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; display: block;}
+        .price-amt { font-size: 3.5rem; font-family: var(--font-head); display: block; margin-bottom: 10px; line-height: 1; color: var(--primary-red);}
+        
+        .bank-details { text-align: left; background: #111; padding: 20px; margin-top: 20px; border: 1px solid #333; }
+        .bank-details p { margin-bottom: 10px; display: flex; justify-content: space-between; border-bottom: 1px dashed #333; padding-bottom: 5px;}
+        .bank-details span:first-child { color: #888; }
+        .bank-details span:last-child { font-weight: bold; color: var(--light); font-family: monospace; font-size: 1.1rem;}
 
         /* --- FOOTER --- */
         footer {
@@ -443,760 +376,35 @@
             padding: 50px 10% 20px;
             margin-top: 50px;
         }
-
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
             margin-bottom: 40px;
         }
+        .f-col h3 { font-family: var(--font-head); font-size: 1.5rem; margin-bottom: 20px; text-transform: uppercase; }
+        .f-col h3 span { color: var(--primary); }
+        .f-col h4 { color: var(--primary); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .f-col p { color: #888; line-height: 1.6; }
+        .f-col a { display: block; color: #fff; text-decoration: none; margin-bottom: 10px; transition: 0.3s; }
+        .f-col a:hover { color: var(--primary); padding-left: 10px; }
+        .copyright { text-align: center; color: #555; font-size: 0.9rem; border-top: 1px solid #222; padding-top: 20px; }
 
-        .f-col h3 {
-            font-family: var(--font-head);
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        .f-col h3 span {
-            color: var(--primary);
-        }
-
-        .f-col h4 {
-            color: var(--primary);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .f-col p {
-            color: #888;
-            line-height: 1.6;
-        }
-
-        .f-col a {
-            display: block;
-            color: #fff;
-            text-decoration: none;
-            margin-bottom: 10px;
-            transition: 0.3s;
-        }
-
-        .f-col a:hover {
-            color: var(--primary);
-            padding-left: 10px;
-        }
-
-        .copyright {
-            text-align: center;
-            color: #555;
-            font-size: 0.9rem;
-            border-top: 1px solid #222;
-            padding-top: 20px;
-        }
-
-        /* =========================================
-           MOBILE & TABLET ADJUSTMENTS (MEDIA QUERIES)
-           ========================================= */
         @media (max-width: 768px) {
-
-            /* Adjust Nav for Mobile */
-            nav {
-                flex-direction: column;
-                padding: 15px 5%;
-                height: auto;
-            }
-
-            .logo {
-                margin-bottom: 15px;
-            }
-
-            .logo br {
-                display: none;
-            }
-
-            /* keep logo on one line if possible or let wrap naturally */
-
-            .nav-links {
-                width: 100%;
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-
-            .nav-links button {
-                margin: 0;
-                padding: 8px 15px;
-                font-size: 0.8rem;
-            }
-
-            /* Adjust Hero */
-            header {
-                padding-top: 120px;
-            }
-
-            /* Push down so nav doesn't cover text */
-
-            /* Stack Tournament Info */
-            .tourney-row {
-                flex-direction: column;
-                text-align: center;
-                gap: 10px;
-            }
-
-            .tourney-row:hover {
-                padding-left: 30px;
-                border-left-width: 0;
-                border-bottom: 2px solid var(--primary);
-            }
-
-            /* Section Padding */
-            section {
-                padding: 60px 5%;
-            }
-
-            /* Footer Grid */
-            footer {
-                padding: 40px 5% 20px;
-            }
-        }
-
-        :root {
-            --primary: #ffe23e;
-            --dark-bg: #0a0a0a;
-            --panel: #1a1a1a;
-            --text: #ffffff;
-            --border: #333;
-        }
-
-        body {
-            background-color: var(--dark-bg);
-            color: var(--text);
-            font-family: 'Saira', sans-serif;
-            margin: 0;
-            line-height: 1.6;
-        }
-
-        /* --- NAVIGATION --- */
-        nav {
-            background: #000;
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid var(--primary);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo {
-            font-family: 'Russo One';
-            font-size: 1.5rem;
-            text-transform: uppercase;
-        }
-
-        .logo span {
-            color: var(--primary);
-        }
-
-        /* --- ADMIN PANEL --- */
-        .admin-bar {
-            background: #111;
-            padding: 15px 5%;
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .admin-bar input {
-            background: #222;
-            border: 1px solid var(--border);
-            padding: 8px 12px;
-            color: #fff;
-            border-radius: 4px;
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .admin-bar button {
-            background: var(--primary);
-            border: none;
-            padding: 8px 20px;
-            font-family: 'Russo One';
-            cursor: pointer;
-            border-radius: 4px;
-            transition: 0.2s;
-        }
-
-        .admin-bar button:hover {
-            transform: scale(1.05);
-        }
-
-        /* --- MAIN LAYOUT --- */
-        .container {
-            max-width: 1400px;
-            margin: 40px auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: 1fr 380px;
-            gap: 30px;
-        }
-
-        /* --- LIVE SECTION --- */
-        .live-viewer {
-            background: var(--panel);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            height: fit-content;
-        }
-
-        .viewer-header {
-            background: #222;
-            padding: 15px 20px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .live-dot {
-            height: 10px;
-            width: 10px;
-            background: #ff4d4d;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 10px;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.3;
-            }
-
-            100% {
-                opacity: 1;
-            }
-        }
-
-        iframe {
-            width: 100%;
-            height: 650px;
-            border: none;
-        }
-
-        .placeholder-text {
-            padding: 100px 20px;
-            text-align: center;
-            color: #666;
-        }
-
-        /* --- SIDEBAR LIST --- */
-        .sidebar-title {
-            font-family: 'Russo One';
-            color: var(--primary);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        .tournament-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .t-card {
-            background: #111;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            border-left: 4px solid #444;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .t-card:hover {
-            background: #222;
-            border-left-color: var(--primary);
-        }
-
-        .t-card.active {
-            background: #222;
-            border-left-color: var(--primary);
-            box-shadow: 0 0 15px rgba(255, 226, 62, 0.1);
-        }
-
-        .t-card h4 {
-            margin: 0 0 5px 0;
-            font-size: 1rem;
-        }
-
-        .t-card p {
-            margin: 0;
-            font-size: 0.8rem;
-            color: #888;
-        }
-
-        /* --- FIDE CALENDAR SECTION --- */
-        .fide-section {
-            grid-column: 1 / -1;
-            margin-top: 50px;
-        }
-
-        .fide-table-wrapper {
-            background: var(--panel);
-            border-radius: 12px;
-            padding: 20px;
-            border: 1px solid var(--border);
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-        }
-
-        th {
-            color: var(--primary);
-            font-family: 'Russo One';
-            padding: 15px;
-            border-bottom: 2px solid #333;
-        }
-
-        td {
-            padding: 15px;
-            border-bottom: 1px solid #222;
-            font-size: 0.95rem;
-        }
-
-        .tag {
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .standard {
-            background: #3498db;
-        }
-
-        .rapid {
-            background: #e67e22;
-        }
-
-        .blitz {
-            background: #e74c3c;
-        }
-
-        @media (max-width: 1000px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        footer {
-            padding: 40px 5% 20px;
-        }
-
-        /* =========================================
-   1. GLOBAL VARIABLES & RESET
-   ========================================= */
-        :root {
-            --primary: #ffe23e;
-            /* Adrenaline Yellow */
-            --dark-bg: #0a0a0a;
-            /* Deep Black */
-            --panel: #1a1a1a;
-            /* Dark Grey Panels */
-            --accent: #2d2d2d;
-            /* Lighter Grey */
-            --text: #ffffff;
-            --text-dim: #888888;
-            --border: #333333;
-            --danger: #ff4d4d;
-            --font-head: 'Russo One', sans-serif;
-            --font-body: 'Saira', sans-serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: var(--dark-bg);
-            color: var(--text);
-            font-family: var(--font-body);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* =========================================
-   2. NAVIGATION
-   ========================================= */
-        nav {
-            background: #000;
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid var(--primary);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-        }
-
-        .logo {
-            font-family: var(--font-head);
-            line-height: 1.1;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .logo span {
-            color: var(--primary);
-            font-size: 0.9rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 10px;
-        }
-
-        .nav-links button {
-            background: transparent;
-            border: 1px solid var(--text);
-            color: var(--text);
-            padding: 8px 18px;
-            font-family: var(--font-head);
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: 0.3s;
-            font-size: 0.85rem;
-            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
-        }
-
-        .nav-links button:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: var(--dark-bg);
-        }
-
-        /* =========================================
-   3. TOURNAMENT VIEWER (THE MAIN STAGE)
-   ========================================= */
-        /* The top section containing the FIDE iframe */
-        .tn-elem__8309354121679753557921 {
-            margin: 40px auto;
-            max-width: 1100px;
-            background: #000;
-            border: 1px solid var(--border);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        iframe.iframe-game {
-            width: 100%;
-            border: none;
-            background: #fff;
-            /* Most FIDE results pages have white backgrounds */
-        }
-
-        /* =========================================
-   4. SCOREBOARD (Tilda Classes)
-   ========================================= */
-        .t396__artboard {
-            background: var(--panel);
-            border-top: 1px solid var(--primary);
-            border-bottom: 1px solid var(--primary);
-            padding: 40px 0;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 250px;
-        }
-
-        /* Player Names */
-        .tn-elem__8331039801732541130599 .tn-atom,
-        .tn-elem__8331039801732541168215 .tn-atom {
-            font-family: var(--font-head);
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            text-transform: uppercase;
-            color: #fff;
-        }
-
-        /* The Score: 7.5 - 6.5 */
-        .tn-elem__8331039801732541180364 .tn-atom {
-            font-family: var(--font-head);
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            color: var(--primary);
-            background: rgba(0, 0, 0, 0.3);
-            padding: 10px 20px;
-            border-radius: 4px;
-        }
-
-        /* Match Progress SVG */
-        .tn-elem__8331039801732539259648 {
-            margin: 20px auto;
-            text-align: center;
-        }
-
-        .tn-elem__8331039801732539259648 img {
-            max-width: 100%;
-            height: auto;
-            filter: drop-shadow(0 0 5px var(--primary));
-        }
-
-        /* =========================================
-   5. FOOTER
-   ========================================= */
-        footer {
-            background: #050505;
-            padding: 60px 10% 20px;
-            margin-top: 80px;
-            border-top: 4px solid var(--primary);
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .f-col h3 {
-            font-family: var(--font-head);
-            margin-bottom: 15px;
-            color: #fff;
-        }
-
-        .f-col h3 span {
-            color: var(--primary);
-            font-size: 0.8rem;
-        }
-
-        .f-col h4 {
-            color: var(--primary);
-            text-transform: uppercase;
-            margin-bottom: 20px;
-        }
-
-        .f-col a {
-            display: block;
-            color: var(--text-dim);
-            text-decoration: none;
-            margin-bottom: 8px;
-            transition: 0.3s;
-        }
-
-        .f-col a:hover {
-            color: var(--primary);
-            padding-left: 5px;
-        }
-
-        .copyright {
-            text-align: center;
-            color: #444;
-            padding-top: 20px;
-            border-top: 1px solid #111;
-            font-size: 0.8rem;
-        }
-
-        /* =========================================
-   6. RESPONSIVE ADJUSTMENTS
-   ========================================= */
-        @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                padding: 1rem;
-            }
-
-            .nav-links {
-                margin-top: 15px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .t396__artboard {
-                flex-direction: column;
-                text-align: center;
-                padding: 20px;
-            }
-
-            .tn-elem {
-                position: relative !important;
-                /* Overriding Tilda inline positioning for mobile */
-                left: auto !important;
-                top: auto !important;
-                margin-bottom: 15px;
-                width: 100% !important;
-            }
-        }
-
-        /* --- SCOREBOARD CONTAINER --- */
-        .t396__artboard {
-            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%) !important;
-            height: auto !important;
-            min-height: 250px !important;
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: center !important;
-            justify-content: center !important;
-            padding: 40px 20px !important;
-            border-bottom: 2px solid var(--primary);
-            position: relative;
-        }
-
-        /* Wrapper for Player - Score - Player */
-        .t396__artboard::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-            opacity: 0.1;
-            pointer-events: none;
-        }
-
-        /* THE DUEL LAYOUT: Force elements into a row */
-        .t396__artboard {
-            display: flex !important;
-            flex-wrap: wrap !important;
-            flex-direction: row !important;
-            gap: 20px;
-        }
-
-        /* Common style for Player Names & Score */
-        .tn-elem {
-            position: static !important;
-            /* Disables the messy absolute positioning */
-            width: auto !important;
-            height: auto !important;
-        }
-
-        /* PLAYER NAMES (Gukesh & Ding) */
-        .tn-elem__8331039801732541130599 .tn-atom,
-        .tn-elem__8331039801732541168215 .tn-atom {
-            font-family: 'Russo One', sans-serif !important;
-            font-size: clamp(1.2rem, 3vw, 2.5rem) !important;
-            letter-spacing: 2px;
-            color: #fff !important;
-            text-transform: uppercase;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-        }
-
-        /* THE SCORE (7½ - 6½) */
-        .tn-elem__8331039801732541180364 {
-            order: 2;
-            /* Keeps it in the middle */
-        }
-
-        .tn-elem__8331039801732541180364 .tn-atom {
-            background: var(--primary) !important;
-            color: #000 !important;
-            font-family: 'Russo One', sans-serif !important;
-            font-size: clamp(1.5rem, 4vw, 3rem) !important;
-            padding: 10px 30px !important;
-            clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0 50%);
-            box-shadow: 0 0 20px rgba(255, 226, 62, 0.4);
-            margin: 0 20px;
-        }
-
-        /* POSITIONING PLAYERS */
-        .tn-elem__8331039801732541130599 {
-            order: 1;
-            text-align: right;
-            flex: 1;
-        }
-
-        /* Gukesh */
-        .tn-elem__8331039801732541168215 {
-            order: 3;
-            text-align: left;
-            flex: 1;
-        }
-
-        /* Ding */
-
-        /* MATCH PROGRESS BAR (The SVG Image) */
-        .tn-elem__8331039801732539259648 {
-            order: 4;
-            width: 100% !important;
-            text-align: center !important;
-        }
-
-        /* --- PLAYER PHOTOS STYLING --- */
-        .player-photo {
-            position: absolute;
-            top: 0;
-            width: 35%;
-            /* Adjust based on how much screen they should take */
-            height: 100%;
-            z-index: 0;
-            /* Sits behind the names */
-            overflow: hidden;
-            pointer-events: none;
-            /* Allows clicking through to text */
-        }
-
-        .player-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(100%) brightness(0.4) contrast(1.2);
-            /* Black and White + Darkened */
-            transition: filter 0.5s ease;
-        }
-
-        /* Position Left (Gukesh) */
-        .photo-left {
-            left: 0;
-            mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0));
-            -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0));
-        }
-
-        /* Position Right (Ding) */
-        .photo-right {
-            right: 0;
-            mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0));
-            -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0));
-        }
-
-        /* Hover Effect: The player "lights up" slightly when the section is hovered */
-        .t396__artboard:hover .player-photo img {
-            filter: grayscale(100%) brightness(0.6) contrast(1.1);
-        }
-
-        /* Ensure names stay on top of photos */
-        .tn-elem__8331039801732541130599,
-        .tn-elem__8331039801732541168215,
-        .tn-elem__8331039801732541180364 {
-            z-index: 2 !important;
-        }
-
-        /* Responsive: Hide photos on mobile to keep the score readable */
-        @media (max-width: 640px) {
-            .player-photo {
-                display: none;
-            }
+            nav { flex-direction: column; padding: 15px 5%; height: auto; }
+            .logo { margin-bottom: 15px; }
+            .logo br { display: none; }
+            .nav-links { width: 100%; justify-content: center; flex-wrap: wrap; gap: 10px; }
+            .nav-links button { margin: 0; padding: 8px 15px; font-size: 0.8rem; }
+            header { padding-top: 120px; min-height: 80vh; }
+            section { padding: 60px 5%; }
+            .info-bar { flex-direction: column; text-align: center; }
+            .phase-row { flex-direction: column; text-align: center; gap: 10px; }
+            .bank-details p { flex-direction: column; text-align: center; border-bottom: none; margin-bottom: 15px;}
+            footer { padding: 40px 5% 20px; }
         }
     </style>
 </head>
-
 <body>
 
     <nav>
@@ -1204,101 +412,159 @@
         <div class="nav-links">
             <a href="index.html"><button>Home</button></a>
             <a href="coaches.html"><button>Coaches</button></a>
-            <a href="Tournaments.html"><button>Tournaments</button></a>
+            <a href="tournaments.html"><button>Pheonix Chess Championship</button></a>
             <a href="schedule.html"><button>Schedule</button></a>
         </div>
     </nav>
 
-    <div class="t396__elem tn-elem tn-elem__8309354121679753557921" data-elem-id="1679753557921" data-elem-type="html"
-        data-field-top-value="157" data-field-left-value="0" data-field-height-value="840" data-field-width-value="1100"
-        data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="grid"
-        data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px"
-        data-field-widthunits-value="px" data-field-top-res-320-value="34" data-field-height-res-320-value="800"
-        data-field-width-res-320-value="100" data-field-container-res-320-value="window"
-        data-field-widthunits-res-320-value="%" data-field-top-res-480-value="43" data-field-left-res-480-value="0"
-        data-field-width-res-480-value="100" data-field-container-res-480-value="window"
-        data-field-widthunits-res-480-value="%" data-field-top-res-640-value="68" data-field-left-res-640-value="0"
-        data-field-height-res-640-value="928" data-field-width-res-640-value="100"
-        data-field-container-res-640-value="window" data-field-widthunits-res-640-value="%"
-        data-field-top-res-960-value="107" data-field-left-res-960-value="10" data-field-height-res-960-value="1021"
-        data-field-width-res-960-value="917" data-field-top-res-1200-value="152" data-field-left-res-1200-value="0"
-        data-fields="width,height,top,left,container,axisx,axisy,widthunits,heightunits,leftunits,topunits"
-        style="width: 917px; left: 91.5px; top: 107px; height: 1021px;">
-        <div class="tn-atom tn-atom__html"> <iframe id="emb1" class="iframe-game"
-                src="https://results.fide.com/match2024/game1.html"
-                style="z-index:1000; display:block;padding:0; margin:0; width: 100%; height: 800px;border:0;left:0; right:0;"
-                vspace="0" hspace="0" width="1366px" height="768px"></iframe> </div>
-    </div>
-    <div class="t396">
-        <div class="t396__artboard rendered" data-artboard-recid="833103980"
-            data-artboard-screens="320,480,640,960,1200" data-artboard-height="330" data-artboard-valign="center"
-            data-artboard-upscale="grid" data-artboard-height-res-320="130" data-artboard-height-res-480="210"
-            data-artboard-height-res-640="260" data-artboard-height-res-960="280" data-artboard-proxy-min-offset-top="0"
-            data-artboard-proxy-min-height="280" data-artboard-proxy-max-height="280">
-            <div class="t396__carrier" data-artboard-recid="833103980"></div>
-            <div class="t396__filter" data-artboard-recid="833103980"></div>
-            <div class="t396__elem tn-elem tn-elem__8331039801732541180364" data-elem-id="1732541180364"
-                data-elem-type="text" data-field-top-value="56" data-field-left-value="452" data-field-width-value="269"
-                data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid"
-                data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value=""
-                data-field-widthunits-value="px" data-field-top-res-320-value="25" data-field-left-res-320-value="117"
-                data-field-width-res-320-value="87" data-field-container-res-320-value="grid"
-                data-field-top-res-480-value="32" data-field-left-res-480-value="150"
-                data-field-width-res-480-value="167" data-field-top-res-640-value="19"
-                data-field-left-res-640-value="230" data-field-width-res-640-value="171"
-                data-field-container-res-640-value="grid" data-field-top-res-960-value="54"
-                data-field-left-res-960-value="346" data-field-width-res-960-value="249"
-                data-field-container-res-960-value="grid"
-                data-fields="top,left,width,height,container,axisx,axisy,widthunits,leftunits,topunits"
-                style="top: 54px; left: 406px; width: 249px; height: auto;">
-                <div class="tn-atom" field="tn_text_1732541180364" style="line-height: 71px;">7½ - 6½</div>
-            </div>
-            <div class="t396__elem tn-elem tn-elem__8331039801732541130599" data-elem-id="1732541130599"
-                data-elem-type="text" data-field-top-value="66" data-field-left-value="196" data-field-width-value="345"
-                data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid"
-                data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value=""
-                data-field-widthunits-value="px" data-field-top-res-320-value="25" data-field-left-res-320-value="10"
-                data-field-width-res-320-value="107" data-field-container-res-320-value="grid"
-                data-field-top-res-480-value="43" data-field-left-res-480-value="17" data-field-top-res-640-value="21"
-                data-field-left-res-640-value="30" data-field-width-res-640-value="210"
-                data-field-container-res-640-value="grid" data-field-top-res-960-value="61"
-                data-field-left-res-960-value="90" data-field-width-res-960-value="345"
-                data-field-container-res-960-value="grid"
-                data-fields="top,left,width,height,container,axisx,axisy,widthunits,leftunits,topunits"
-                style="top: 61px; left: 150px; width: 345px; height: auto;">
-                <div class="tn-atom" field="tn_text_1732541130599" style="line-height: 62px;">GUKESH D.</div>
-            </div>
-            <div class="t396__elem tn-elem tn-elem__8331039801732541168215" data-elem-id="1732541168215"
-                data-elem-type="text" data-field-top-value="67" data-field-left-value="729" data-field-width-value="275"
-                data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid"
-                data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value=""
-                data-field-widthunits-value="px" data-field-top-res-320-value="25" data-field-left-res-320-value="204"
-                data-field-width-res-320-value="141" data-field-container-res-320-value="grid"
-                data-field-top-res-480-value="43" data-field-left-res-480-value="317"
-                data-field-width-res-480-value="141" data-field-top-res-640-value="21"
-                data-field-left-res-640-value="401" data-field-width-res-640-value="209"
-                data-field-container-res-640-value="grid" data-field-top-res-960-value="61"
-                data-field-left-res-960-value="595" data-field-width-res-960-value="274"
-                data-field-container-res-960-value="grid"
-                data-fields="top,left,width,height,container,axisx,axisy,widthunits,leftunits,topunits"
-                style="top: 61px; left: 655px; width: 274px; height: auto;">
-                <div class="tn-atom" field="tn_text_1732541168215" style="line-height: 62px;">DING LIREN</div>
-            </div>
-            <div class="player-photo photo-left">
-                <img src="Assets/gurkesh.jpg" alt="Gukesh D">
-            </div>
+    <header id="hero">
+        <div class="bg-grid"></div>
+        <div class="floater p-king" data-speed="2">♚</div>
+        <div class="floater p-knight" data-speed="-2">♞</div>
+        <div class="floater p-rook" data-speed="1">♜</div>
 
-            <div class="player-photo photo-right">
-                <img src="Assets/ding.jpg" alt="Ding Liren">
+        <div class="hero-content">
+            <div class="hero-subtitle">PROUDLY PRESENTS</div>
+            <h1>PHOENIX</h1>
+            <div class="series-tag">INDIVIDUAL CHESS TOURNAMENT SERIES - 2026</div>
+            <div class="reborn-badge">THE "REBORN"</div>
+            <p style="font-size: 1.1rem; color: #aaa; margin-top: 30px; text-transform: uppercase; letter-spacing: 1px;">
+                For students of member schools and academies coached by KSCA
+            </p>
+            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                <a href="#register" class="cta-btn">Register Now <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
+    </header>
+
+    <div class="ticker">
+        <div class="ticker-content">
+            <i class="fa-solid fa-triangle-exclamation"></i> ATTENTION: TOURNAMENT DATE EXTENDED TO 28TH MARCH 2026! SECURE YOUR SPOT TODAY! LIMITED ENTRIES AVAILABLE. <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
     </div>
+
+    <div class="info-bar">
+        <div class="info-item"><i class="fa-solid fa-calendar-check"></i> 28 MARCH 2026</div>
+        <div class="info-item"><i class="fa-solid fa-clock"></i> 7.30 A.M ONWARDS</div>
+        <div class="info-item"><i class="fa-solid fa-location-dot"></i> DHARMAPALA VIDYALAYA, PANNIPITIYA</div>
+    </div>
+
+    <section id="details">
+        <h2 class="section-title scroll-trigger">Tournament Details</h2>
+        
+        <div class="content-grid">
+            <div class="dark-card scroll-trigger">
+                <div class="card-header"><i class="fa-solid fa-users"></i> Age Categories</div>
+                <table class="custom-table">
+                    <tr><td>Under 7</td><td>Girls / Boys</td><td>(2019 - 2020)</td></tr>
+                    <tr><td>Under 9</td><td>Girls / Boys</td><td>(2017 - 2018)</td></tr>
+                    <tr><td>Under 11</td><td>Girls / Boys</td><td>(2015 - 2016)</td></tr>
+                    <tr><td>Under 13</td><td>Girls / Boys</td><td>(2013 - 2014)</td></tr>
+                    <tr><td>Under 17</td><td>Over 13</td><td>(2009 - 2012)</td></tr>
+                </table>
+                <div class="highlight-box">
+                    <i class="fa-solid fa-circle-info"></i> MIX MATCHES - SEPARATE PRIZES
+                </div>
+            </div>
+
+            <div class="dark-card scroll-trigger" style="transition-delay: 0.2s;">
+                <div class="card-header"><i class="fa-solid fa-trophy"></i> Prizes</div>
+                <ul class="prize-list">
+                    <li>
+                        <span class="prize-place" style="color: var(--primary);"><i class="fa-solid fa-crown"></i> Champion</span>
+                        <span class="prize-award">Trophy + Medal + Certificate</span>
+                    </li>
+                    <li>
+                        <span class="prize-place"><i class="fa-solid fa-medal" style="color: silver;"></i> 1st Runners Up</span>
+                        <span class="prize-award">Trophy + Medal + Certificate</span>
+                    </li>
+                    <li>
+                        <span class="prize-place"><i class="fa-solid fa-medal" style="color: #cd7f32;"></i> 2nd Runners Up</span>
+                        <span class="prize-award">Trophy + Medal + Certificate</span>
+                    </li>
+                    <li>
+                        <span class="prize-place">4th & 5th Place</span>
+                        <span class="prize-award">Trophy + Certificate</span>
+                    </li>
+                    <li>
+                        <span class="prize-place">6th to 15th Place</span>
+                        <span class="prize-award">Trophy + Certificate</span>
+                    </li>
+                </ul>
+                <div class="highlight-box" style="text-align: center; border-left: none; border-bottom: 4px solid #22c55e; color: #22c55e;">
+                    <i class="fa-solid fa-check-double"></i> CERTIFICATES FOR ALL PARTICIPANTS
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background: var(--darker);">
+        <h2 class="section-title scroll-trigger">The Trilogy Series</h2>
+        <p style="color: #aaa; margin-bottom: 30px; font-size: 1.1rem;" class="scroll-trigger">This is a tournament series consisting of three phases. Let's Redefine the Art of Tournaments !!</p>
+        
+        <div style="max-width: 900px;">
+            <div class="phase-row current scroll-trigger">
+                <div class="phase-title">REBORN</div>
+                <div class="phase-desc">Member schools and academy students event. <strong>(Current Event)</strong></div>
+            </div>
+            <div class="phase-row next scroll-trigger" style="transition-delay: 0.1s;">
+                <div class="phase-title">FLAMES</div>
+                <div class="phase-desc">Open event for all schools across the region. <em>(Scheduled for April)</em></div>
+            </div>
+            <div class="phase-row final scroll-trigger" style="transition-delay: 0.2s;">
+                <div class="phase-title">CLASH</div>
+                <div class="phase-desc">The ultimate final event. Top 15 players of each category from REBORN and FLAMES will meet here. <em>(Scheduled for May)</em></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="register">
+        <h2 class="section-title scroll-trigger">Registration</h2>
+        
+        <div class="content-grid">
+            <div class="price-card scroll-trigger">
+                <span class="price-tier">Entry Fee</span>
+                <span class="price-amt">Rs.2000 /-</span>
+                <span style="color: var(--primary); font-family: var(--font-head); letter-spacing: 2px; margin-bottom: 20px;">*LIMITED ENTRIES</span>
+                
+                <div style="margin-top: 20px; border-top: 1px solid #333; padding-top: 20px;">
+                    <span style="color: #888; display: block; margin-bottom: 5px;">Closing Date</span>
+                    <span style="background: var(--primary-red); color: white; padding: 5px 15px; font-family: var(--font-head); font-size: 1.2rem;">25TH MARCH 2026</span>
+                </div>
+
+                <div style="margin-top: 30px; display: flex; flex-direction: column; gap: 15px;">
+                    <a href="https://forms.gle/iQUe28VxSJittt4w6" class="cta-btn" style="width: 100%; justify-content: center;"><i class="fa-brands fa-google"></i> Google Form</a>
+                </div>
+            </div>
+
+            <div class="dark-card scroll-trigger" style="transition-delay: 0.2s;">
+                <div class="card-header"><i class="fa-solid fa-building-columns"></i> Bank Details</div>
+                <p style="color: #aaa; margin-bottom: 20px;">Please transfer the entry fee to the following account to secure your registration.</p>
+                
+                <div class="bank-details">
+                    <p><span>Account Name</span> <span>D.T.K. Rathnayake</span></p>
+                    <p><span>Account No.</span> <span style="color: var(--primary); font-size: 1.3rem;">0770 2040 9058</span></p>
+                    <p><span>Bank</span> <span>Hatton National Bank</span></p>
+                    <p><span>Branch</span> <span>Homagama</span></p>
+                </div>
+                
+                <div style="margin-top: 30px; text-align: center;">
+                    <a href="https://chat.whatsapp.com/IVLoQllijqYFdwGAhJRa9P?mode=gi_t" class="cta-btn whatsapp"><i class="fa-brands fa-whatsapp"></i> Join Official Group</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer>
         <div class="footer-content">
             <div class="f-col">
                 <h3>KING'S SQUARE<span><br>Chess Academy</span></h3>
-                <p>Forging the next generation of chess elite.</p>
+                <p>Forging the next generation of chess elite. Contact the KSCA Coaching Team for all inquiries.</p>
+                <div style="margin-top: 20px; font-family: var(--font-head); color: var(--light);">
+                    <i class="fa-solid fa-phone" style="color: var(--primary);"></i> 071 679 0303<br>
+                    <i class="fa-solid fa-phone" style="color: var(--primary);"></i> 071 313 8301<br>
+                    <i class="fa-solid fa-phone" style="color: var(--primary);"></i> 071 666 8363
+                </div>
             </div>
             <div class="f-col">
                 <h4>Quick Links</h4>
@@ -1309,10 +575,35 @@
             </div>
         </div>
         <div class="copyright">
-            &copy; 2024 KING'S SQUARE Chess Academy.
+            &copy; 2026 KING'S SQUARE Chess Academy. Let's Redefine the Art of Tournaments !!
         </div>
     </footer>
-    <script src="tournament-logic.js"></script>
-</body>
 
+    <script>
+        // --- 1. PARALLAX EFFECT FOR HERO ---
+        document.addEventListener("mousemove", (e) => {
+            const floaters = document.querySelectorAll(".floater");
+            const x = (window.innerWidth - e.pageX * 2) / 100;
+            const y = (window.innerHeight - e.pageY * 2) / 100;
+
+            floaters.forEach(el => {
+                const speed = el.getAttribute("data-speed");
+                el.style.transform = `translateX(${x * speed}px) translateY(${y * speed}px)`;
+            });
+        });
+
+        // --- 2. SCROLL REVEAL ANIMATION ---
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                }
+            });
+        }, observerOptions);
+
+        const scrollElements = document.querySelectorAll(".scroll-trigger");
+        scrollElements.forEach(el => observer.observe(el));
+    </script>
+</body>
 </html>
