@@ -192,6 +192,14 @@
             align-items: center;
             justify-content: center;
         }
+        
+        .hero-subtitle {
+            color: var(--primary);
+            font-family: var(--font-head);
+            letter-spacing: 3px;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            margin-bottom: 10px;
+        }
 
         .slide.active { opacity: 1; }
 
@@ -247,6 +255,32 @@
         }
         .section-title.visible { opacity: 1; transform: translateX(0); }
 
+        /* --- TOURNAMENT SECTION STYLES --- */
+        .tourney-feature {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .series-tag {
+            font-family: var(--font-head);
+            color: var(--primary);
+            letter-spacing: 2px;
+            font-size: 1.2rem;
+            margin: 15px 0;
+        }
+        .reborn-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--dark);
+            padding: 5px 20px;
+            font-family: var(--font-head);
+            font-style: italic;
+            font-size: 1.5rem;
+            transform: skew(-15deg);
+            margin-top: 10px;
+        }
+
+        /* --- PREVIOUS STYLES REMAINING --- */
         .gm-grid, .pricing-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -279,28 +313,6 @@
         .gm-name { font-family: var(--font-head); font-size: 1.5rem; text-transform: uppercase; }
         .gm-rank { color: var(--primary); font-weight: bold; }
 
-        /* --- TOURNAMENTS --- */
-        .tourney-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 30px;
-            border-bottom: 1px solid #333;
-            transition: 0.3s;
-            background: linear-gradient(90deg, transparent 0%, transparent 100%);
-            opacity: 0;
-        }
-        .tourney-row.visible { opacity: 1; }
-        .tourney-row:hover {
-            background: linear-gradient(90deg, rgba(255,226,62,0.1) 0%, transparent 100%);
-            border-left: 5px solid var(--primary);
-            padding-left: 40px;
-        }
-        .t-date { color: #888; font-weight: bold; min-width: 80px; }
-        .t-name { font-size: 1.5rem; font-family: var(--font-head); flex-grow: 1; margin: 0 20px; }
-        .t-prize { color: var(--primary); font-size: 1.2rem; font-weight: bold; }
-
-        /* --- PRICING --- */
         .price-card {
             background: var(--darker);
             border: 1px solid #333;
@@ -321,7 +333,6 @@
         .price-list { list-style: none; text-align: left; margin-bottom: 30px; color: #aaa; }
         .price-list li { margin-bottom: 10px; border-bottom: 1px solid #222; padding-bottom: 5px; }
 
-        /* --- FOOTER --- */
         footer {
             background: var(--darker);
             border-top: 5px solid var(--primary);
@@ -349,11 +360,106 @@
             .nav-links { width: 100%; justify-content: center; flex-wrap: wrap; gap: 10px; }
             .nav-links button { margin: 0; padding: 8px 15px; font-size: 0.8rem; }
             header { padding-top: 120px; }
-            .tourney-row { flex-direction: column; text-align: center; gap: 10px; }
-            .tourney-row:hover { padding-left: 30px; border-left-width: 0; border-bottom: 2px solid var(--primary); }
             section { padding: 60px 5%; }
             footer { padding: 40px 5% 20px; }
         }
+
+        /* --- NEW PHOENIX CREATIVE STYLES --- */
+    .phoenix-container {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 40px;
+        align-items: center;
+        background: linear-gradient(45deg, #0a0a0a 0%, #151515 100%);
+        padding: 40px;
+        border: 1px solid rgba(255, 226, 62, 0.2);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .phoenix-container::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255, 226, 62, 0.05) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .phoenix-main h1 {
+        font-size: clamp(4rem, 15vw, 9rem);
+        letter-spacing: -5px;
+        margin-bottom: 0;
+        line-height: 0.8;
+    }
+
+    .phoenix-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    .stat-box {
+        background: var(--lightdark);
+        padding: 20px;
+        border-bottom: 4px solid var(--primary);
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%);
+        transition: 0.3s;
+    }
+
+    .stat-box:hover {
+        transform: translateY(-5px);
+        background: var(--accent);
+    }
+
+    .stat-box i {
+        color: var(--primary);
+        font-size: 1.5rem;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .stat-label {
+        font-family: var(--font-head);
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        color: #888;
+        display: block;
+    }
+
+    .stat-value {
+        font-family: var(--font-head);
+        font-size: 1.2rem;
+        color: var(--light);
+    }
+
+    .series-tag {
+        display: inline-block;
+        background: var(--primary);
+        color: var(--dark);
+        padding: 2px 10px;
+        font-family: var(--font-head);
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+
+    .reborn-text {
+        font-family: var(--font-head);
+        color: var(--primary);
+        font-style: italic;
+        font-size: 1.5rem;
+        letter-spacing: 5px;
+        margin-top: -10px;
+        display: block;
+        text-shadow: 2px 2px 10px rgba(255, 226, 62, 0.3);
+    }
+
+    @media (max-width: 992px) {
+        .phoenix-container { grid-template-columns: 1fr; }
+        .phoenix-main { text-align: center; }
+    }
     </style>
 </head>
 <body>
@@ -389,10 +495,10 @@
 
     <div class="slideshow-section">
         <div class="slide active">
-            <a href="WB&RCC2025.html" class="slide-overlay">
-                <div class="slide-caption"><h3>World Rapid & Blitz Chess Championship 2025</h3></div>
+            <a href="Tournaments.html" class="slide-overlay">
+                <div class="slide-caption"><h3>Pheonix Individual Chess Championship Seires 2026</h3></div>
             </a>
-            <img src="Assets/World Bliz and Rapid banner.jpg" alt="Academy Life 1">
+            <img src="Assets/tournament extended.jpeg" alt="Academy Life 1">
         </div>
     </div>
 
@@ -420,36 +526,44 @@
                     <div class="gm-rank">Divisional Instructor</div>
                 </div>
             </div>
-            <div class="gm-card scroll-trigger" style="transition-delay: 0.3s;">
-                <img src="Assets/Kanishka.jpg" alt="Coach">
-                <div class="gm-info">
-                    <div class="gm-name">Kanishka Dulanjana</div>
-                    <div class="gm-rank">Divisional Instructor</div>
-                </div>
-            </div>
         </div>
     </section>
 
-    <section style="background: var(--darker);">
-        <h2 class="section-title scroll-trigger">Live Tournaments</h2>
-        <div class="tourney-list">
-            <div class="tourney-row scroll-trigger">
-                <span class="t-date">AUG 15</span>
-                <span class="t-name">Speed Chess Championship</span>
-                <span class="t-prize">$10,000 Prize</span>
+    <section style="background: var(--darker); overflow: hidden;">
+    <h2 class="section-title scroll-trigger">Tournaments</h2>
+    
+    <div class="phoenix-container scroll-trigger">
+        <div class="phoenix-main">
+            <div class="hero-subtitle">PROUDLY PRESENTS</div>
+            <div class="series-tag">INDIVIDUAL SERIES 2026</div>
+            <h1 style="color: var(--light);">PHOENIX<span style="color: var(--primary);"></span></h1>
+            <span class="reborn-text">THE REBORN</span>
+            <p style="margin-top: 25px; color: #aaa; max-width: 500px;">
+                A premier competitive arena specifically designed for the elite students of KSCA member schools. Forge your legacy on the 64 squares.
+            </p>
+            <a href="Tournaments.html"><button class="cta-btn">Register for Phase I</button></a>
+        </div>
+
+        <div class="phoenix-stats">
+            <div class="stat-box">
+                <span class="stat-label">Format</span>
+                <span class="stat-value">Swiss System</span>
             </div>
-            <div class="tourney-row scroll-trigger">
-                <span class="t-date">SEP 02</span>
-                <span class="t-name">The Iron Defense Open</span>
-                <span class="t-prize">$5,000 Prize</span>
+            <div class="stat-box">
+                <span class="stat-label">Eligibility</span>
+                <span class="stat-value">Member Schools</span>
             </div>
-            <div class="tourney-row scroll-trigger">
-                <span class="t-date">OCT 10</span>
-                <span class="t-name">Junior Global Qualifiers</span>
-                <span class="t-prize">Entry to Finals</span>
+            <div class="stat-box">
+                <span class="stat-label">Rewards</span>
+                <span class="stat-value">Trophies & Medals</span>
+            </div>
+            <div class="stat-box" style="border-color: #fff;">
+                <span class="stat-label">Next Event</span>
+                <span class="stat-value">Coming Soon</span>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <section>
         <h2 class="section-title scroll-trigger">Our Branches</h2>
@@ -462,7 +576,7 @@
                     <li>Intermediate</li>
                     <li>Advanced</li>
                 </ul>
-                <button class="cta-btn" style="background:transparent; border:1px solid var(--primary);">Sign Up</button>
+                <button href="schedule.html" class="cta-btn">Class Schedule</button>
             </div>
             <div class="price-card scroll-trigger" style="border-color: var(--primary);">
                 <span class="price-tier">Pannipitiya</span>
@@ -472,20 +586,9 @@
                     <li>Intermediate</li>
                     <li>Advanced</li>
                 </ul>
-                <button class="cta-btn">Class Schedule</button>
+                <button href="schedule.html" class="cta-btn">Class Schedule</button>
             </div>
-            <div class="price-card scroll-trigger">
-                <span class="price-tier">Grandmaster</span>
-                <span class="price-amt">$99</span>
-                <ul class="price-list">
-                    <li>1-on-1 Coaching</li>
-                    <li>Private Seminars</li>
-                    <li>All Access Pass</li>
-                </ul>
-                <button class="cta-btn" style="background:transparent; border:1px solid var(--primary);">Sign Up</button>
-            </div>
-        </div>
-    </section>
+        </div> </section>
 
     <footer>
         <div class="footer-content">
@@ -541,11 +644,10 @@
             slideIndex++;
             if (slideIndex > slides.length) { slideIndex = 1; }
             slides[slideIndex - 1].classList.add("active");
-            setTimeout(showSlides, 5000); // Change image every 5 seconds
+            setTimeout(showSlides, 5000); 
         }
         
         showSlides();
     </script>
 </body>
 </html>
-
