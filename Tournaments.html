@@ -390,6 +390,143 @@
         .f-col a:hover { color: var(--primary); padding-left: 10px; }
         .copyright { text-align: center; color: #555; font-size: 0.9rem; border-top: 1px solid #222; padding-top: 20px; }
 
+        /* --- MODAL STYLES --- */
+        .modal {
+            display: flex;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: var(--darker);
+            padding: 40px;
+            border-radius: 8px;
+            border: 2px solid var(--primary-green);
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 0 50px rgba(34, 197, 94, 0.3);
+            animation: slideInUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+            text-align: center;
+        }
+
+        .modal-header {
+            font-family: var(--font-head);
+            font-size: 2rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .modal-subheader {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .modal-body {
+            color: #aaa;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .modal-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .modal-highlight-item {
+            background: var(--lightdark);
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid var(--primary-green);
+        }
+
+        .modal-highlight-label {
+            font-size: 0.9rem;
+            color: #888;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .modal-highlight-value {
+            font-size: 1.3rem;
+            color: var(--primary-green);
+            font-family: var(--font-head);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .modal-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            font-family: var(--font-head);
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .modal-btn-primary {
+            background: var(--primary-green);
+            color: var(--dark);
+        }
+
+        .modal-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+        }
+
+        .modal-btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .modal-btn-secondary:hover {
+            background: var(--primary-green);
+            color: var(--dark);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: var(--primary-green);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg);
+        }
+
         @media (max-width: 768px) {
             nav { flex-direction: column; padding: 15px 5%; height: auto; }
             .logo { margin-bottom: 15px; }
@@ -414,6 +551,7 @@
             <a href="coaches.html"><button>Coaches</button></a>
             <a href="tournaments.html"><button>Pheonix Chess Championship</button></a>
             <a href="schedule.html"><button>Schedule</button></a>
+            <a href="Free.html"><button style="background: #22c55e; border-color: #22c55e; color: var(--dark);">FREE SEMINAR</button></a>
         </div>
     </nav>
 
@@ -432,14 +570,14 @@
                 For students of member schools and academies coached by KSCA
             </p>
             <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-                <a href="#register" class="cta-btn">Register Now <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="#register" class="cta-btn" style="background: #22c55e; border-color: #22c55e;"><i class="fa-solid fa-check-circle"></i> Event Completed</a>
             </div>
         </div>
     </header>
 
     <div class="ticker">
         <div class="ticker-content">
-            <i class="fa-solid fa-triangle-exclamation"></i> ATTENTION: TOURNAMENT DATE EXTENDED TO 28TH MARCH 2026! SECURE YOUR SPOT TODAY! LIMITED ENTRIES AVAILABLE. <i class="fa-solid fa-triangle-exclamation"></i>
+            <i class="fa-solid fa-check-circle"></i> PHOENIX REBORN TOURNAMENT COMPLETED SUCCESSFULLY! Thank you for participating! <i class="fa-solid fa-check-circle"></i>
         </div>
     </div>
 
@@ -505,7 +643,7 @@
         <div style="max-width: 900px;">
             <div class="phase-row current scroll-trigger">
                 <div class="phase-title">REBORN</div>
-                <div class="phase-desc">Member schools and academy students event. <strong>(Current Event)</strong></div>
+                <div class="phase-desc">Member schools and academy students event. <strong style="color: #22c55e;">(✓ Event Completed - 28 March 2026)</strong></div>
             </div>
             <div class="phase-row next scroll-trigger" style="transition-delay: 0.1s;">
                 <div class="phase-title">FLAMES</div>
@@ -518,42 +656,68 @@
         </div>
     </section>
 
-    <section id="register">
-        <h2 class="section-title scroll-trigger">Registration</h2>
+    <section id="register" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, transparent 100%);">
+        <h2 class="section-title scroll-trigger">Event Completed</h2>
         
-        <div class="content-grid">
-            <div class="price-card scroll-trigger">
-                <span class="price-tier">Entry Fee</span>
-                <span class="price-amt">Rs.2000 /-</span>
-                <span style="color: var(--primary); font-family: var(--font-head); letter-spacing: 2px; margin-bottom: 20px;">*LIMITED ENTRIES</span>
-                
-                <div style="margin-top: 20px; border-top: 1px solid #333; padding-top: 20px;">
-                    <span style="color: #888; display: block; margin-bottom: 5px;">Closing Date</span>
-                    <span style="background: var(--primary-red); color: white; padding: 5px 15px; font-family: var(--font-head); font-size: 1.2rem;">25TH MARCH 2026</span>
+        <div style="text-align: center; max-width: 900px; margin: 0 auto;">
+            <div class="dark-card scroll-trigger" style="background: linear-gradient(to bottom, rgba(34, 197, 94, 0.1), var(--accent)); border-color: #22c55e;">
+                <div style="font-size: 3rem; color: #22c55e; margin-bottom: 20px;">
+                    <i class="fa-solid fa-trophy"></i>
                 </div>
-
-                <div style="margin-top: 30px; display: flex; flex-direction: column; gap: 15px;">
-                    <a href="https://forms.gle/iQUe28VxSJittt4w6" class="cta-btn" style="width: 100%; justify-content: center;"><i class="fa-brands fa-google"></i> Google Form</a>
+                <h3 style="font-family: var(--font-head); font-size: 2rem; color: #22c55e; margin-bottom: 20px; text-transform: uppercase;">
+                    PHOENIX REBORN Completed!
+                </h3>
+                <p style="color: #aaa; margin-bottom: 30px; font-size: 1.1rem; line-height: 1.8;">
+                    Thank you to all participants, coaches, and organizers for making the PHOENIX REBORN tournament a tremendous success! 
+                    Congratulations to all winners and participants. Results will be published soon.
+                </p>
+                <div style="background: var(--lightdark); padding: 20px; border-radius: 4px; margin-bottom: 30px; border-left: 5px solid #22c55e;">
+                    <p style="color: #aaa; margin-bottom: 15px;">
+                        <strong style="color: #22c55e;">Tournament Completed:</strong> 28th March 2026 at Dharmapala Vidyalaya, Pannipitiya
+                    </p>
                 </div>
-            </div>
-
-            <div class="dark-card scroll-trigger" style="transition-delay: 0.2s;">
-                <div class="card-header"><i class="fa-solid fa-building-columns"></i> Bank Details</div>
-                <p style="color: #aaa; margin-bottom: 20px;">Please transfer the entry fee to the following account to secure your registration.</p>
-                
-                <div class="bank-details">
-                    <p><span>Account Name</span> <span>D.T.K. Rathnayake</span></p>
-                    <p><span>Account No.</span> <span style="color: var(--primary); font-size: 1.3rem;">0770 2040 9058</span></p>
-                    <p><span>Bank</span> <span>Hatton National Bank</span></p>
-                    <p><span>Branch</span> <span>Homagama</span></p>
-                </div>
-                
-                <div style="margin-top: 30px; text-align: center;">
-                    <a href="https://chat.whatsapp.com/IVLoQllijqYFdwGAhJRa9P?mode=gi_t" class="cta-btn whatsapp"><i class="fa-brands fa-whatsapp"></i> Join Official Group</a>
-                </div>
+                <a href="https://chat.whatsapp.com/IVLoQllijqYFdwGAhJRa9P?mode=gi_t" class="cta-btn whatsapp" style="display: inline-flex;"><i class="fa-brands fa-whatsapp"></i> Join Official Group</a>
             </div>
         </div>
     </section>
+
+    <!-- FREE SEMINAR MODAL -->
+    <div id="freeSeminarModal" class="modal">
+        <div style="position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+            <div class="modal-content">
+                <button class="modal-close" onclick="document.getElementById('freeSeminarModal').style.display='none';">×</button>
+                <div class="modal-header">
+                    <i class="fa-solid fa-star" style="color: #22c55e; margin-right: 10px;"></i>FREE SEMINAR SERIES
+                </div>
+                <div class="modal-subheader">For Provincial Tournament Selected Students</div>
+                <div class="modal-body">
+                    Join our exclusive free seminars and simultaneous exhibitions on Lichess. Expert coaching sessions to prepare you for success!
+                </div>
+                <div class="modal-highlights">
+                    <div class="modal-highlight-item">
+                        <div class="modal-highlight-label">Duration</div>
+                        <div class="modal-highlight-value">2 Hours</div>
+                    </div>
+                    <div class="modal-highlight-item">
+                        <div class="modal-highlight-label">Sessions</div>
+                        <div class="modal-highlight-value">4 Events</div>
+                    </div>
+                    <div class="modal-highlight-item">
+                        <div class="modal-highlight-label">Dates</div>
+                        <div class="modal-highlight-value">Jun 10-11</div>
+                    </div>
+                    <div class="modal-highlight-item">
+                        <div class="modal-highlight-label">Cost</div>
+                        <div class="modal-highlight-value">FREE!</div>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <a href="Free.html" class="modal-btn modal-btn-primary"><i class="fa-solid fa-arrow-right"></i> Learn More</a>
+                    <button class="modal-btn modal-btn-secondary" onclick="document.getElementById('freeSeminarModal').style.display='none';">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <div class="footer-content">
@@ -579,7 +743,52 @@
         </div>
     </footer>
 
+    <!-- FREE SEMINAR MODAL -->
+    <div id="freeinarModal" class="modal">
+        <div style="position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+            <div class="modal-content">
+                <button class="modal-close" onclick="document.getElementById('freeSeminarModal').style.display='none';">×</button>
+                <div class="modal-header">
+                    <i class="fa-solid fa-star" style="color: #22c55e; margin-right: 10px;"></i>FREE SEMINAR SERIES
+                </div>
+                <div class="modal-subheader">For Provincial Tournament Selected Students</div>
+                <div class="modal-body">
+                    Join our exclusive free seminars and simultaneous exhibitions on Lichess. Expert coaching sessions to prepare you for success!
+                </div>
+                <div class="modal-highlights">
+                    <div class="modal-highlight-item">
+                        <div class="modal-highlight-label">Duration</div>
+                        <div class="modal-highlight-value">2 Hours</div>
+                    </div>
+                    <div class="modal-highlight-item">
+                        <div class="modal-highlight-label">Sessions</div>
+                        <div class="modal-highlight-value">4 Events</div>
+                    </div>
+                    <div class="modal-highlight-item">
+                        <div class="modal-highlight-label">Dates</div>
+                        <div class="modal-highlight-value">Jun 10-11</div>
+                    </div>
+                    <div class="modal-highlight-item">
+                        <div class="modal-highlight-label">Cost</div>
+                        <div class="modal-highlight-value">FREE!</div>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <a href="Free.html" class="modal-btn modal-btn-primary"><i class="fa-solid fa-arrow-right"></i> Learn More</a>
+                    <button class="modal-btn modal-btn-secondary" onclick="document.getElementById('freeSeminarModal').style.display='none';">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // --- FREE SEMINAR MODAL ---
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('freeSeminarModal').style.display = 'flex';
+            }, 1000);
+        });
+
         // --- 1. PARALLAX EFFECT FOR HERO ---
         document.addEventListener("mousemove", (e) => {
             const floaters = document.querySelectorAll(".floater");
@@ -607,4 +816,3 @@
     </script>
 </body>
 </html>
-
