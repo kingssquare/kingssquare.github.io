@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Seminar - King's Square Chess Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Saira:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- RESET & VARS --- */
+        :root {
+            --primary: #ffe23e; 
+            --primary-green: #22c55e;
+            --dark: #0a0a0a;
+            --darker: #050505;
+            --light: #F0F0F0;
+            --lightdark: #222222;
+            --accent: #2d2d2d;
+            --font-head: 'Russo One', sans-serif;
+            --font-body: 'Saira', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- UTILITY ANIMATIONS --- */
+        @keyframes slideInUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary);
+            transition: 0.3s ease;
+        }
+        
+        .logo { 
+            font-family: var(--font-head); 
+            font-size: 1.5rem; 
+            color: var(--light); 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+            line-height: 1.1;
+            text-align: center;
+        }
+        .logo span { color: var(--primary); font-size: 1rem; display: block;}
+
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a { text-decoration: none; }
+        .nav-links button {
+            background: transparent;
+            border: 1px solid var(--light);
+            color: var(--light);
+            padding: 8px 20px;
+            margin-left: 15px;
+            font-family: var(--font-head);
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+            white-space: nowrap;
+        }
+        .nav-links button:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--dark);
+            transform: scale(1.05);
+        }
+
+        /* --- HERO SECTION --- */
+        header {
+            height: 100vh;
+            min-height: 600px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            perspective: 1000px;
+            padding: 0 20px;
+            margin-top: 80px;
+        }
+        
+        .bg-grid {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                linear-gradient(rgba(255, 226, 62, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 226, 62, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+            animation: gridMove 20s linear infinite;
+            opacity: 0.3;
+        }
+        @keyframes gridMove { from { background-position: 0 0; } to { background-position: 0 1000px; } }
+
+        .hero-content { z-index: 10; text-align: center; width: 100%; }
+        
+        h1 {
+            font-family: var(--font-head);
+            font-size: clamp(3rem, 10vw, 6rem); 
+            line-height: 0.9;
+            text-transform: uppercase;
+            font-style: italic;
+            text-shadow: 10px 10px 0px rgba(255, 255, 255, 0.1);
+            animation: slideInUp 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+            color: var(--light);
+        }
+        h1 span { color: var(--primary); display: block; }
+        
+        .hero-subtitle {
+            color: var(--primary);
+            font-family: var(--font-head);
+            letter-spacing: 3px;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            margin-bottom: 15px;
+            animation: slideInUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: #aaa;
+            margin-top: 20px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: slideInUp 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+
+        .cta-btn {
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            background: var(--primary);
+            color: var(--dark);
+            border: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+            transition: 0.3s;
+            animation: slideInUp 1.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .cta-btn:hover {
+            box-shadow: 0 0 30px var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .floater {
+            position: absolute;
+            font-size: clamp(5rem, 15vw, 10rem);
+            opacity: 0.1;
+            color: var(--light);
+            z-index: 1;
+            transition: transform 0.1s linear;
+            pointer-events: none;
+        }
+        .p-king { top: 15%; right: 5%; }
+        .p-knight { bottom: 15%; left: 5%; }
+
+        /* --- TICKER --- */
+        .ticker {
+            background: var(--primary-green);
+            color: var(--dark);
+            padding: 15px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            font-family: var(--font-head);
+            font-style: italic;
+            font-size: 1.4rem;
+            border-top: 2px solid var(--light);
+            border-bottom: 2px solid var(--light);
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+        }
+        .ticker-content { display: inline-block; animation: tickerScroll 20s linear infinite; }
+        @keyframes tickerScroll { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+
+        /* --- SECTIONS COMMON --- */
+        section { padding: 80px 10%; position: relative; }
+        
+        .section-title {
+            font-family: var(--font-head);
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            border-left: 10px solid var(--primary);
+            padding-left: 20px;
+            opacity: 0; transform: translateX(-50px); transition: 1s all ease;
+        }
+        .section-title.visible { opacity: 1; transform: translateX(0); }
+
+        /* --- TIMELINE STYLES --- */
+        .timeline-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 30px;
+            margin-bottom: 60px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: 1s all ease;
+        }
+        .timeline-item.visible { opacity: 1; transform: translateY(0); }
+
+        .timeline-date {
+            font-family: var(--font-head);
+            font-size: 1.2rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            text-align: right;
+            padding-right: 30px;
+            border-right: 3px solid var(--accent);
+            position: relative;
+        }
+
+        .timeline-date::after {
+            content: "";
+            position: absolute;
+            right: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border: 3px solid var(--dark);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 226, 62, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .timeline-content {
+            background: var(--accent);
+            padding: 30px;
+            border-left: 5px solid var(--primary);
+            border-radius: 4px;
+            position: relative;
+            transition: 0.4s;
+        }
+        .timeline-content:hover {
+            transform: translateX(10px);
+            box-shadow: 0 0 30px rgba(255, 226, 62, 0.1);
+        }
+
+        .timeline-title {
+            font-family: var(--font-head);
+            font-size: 1.8rem;
+            color: var(--light);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .timeline-type {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--dark);
+            padding: 5px 15px;
+            font-family: var(--font-head);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .timeline-desc {
+            color: #aaa;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .countdown-display {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+        }
+
+        .countdown-label {
+            color: #888;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .countdown-timer {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 10px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .countdown-unit {
+            text-align: center;
+            background: var(--lightdark);
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #333;
+        }
+
+        .countdown-unit-value {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: bold;
+            display: block;
+            line-height: 1;
+        }
+
+        .countdown-unit-label {
+            font-size: 0.8rem;
+            color: #888;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .countdown-expired {
+            color: #888;
+            font-size: 1.1rem;
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+            border-left: 5px solid #888;
+        }
+
+        .action-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: var(--primary-green);
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            font-family: var(--font-head);
+            cursor: pointer;
+            border: none;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+        }
+
+        .action-btn.primary {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        .action-btn.primary:hover {
+            box-shadow: 0 0 20px rgba(255, 226, 62, 0.3);
+        }
+
+        .conductor-info {
+            background: rgba(34, 197, 94, 0.1);
+            border-left: 4px solid var(--primary-green);
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 4px;
+        }
+
+        .conductor-label {
+            color: #888;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .conductor-name {
+            font-family: var(--font-head);
+            color: var(--primary-green);
+            font-size: 1.1rem;
+        }
+
+        /* --- EXHIBITION LINKS MODAL --- */
+        .score-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .score-modal.show {
+            display: flex;
+        }
+
+        .score-modal-content {
+            background: var(--darker);
+            padding: 40px;
+            border-radius: 8px;
+            border: 2px solid var(--primary);
+            max-width: 700px;
+            width: 90%;
+            box-shadow: 0 0 50px rgba(255, 226, 62, 0.3);
+            animation: slideInUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+            text-align: center;
+            position: relative;
+        }
+
+        .score-modal-title {
+            font-family: var(--font-head);
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .score-modal-subtitle {
+            color: #aaa;
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        .score-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .score-option {
+            background: var(--accent);
+            padding: 20px;
+            border-radius: 4px;
+            border: 2px solid #333;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .score-option:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(255, 226, 62, 0.2);
+        }
+
+        .score-range {
+            font-family: var(--font-head);
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .score-description {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .score-link-btn {
+            display: inline-block;
+            background: var(--primary-green);
+            color: var(--dark);
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-family: var(--font-head);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .score-link-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
+        }
+
+        .score-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .score-modal-close:hover {
+            transform: rotate(90deg);
+        }
+
+        /* --- RESOURCES SECTION --- */
+        .resources-container {
+            background: var(--accent);
+            padding: 30px;
+            border-left: 5px solid var(--primary-green);
+            border-radius: 4px;
+        }
+
+        .resources-header {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .password-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .password-input-group input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            background: var(--lightdark);
+            border: 1px solid #333;
+            color: var(--light);
+            border-radius: 4px;
+            font-family: var(--font-body);
+        }
+
+        .password-input-group button {
+            padding: 12px 30px;
+            background: var(--primary-green);
+            color: var(--dark);
+            border: none;
+            border-radius: 4px;
+            font-family: var(--font-head);
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .password-input-group button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
+        }
+
+        .resources-list {
+            list-style: none;
+        }
+
+        .resources-list li {
+            background: var(--lightdark);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border-left: 4px solid var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .resource-name {
+            color: var(--light);
+            font-weight: bold;
+        }
+
+        .resource-type {
+            color: #888;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .resource-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--primary);
+            color: var(--dark);
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-family: var(--font-head);
+            font-size: 0.85rem;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .resource-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px rgba(255, 226, 62, 0.2);
+        }
+
+        .resources-locked {
+            text-align: center;
+            color: #888;
+            padding: 30px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--darker);
+            border-top: 5px solid var(--primary);
+            padding: 50px 10% 20px;
+            margin-top: 50px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .f-col h3 { font-family: var(--font-head); font-size: 1.5rem; margin-bottom: 20px; text-transform: uppercase; }
+        .f-col h3 span { color: var(--primary); }
+        .f-col h4 { color: var(--primary); margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px; }
+        .f-col p { color: #888; line-height: 1.6; }
+        .f-col a { display: block; color: #fff; text-decoration: none; margin-bottom: 10px; transition: 0.3s; }
+        .f-col a:hover { color: var(--primary); padding-left: 10px; }
+        .copyright { text-align: center; color: #555; font-size: 0.9rem; border-top: 1px solid #222; padding-top: 20px; }
+
+        @media (max-width: 768px) {
+            nav { flex-direction: column; padding: 15px 5%; height: auto; }
+            .logo { margin-bottom: 15px; }
+            .logo br { display: none; }
+            .nav-links { width: 100%; justify-content: center; flex-wrap: wrap; gap: 10px; }
+            .nav-links button { margin: 0; padding: 8px 15px; font-size: 0.8rem; }
+            header { padding-top: 80px; }
+            section { padding: 60px 5%; }
+            .timeline-item { grid-template-columns: 1fr; gap: 15px; }
+            .timeline-date { text-align: left; border-right: none; border-bottom: 3px solid var(--accent); padding-right: 0; padding-bottom: 15px; }
+            .timeline-date::after { right: auto; left: -12px; }
+            .action-links { flex-direction: column; }
+            .action-btn { width: 100%; justify-content: center; }
+            footer { padding: 40px 5% 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">KING'S SQUARE<br><span>Chess Academy</span></div>
+        <div class="nav-links">
+            <a href="index.html"><button>Home</button></a>
+            <a href="coaches.html"><button>Coaches</button></a>
+            <a href="Tournaments.html"><button>Tournaments</button></a>
+            <a href="schedule.html"><button>Schedule</button></a>
+        </div>
+    </nav>
+
+    <header id="hero">
+        <div class="bg-grid"></div>
+        <div class="floater p-king" data-speed="2">♚</div>
+        <div class="floater p-knight" data-speed="-2">♞</div>
+
+        <div class="hero-content">
+            <div class="hero-subtitle">Provincial Selection</div>
+            <h1>Free<span>Seminar Series</span></h1>
+            <p class="hero-desc">Specialized training for students selected for the provincial chess tournament. Join our expert coaches for intensive sessions and simultaneous exhibitions.</p>
+        </div>
+    </header>
+
+    <div class="ticker">
+        <div class="ticker-content">
+            <i class="fa-solid fa-star"></i> FREE SEMINAR FOR ALL SELECTED STUDENTS - EXPERT COACHING & LIVE EXHIBITIONS - JOIN NOW! <i class="fa-solid fa-star"></i>
+        </div>
+    </div>
+
+    <section id="timeline">
+        <h2 class="section-title scroll-trigger">Seminar Timeline</h2>
+        
+        <div class="timeline-container">
+            <!-- Session 1: Seminar 01 -->
+            <div class="timeline-item scroll-trigger">
+                <div class="timeline-date">10 Jun<br>2026</div>
+                <div class="timeline-content">
+                    <span class="timeline-type"><i class="fa-solid fa-video"></i> Online Seminar</span>
+                    <div class="timeline-title">Online Seminar 01</div>
+                    <p class="timeline-desc">Strategic openings and tactical fundamentals. Duration: 2 hours</p>
+                    <div class="conductor-info">
+                        <div class="conductor-label">Conducting by:</div>
+                        <div class="conductor-name"><i class="fa-solid fa-chalkboard-user"></i> Coach Thejan Rathnayake (FIDE Instructor)</div>
+                    </div>
+                    
+                    <div class="countdown-display">
+                        <span class="countdown-label"><i class="fa-solid fa-hourglass-start"></i> Time Remaining</span>
+                        <div class="countdown-timer" id="countdown-1">
+                            <div class="countdown-unit">
+                                <span class="countdown-unit-value">-</span>
+                                <span class="countdown-unit-label">Days</span>
+                            </div>
+                            <div class="countdown-unit">
+                                <span class="countdown-unit-value">-</span>
+                                <span class="countdown-unit-label">Hours</span>
+                            </div>
+                            <div class="countdown-unit">
+                                <span class="countdown-unit-value">-</span>
+                                <span class="countdown-unit-label">Minutes</span>
+                            </div>
+                            <div class="countdown-unit">
+                                <span class="countdown-unit-value">-</span>
+                                <span class="countdown-unit-label">Seconds</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-links">
+                        <a href="#" class="action-btn primary"><i class="fa-solid fa-link"></i> Join Seminar</a>
+                        <a href="#" class="action-btn"><i class="fa-solid fa-calendar"></i> Add to Calendar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Session 2: Simultaneous Exhibition 1 -->
+            <div class="timeline-item scroll-trigger" style="transition-delay: 0.2s;">
+                <div class="timeline-date">10 Jun<br>2026</div>
+                <div class="timeline-content">
+                    <span class="timeline-type"><i class="fa-brands fa-chess"></i> Exhibition</span>
+                    <div class="timeline-title">Simultaneous Exhibition 01</div>
+                    <p class="timeline-desc">Play against coaches on Lichess platform. Starts immediately after Seminar 01. Links available based on your previous tournament performance.</p>
+                    <div class="conductor-info">
+                        <div class="conductor-label">Conducting by:</div>
+                        <div class="conductor-name"><i class="fa-solid fa-chalkboard-user"></i> Coach Udan Rathnayake (FIDE National Instructor)</div>
+                    </div>
+                    
+                    <div class="countdown-display">
+                        <span class="countdown-label"><i class="fa-solid fa-hourglass-start"></i> Time Remaining</span>
+                        <div class="countdown-timer" id="countdown-2">
+                            <div class="countdown-unit">
+                                <span class="countdown-unit-value">-</span>
+                                <span class="countdown-unit-label">Days</span>
+                            </div>
+                            <div class="countdown-unit">
+                                <span class="countdown-unit-value">-</span>
+                                <span class="countdown-unit-label">Hours</span>
+                            </div>
+                            <div class="countdown-unit">
+                                <span class="countdown-unit-value">-</span>
+                                <span class="countdown-unit-label">Minutes</span>
+                            </div>
+                            <div class="countdown-unit">
+                                <span class="countdown-unit-value">-</span>
+                                <span class="countdown-unit-label">Seconds</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-links">
+                        <button onclick="showScoreModal('exhibition1')" class="action-btn primary"><i class="fa-solid fa-link"></i> Get Exhibition Link</button>
+                        <a href="#" class="action-btn"><i class="fa-solid fa-users"></i> Event Group</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Session 3: Seminar 02 -->
+            <div class="timeline-item scroll-trigger" style="transition-delay: 0.4s;">
+                <div class="timeline-date">11 Jun<br>2026</div>
+                <div class="timeline-content">
+                    <span class="timeline-type"><i class="fa-solid fa-video"></i> Online Seminar</span>
+                    <div class="timeline-title">Online Seminar 02</div>
+                    <p class="timeline-desc">Advanced endgame techniques and tournament preparation. Duration: 2 hours</p>
+                    <div class="conductor-info">
+                        <div class="conductor-label">Conducting by:</div>
+                        <div class="conductor-name"><i class="fa-solid fa-chalkboard-user"></i> Coach Sandeepana Prabuddha (Divisional Instructor)</div>
+                    </div>
+                    
+                    <div class="countdown-display">
+                        <span class="countdown-label"><i class="fa-solid fa-hourglass-start"></i> Time Remaining</span>
+                        <div class="countdown-timer" id="countdown-3">
+                            <div class="countdown-unit">
+                                <span class="countdown-unit-value">-</span>
+                                <span class="countdown-unit-label">Days</span>
+                            </div>
+                            <div class="countdown-unit">
+                                <span class="countdown-unit-value">-</span>
+                                <span class="countdown-unit-label">Hours</span>
+                            </div>
+                            <div class="countdown-unit">
+                                <span class="countdown-unit-value">-</span>
+                                <span class="countdown-unit-label">Minutes</span>
+                            </div>
+                            <div class="countdown-unit">
+                                <span class="countdown-unit-value">-</span>
+                                <span class="countdown-unit-label">Seconds</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-links">
+                        <a href="#" class="action-btn primary"><i class="fa-solid fa-link"></i> Join Seminar</a>
+                        <a href="#" class="action-btn"><i class="fa-solid fa-calendar"></i> Add to Calendar</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Session 4: Simultaneous Exhibition 2 -->
+            <div class="timeline-item scroll-trigger" style="transition-delay: 0.6s;">
+                <div class="timeline-date">11 Jun<br>2026</div>
+                <div class="timeline-content">
+                    <span class="timeline-type"><i class="fa-brands fa-chess"></i> Exhibition</span>
+                    <div class="timeline-title">Simultaneous Exhibition 02</div>
+                    <p class="timeline-desc">Final exhibition round on Lichess. Test your skills in live play.</p>
+                    <div class="conductor-info">
+                        <div class="conductor-label">Conducting by:</div>
+                        <div class="conductor-name"><i class="fa-solid fa-chalkboard-user"></i> Coach Thejan Rathnayake (FIDE Instructor)</div>
+                    </div>
+                    
+                    <div class="countdown-display">
+                        <span class="countdown-label"><i class="fa-solid fa-hourglass-start"></i> Time Remaining</span>
+                        <div class="countdown-timer" id="countdown-4">
+                            <div class="countdown-unit">
+                                <span class="countdown-unit-value">-</span>
+                                <span class="countdown-unit-label">Days</span>
+                            </div>
+                            <div class="countdown-unit">
+                                <span class="countdown-unit-value">-</span>
+                                <span class="countdown-unit-label">Hours</span>
+                            </div>
+                            <div class="countdown-unit">
+                                <span class="countdown-unit-value">-</span>
+                                <span class="countdown-unit-label">Minutes</span>
+                            </div>
+                            <div class="countdown-unit">
+                                <span class="countdown-unit-value">-</span>
+                                <span class="countdown-unit-label">Seconds</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-links">
+                        <button onclick="showScoreModal('exhibition2')" class="action-btn primary"><i class="fa-solid fa-link"></i> Get Exhibition Link</button>
+                        <a href="#" class="action-btn"><i class="fa-solid fa-users"></i> Event Group</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background: var(--darker);">
+        <h2 class="section-title scroll-trigger">Password Protected Resources</h2>
+        
+        <div class="resources-container">
+            <div class="resources-header">Unlock Seminar Resources</div>
+            <p style="color: #aaa; margin-bottom: 20px;">Enter the password provided in the seminar to access study materials, PDFs, and external resources.</p>
+            
+            <div class="password-input-group">
+                <input type="password" id="resourcePassword" placeholder="Enter Password" autocomplete="off">
+                <button onclick="unlockResources()">Unlock Resources</button>
+            </div>
+            
+            <div id="resourcesList" style="display: none;">
+                <ul class="resources-list">
+                    <li style="opacity: 0; transform: translateY(20px); animation: slideInUp 0.5s ease-out forwards;">
+                        <div>
+                            <div class="resource-name">Opening Theory Guide</div>
+                            <div class="resource-type">PDF • 2.5 MB</div>
+                        </div>
+                        <a href="#" onclick="downloadResource(event)" class="resource-download">
+                            <i class="fa-solid fa-download"></i> Download
+                        </a>
+                    </li>
+                    <li style="opacity: 0; transform: translateY(20px); animation: slideInUp 0.6s ease-out forwards;">
+                        <div>
+                            <div class="resource-name">Endgame Techniques</div>
+                            <div class="resource-type">PDF • 3.1 MB</div>
+                        </div>
+                        <a href="#" onclick="downloadResource(event)" class="resource-download">
+                            <i class="fa-solid fa-download"></i> Download
+                        </a>
+                    </li>
+                    <li style="opacity: 0; transform: translateY(20px); animation: slideInUp 0.7s ease-out forwards;">
+                        <div>
+                            <div class="resource-name">Tactical Puzzles Collection</div>
+                            <div class="resource-type">PDF • 1.8 MB</div>
+                        </div>
+                        <a href="#" onclick="downloadResource(event)" class="resource-download">
+                            <i class="fa-solid fa-download"></i> Download
+                        </a>
+                    </li>
+                    <li style="opacity: 0; transform: translateY(20px); animation: slideInUp 0.8s ease-out forwards;">
+                        <div>
+                            <div class="resource-name">Tournament Preparation Guide</div>
+                            <div class="resource-type">PDF • 2.2 MB</div>
+                        </div>
+                        <a href="#" onclick="downloadResource(event)" class="resource-download">
+                            <i class="fa-solid fa-download"></i> Download
+                        </a>
+                    </li>
+                    <li style="opacity: 0; transform: translateY(20px); animation: slideInUp 0.9s ease-out forwards;">
+                        <div>
+                            <div class="resource-name">Chess.com Premium Practice</div>
+                            <div class="resource-type">External Link</div>
+                        </div>
+                        <a href="https://www.chess.com/" target="_blank" class="resource-download">
+                            <i class="fa-solid fa-external-link"></i> Visit
+                        </a>
+                    </li>
+                    <li style="opacity: 0; transform: translateY(20px); animation: slideInUp 1s ease-out forwards;">
+                        <div>
+                            <div class="resource-name">Lichess.org Study Database</div>
+                            <div class="resource-type">External Link</div>
+                        </div>
+                        <a href="https://lichess.org/study" target="_blank" class="resource-download">
+                            <i class="fa-solid fa-external-link"></i> Visit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div id="resourcesLocked" class="resources-locked">
+                <i class="fa-solid fa-lock" style="font-size: 3rem; color: var(--primary); margin-bottom: 15px; display: block;"></i>
+                <p>Resources are password protected. Enter the password above to unlock.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exhibition Links Modal -->
+    <div id="scoreModal" class="score-modal">
+        <div class="score-modal-content">
+            <button class="score-modal-close" onclick="closeScoreModal()">&times;</button>
+            <div class="score-modal-title">Choose Your Level</div>
+            <div class="score-modal-subtitle">Select based on your previous tournament performance</div>
+            
+            <div class="score-options" id="scoreOptions"></div>
+        </div>
+    </div>
+
+    <section style="background: var(--darker);">
+        <h2 class="section-title scroll-trigger">Event Information</h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+            <div style="background: var(--accent); padding: 30px; border-left: 5px solid var(--primary); opacity: 0; transform: translateY(50px); transition: 1s all ease;" class="scroll-trigger">
+                <h3 style="font-family: var(--font-head); font-size: 1.3rem; margin-bottom: 15px; color: var(--primary);">
+                    <i class="fa-solid fa-bullseye"></i> Who Can Attend?
+                </h3>
+                <p style="color: #aaa; line-height: 1.8;">
+                    Students selected for the provincial chess tournament. This is a specialized training program designed specifically for candidates preparing for provincial competitions.
+                </p>
+            </div>
+
+            <div style="background: var(--accent); padding: 30px; border-left: 5px solid var(--primary); opacity: 0; transform: translateY(50px); transition: 1s all ease;" class="scroll-trigger" style="transition-delay: 0.2s;">
+                <h3 style="font-family: var(--font-head); font-size: 1.3rem; margin-bottom: 15px; color: var(--primary);">
+                    <i class="fa-solid fa-free"></i> Cost
+                </h3>
+                <p style="color: #aaa; line-height: 1.8;">
+                    <span style="font-size: 1.5rem; color: var(--primary-green);">ABSOLUTELY FREE</span><br>
+                    No charges for seminars or exhibitions. Completely complimentary for all selected students.
+                </p>
+            </div>
+
+            <div style="background: var(--accent); padding: 30px; border-left: 5px solid var(--primary); opacity: 0; transform: translateY(50px); transition: 1s all ease;" class="scroll-trigger" style="transition-delay: 0.4s;">
+                <h3 style="font-family: var(--font-head); font-size: 1.3rem; margin-bottom: 15px; color: var(--primary);">
+                    <i class="fa-solid fa-question"></i> Need Help?
+                </h3>
+                <p style="color: #aaa; line-height: 1.8;">
+                    Contact the KSCA coaching team for any questions or technical support during the seminars.
+                </p>
+                <div style="margin-top: 15px; font-size: 0.95rem;">
+                    <i class="fa-solid fa-phone" style="color: var(--primary);"></i> <strong>071 679 0303</strong><br>
+                    <i class="fa-solid fa-phone" style="color: var(--primary);"></i> <strong>071 313 8301</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="f-col">
+                <h3>KING'S SQUARE<span><br>Chess Academy</span></h3>
+                <p>Forging the next generation of chess elite. Providing exceptional training for provincial and national tournaments.</p>
+            </div>
+            <div class="f-col">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="coaches.html">Our Coaches</a>
+                <a href="Tournaments.html">Tournaments</a>
+                <a href="schedule.html">Class Schedule</a>
+            </div>
+            <div class="f-col">
+                <h4>Contact Info</h4>
+                <p><i class="fa-solid fa-phone" style="color: var(--primary);"></i> 071 679 0303</p>
+                <p><i class="fa-solid fa-phone" style="color: var(--primary);"></i> 071 313 8301</p>
+                <p><i class="fa-solid fa-phone" style="color: var(--primary);"></i> 071 666 8363</p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 KING'S SQUARE Chess Academy. Free Seminars for Provincial Champions.
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. PARALLAX EFFECT FOR HERO ---
+        document.addEventListener("mousemove", (e) => {
+            const floaters = document.querySelectorAll(".floater");
+            const x = (window.innerWidth - e.pageX * 2) / 100;
+            const y = (window.innerHeight - e.pageY * 2) / 100;
+
+            floaters.forEach(el => {
+                const speed = el.getAttribute("data-speed");
+                el.style.transform = `translateX(${x * speed}px) translateY(${y * speed}px)`;
+            });
+        });
+
+        // --- 2. SCROLL REVEAL ANIMATION ---
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                }
+            });
+        }, observerOptions);
+
+        const scrollElements = document.querySelectorAll(".scroll-trigger");
+        scrollElements.forEach(el => observer.observe(el));
+
+        // --- 3. COUNTDOWN TIMERS ---
+        // Define seminar times for June 10th and 11th, 2026
+        const seminars = [
+            {
+                id: 'countdown-1',
+                date: new Date('2026-06-10T09:00:00').getTime(), // 9:00 AM
+                name: 'Seminar 01'
+            },
+            {
+                id: 'countdown-2',
+                date: new Date('2026-06-10T11:15:00').getTime(), // ~11:15 AM (after 2h seminar)
+                name: 'Exhibition 01'
+            },
+            {
+                id: 'countdown-3',
+                date: new Date('2026-06-11T09:00:00').getTime(), // 9:00 AM
+                name: 'Seminar 02'
+            },
+            {
+                id: 'countdown-4',
+                date: new Date('2026-06-11T11:15:00').getTime(), // ~11:15 AM (after 2h seminar)
+                name: 'Exhibition 02'
+            }
+        ];
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+
+            seminars.forEach(seminar => {
+                const countdownElement = document.getElementById(seminar.id);
+                if (!countdownElement) return;
+
+                const timeRemaining = seminar.date - now;
+
+                if (timeRemaining < 0) {
+                    countdownElement.innerHTML = `<div class="countdown-expired"><i class="fa-solid fa-check-circle"></i> ${seminar.name} has started!</div>`;
+                    return;
+                }
+
+                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+                countdownElement.innerHTML = `
+                    <div class="countdown-unit">
+                        <span class="countdown-unit-value">${days}</span>
+                        <span class="countdown-unit-label">Days</span>
+                    </div>
+                    <div class="countdown-unit">
+                        <span class="countdown-unit-value">${hours}</span>
+                        <span class="countdown-unit-label">Hours</span>
+                    </div>
+                    <div class="countdown-unit">
+                        <span class="countdown-unit-value">${minutes}</span>
+                        <span class="countdown-unit-label">Minutes</span>
+                    </div>
+                    <div class="countdown-unit">
+                        <span class="countdown-unit-value">${seconds}</span>
+                        <span class="countdown-unit-label">Seconds</span>
+                    </div>
+                `;
+            });
+        }
+
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Exhibition Links Modal Functions
+        const exhibitionLinks = {
+            'exhibition1': {
+                intermediate: 'https://lichess.org/tournament/intermediate-exhibition-1',
+                advanced: 'https://lichess.org/tournament/advanced-exhibition-1',
+                elite: 'https://lichess.org/tournament/elite-exhibition-1'
+            },
+            'exhibition2': {
+                intermediate: 'https://lichess.org/tournament/intermediate-exhibition-2',
+                advanced: 'https://lichess.org/tournament/advanced-exhibition-2',
+                elite: 'https://lichess.org/tournament/elite-exhibition-2'
+            }
+        };
+
+        function showScoreModal(exhibition) {
+            const modal = document.getElementById('scoreModal');
+            const options = document.getElementById('scoreOptions');
+            
+            options.innerHTML = `
+                <div class="score-option" onclick="window.open('${exhibitionLinks[exhibition].intermediate}', '_blank')">
+                    <div class="score-range">3/5 - 4/6</div>
+                    <div class="score-description">Intermediate Players</div>
+                    <a href="${exhibitionLinks[exhibition].intermediate}" target="_blank" class="score-link-btn">Join Tournament</a>
+                </div>
+                <div class="score-option" onclick="window.open('${exhibitionLinks[exhibition].advanced}', '_blank')">
+                    <div class="score-range">4/5 - 5/6</div>
+                    <div class="score-description">Advanced Players</div>
+                    <a href="${exhibitionLinks[exhibition].advanced}" target="_blank" class="score-link-btn">Join Tournament</a>
+                </div>
+                <div class="score-option" onclick="window.open('${exhibitionLinks[exhibition].elite}', '_blank')">
+                    <div class="score-range">5/5 - 6/6</div>
+                    <div class="score-description">Elite Players</div>
+                    <a href="${exhibitionLinks[exhibition].elite}" target="_blank" class="score-link-btn">Join Tournament</a>
+                </div>
+            `;
+            
+            modal.classList.add('show');
+        }
+
+        function closeScoreModal() {
+            const modal = document.getElementById('scoreModal');
+            modal.classList.remove('show');
+        }
+
+        // Resources Password Protection
+        const RESOURCE_PASSWORD = 'KSCA2026';
+
+        function unlockResources() {
+            const passwordInput = document.getElementById('resourcePassword');
+            const password = passwordInput.value;
+
+            if (password === RESOURCE_PASSWORD) {
+                document.getElementById('resourcesList').style.display = 'block';
+                document.getElementById('resourcesLocked').style.display = 'none';
+                passwordInput.value = '';
+            } else {
+                alert('Incorrect password. Please try again.');
+                passwordInput.value = '';
+            }
+        }
+
+        function downloadResource(event) {
+            event.preventDefault();
+            alert('Resources are being prepared. You will soon be able to download them from this page. Thank you for your patience!');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('scoreModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeScoreModal();
+            }
+        });
+    </script>
+</body>
+</html>
