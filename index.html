@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>King's Square Chess Academy</title>
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Saira:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* --- RESET & VARS --- */
         :root {
@@ -460,6 +461,238 @@
         .phoenix-container { grid-template-columns: 1fr; }
         .phoenix-main { text-align: center; }
     }
+    /* --- PROMOTIONAL BANNER --- */
+    .promo-banner {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%);
+        padding: 15px 20px;
+        text-align: center;
+        z-index: 999;
+        box-shadow: 0 5px 20px rgba(34, 197, 94, 0.3);
+        animation: slideInDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    }
+
+    @keyframes slideInDown {
+        from { transform: translateY(-100%); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    .promo-banner-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .promo-banner-text {
+        font-family: var(--font-head);
+        color: white;
+        font-size: clamp(0.9rem, 2vw, 1.1rem);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: bold;
+    }
+
+    .promo-banner-icon {
+        font-size: 1.5rem;
+        animation: pulse-icon 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse-icon {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+    }
+
+    .promo-banner-btn {
+        background: white;
+        color: #16a34a;
+        padding: 8px 20px;
+        border: none;
+        border-radius: 4px;
+        font-family: var(--font-head);
+        font-size: 0.9rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: 0.3s;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .promo-banner-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+
+    .promo-close {
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .promo-close:hover {
+        transform: rotate(90deg);
+    }
+
+    header {
+        margin-top: 60px;
+    }
+
+    @media (max-width: 768px) {
+        .promo-banner {
+            padding: 12px 10px;
+        }
+        header {
+            margin-top: 50px;
+        }
+    }
+
+    /* --- MODAL STYLES --- */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .modal-content {
+        background: var(--darker);
+        padding: 40px;
+        border-radius: 8px;
+        border: 2px solid #22c55e;
+        max-width: 600px;
+        width: 90%;
+        box-shadow: 0 0 50px rgba(34, 197, 94, 0.3);
+        animation: slideInUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        text-align: center;
+        position: relative;
+    }
+
+    .modal-header {
+        font-family: var(--font-head);
+        font-size: 2rem;
+        color: #22c55e;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+    }
+
+    .modal-subheader {
+        font-size: 1.3rem;
+        color: var(--primary);
+        margin-bottom: 15px;
+    }
+
+    .modal-body {
+        color: #aaa;
+        margin-bottom: 30px;
+        line-height: 1.8;
+    }
+
+    .modal-highlights {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+    .modal-highlight-item {
+        background: var(--lightdark);
+        padding: 15px;
+        border-radius: 4px;
+        border-left: 4px solid #22c55e;
+    }
+
+    .modal-highlight-label {
+        font-size: 0.9rem;
+        color: #888;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+    }
+
+    .modal-highlight-value {
+        font-size: 1.3rem;
+        color: #22c55e;
+        font-family: var(--font-head);
+    }
+
+    .modal-actions {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .modal-btn {
+        padding: 12px 30px;
+        border: none;
+        border-radius: 4px;
+        font-family: var(--font-head);
+        font-size: 1rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: 0.3s;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .modal-btn-primary {
+        background: #22c55e;
+        color: var(--dark);
+    }
+
+    .modal-btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
+    }
+
+    .modal-btn-secondary {
+        background: transparent;
+        border: 2px solid #22c55e;
+        color: #22c55e;
+    }
+
+    .modal-btn-secondary:hover {
+        background: #22c55e;
+        color: var(--dark);
+    }
+
+    .modal-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: transparent;
+        border: none;
+        color: #22c55e;
+        font-size: 2rem;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .modal-close:hover {
+        transform: rotate(90deg);
+    }
     </style>
 </head>
 <body>
@@ -469,10 +702,22 @@
         <div class="nav-links">
             <a href="index.html"><button>Home</button></a>
             <a href="coaches.html"><button>Coaches</button></a>
-            <a href="Tournaments.html"><button>Pheonix Chess Championship</button></a>
+            <a href="Tournaments.html"><button>Tournaments</button></a>
             <a href="schedule.html"><button>Schedule</button></a>
+            <a href="Free.html"><button style="background: #22c55e; border-color: #22c55e; color: var(--dark);">FREE SEMINAR</button></a>
         </div>
     </nav>
+
+    <div class="promo-banner" id="promoBanner">
+        <div class="promo-banner-content">
+            <span class="promo-banner-icon">⭐</span>
+            <span class="promo-banner-text">
+                <i class="fa-solid fa-clock"></i> FREE SEMINAR SERIES | JUNE 10-11 2026 | ONLINE SESSIONS + LIVE EXHIBITIONS
+            </span>
+            <a href="Free.html" class="promo-banner-btn">REGISTER NOW</a>
+            <button class="promo-close" onclick="document.getElementById('promoBanner').style.display='none';">×</button>
+        </div>
+    </div>
 
     <header id="hero">
         <div class="bg-grid"></div>
@@ -539,9 +784,9 @@
             <h1 style="color: var(--light);">PHOENIX<span style="color: var(--primary);"></span></h1>
             <span class="reborn-text">THE REBORN</span>
             <p style="margin-top: 25px; color: #aaa; max-width: 500px;">
-                A premier competitive arena specifically designed for the elite students of KSCA member schools. Forge your legacy on the 64 squares.
+                A premier competitive arena specifically designed for the elite students of KSCA member schools. Event completed successfully on 28th March 2026!
             </p>
-            <a href="Tournaments.html"><button class="cta-btn">Register for Phase I</button></a>
+            <a href="Tournaments.html" style="background: #22c55e; border-color: #22c55e;"><button class="cta-btn" style="background: #22c55e; border-color: #22c55e;"><i class="fa-solid fa-check-circle"></i> Event Completed</button></a>
         </div>
 
         <div class="phoenix-stats">
@@ -590,6 +835,44 @@
             </div>
         </div> </section>
 
+    <!-- FREE SEMINAR MODAL -->
+    <div id="freeSeminarModal" class="modal">
+        <div style="position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+            <div class="modal-content">
+                <button class="modal-close" onclick="document.getElementById('freeSeminarModal').style.display='none';">×</button>
+                <div class="modal-header">
+                    <i class="fa-solid fa-star" style="color: #22c55e; margin-right: 10px;"></i>FREE SEMINAR SERIES
+                </div>
+                <div class="modal-subheader">For Provincial Tournament Selected Students</div>
+                <div class="modal-body">
+                    Join our exclusive free seminars and simultaneous exhibitions on Lichess. Expert coaching sessions to prepare you for success!
+                </div>
+                <div class="modal-highlights">
+                    <div class="modal-highlight-item">
+                        <div class="modal-highlight-label">Duration</div>
+                        <div class="modal-highlight-value">2 Hours</div>
+                    </div>
+                    <div class="modal-highlight-item">
+                        <div class="modal-highlight-label">Sessions</div>
+                        <div class="modal-highlight-value">4 Events</div>
+                    </div>
+                    <div class="modal-highlight-item">
+                        <div class="modal-highlight-label">Dates</div>
+                        <div class="modal-highlight-value">Jun 10-11</div>
+                    </div>
+                    <div class="modal-highlight-item">
+                        <div class="modal-highlight-label">Cost</div>
+                        <div class="modal-highlight-value">FREE!</div>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <a href="Free.html" class="modal-btn modal-btn-primary"><i class="fa-solid fa-arrow-right"></i> Learn More</a>
+                    <button class="modal-btn modal-btn-secondary" onclick="document.getElementById('freeSeminarModal').style.display='none';">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <div class="footer-content">
             <div class="f-col">
@@ -610,6 +893,13 @@
     </footer>
 
     <script>
+        // --- FREE SEMINAR MODAL TRIGGER ---
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('freeSeminarModal').style.display = 'flex';
+            }, 1500);
+        });
+
         // --- 1. PARALLAX EFFECT FOR HERO ---
         document.addEventListener("mousemove", (e) => {
             const floaters = document.querySelectorAll(".floater");
@@ -651,4 +941,3 @@
     </script>
 </body>
 </html>
-
