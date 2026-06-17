@@ -52,15 +52,17 @@
         }
         
         .logo { 
-            font-family: var(--font-head); 
-            font-size: 1.5rem; 
-            color: var(--light); 
-            text-transform: uppercase; 
-            letter-spacing: 2px;
-            line-height: 1.1;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
         }
-        .logo span { color: var(--primary); font-size: 1rem; display: block;}
+        
+        .logo img {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
 
         .nav-links { display: flex; align-items: center; }
         .nav-links a { text-decoration: none; }
@@ -357,7 +359,7 @@
         @media (max-width: 768px) {
             nav { flex-direction: column; padding: 15px 5%; height: auto; }
             .logo { margin-bottom: 15px; }
-            .logo br { display: none; }
+            .logo img { height: 40px; }
             .nav-links { width: 100%; justify-content: center; flex-wrap: wrap; gap: 10px; }
             .nav-links button { margin: 0; padding: 8px 15px; font-size: 0.8rem; }
             header { padding-top: 120px; }
@@ -698,7 +700,9 @@
 <body>
 
     <nav>
-        <div class="logo">KING'S SQUARE<br><span>Chess Academy</span></div>
+        <a href="index.html" class="logo">
+            <img src="Assets/logo.png" alt="King's Square Chess Academy Logo">
+        </a>
         <div class="nav-links">
             <a href="index.html"><button>Home</button></a>
             <a href="coaches.html"><button>Coaches</button></a>
@@ -775,7 +779,7 @@
             <p style="margin-top: 25px; color: #aaa; max-width: 500px;">
                 A premier competitive arena specifically designed for the elite students of KSCA member schools. Event completed successfully on 28th March 2026!
             </p>
-            <a href="Tournaments.html" style="background: #22c55e; border-color: #22c55e;"><button class="cta-btn" style="background: #22c55e; border-color: #22c55e;"><i class="fa-solid fa-check-circle"></i> Event Completed</button></a>
+            <a href="Tournaments.html" style="background: #22c55e; border-color: #22c55e;"><button class="cta-btn" style="background: #22c55e; border-color: #22c55e;"><i class="fa-solid fa-check-circle"></i> Check Results</button></a>
         </div>
 
         <div class="phoenix-stats">
